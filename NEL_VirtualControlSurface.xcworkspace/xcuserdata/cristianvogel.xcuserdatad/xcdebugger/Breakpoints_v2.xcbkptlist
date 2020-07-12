@@ -7,79 +7,47 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D63E9F5D-48B5-40C2-9CE1-EEB414C0DA4E"
+            uuid = "A8181937-6F18-4F6C-B266-7EFC94D9E27B"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "projects/NEL_VCS_Constants.hpp"
+            filePath = "NEL_VirtualControlSurface.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "GetSwatch(gradient, stop)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "F70F1D40-B5BB-4C2A-8E28-3DF5ECF79BEE"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "NELDoubleDial.cpp"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "NELDoubleDial::NELDoubleDial(bounds, params, stop1, stop2, stop3, flashRate, a1, a2, aAnchor)"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
+            landmarkName = "NEL_VirtualControlSurface::NEL_VirtualControlSurface(info)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "8A3419CA-0865-49B4-809A-ED3032F44970"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "NELDoubleDial.cpp"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
-            landmarkName = "NELDoubleDial::Draw(g)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "C1996D47-F815-4398-B5B6-5D2AC94E7B15"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "NELDoubleDial.cpp"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "150"
-            endingLineNumber = "150"
-            landmarkName = "NELDoubleDial::OnMouseDrag(x, y, dX, dY, mod)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "53267332-223B-4EA7-AB10-337D416B5195"
+            uuid = "FB483026-6FE5-46EB-B7AC-F9DF0ED212D7"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../IPlug/Extras/OSC/IPlugOSC.h"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "490"
-            endingLineNumber = "490"
+            startingLineNumber = "512"
+            endingLineNumber = "512"
+            landmarkName = "OSCReceiver()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DB8D4303-9731-4C05-A030-5FD87F6FF0B7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../IPlug/Extras/OSC/IPlugOSC.h"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "489"
+            endingLineNumber = "489"
             landmarkName = "OSCSender()"
             landmarkType = "7">
          </BreakpointContent>
@@ -87,112 +55,64 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E280210B-1840-4EDD-B85C-1B3227050E9A"
-            shouldBeEnabled = "No"
+            uuid = "7656F576-BC03-49E3-BB1F-3B3D2916E738"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "tiny-process/process.hpp"
+            filePath = "../../IPlug/Extras/OSC/IPlugOSC.h"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "Process"
+            startingLineNumber = "501"
+            endingLineNumber = "501"
+            landmarkName = "SendOSCMessage(msg)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FB4FCA71-B5E7-49BE-9A28-27B69217728B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../IGraphics/IGraphics.h"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1493"
+            endingLineNumber = "1493"
+            landmarkName = "IGraphics"
             landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1DC24125-348F-44D6-BB3C-3A161EFE5B6B"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "tiny-process/process_unix.cpp"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
-            landmarkName = "Process::Process(function, read_stdout, read_stderr, open_stdin, config)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "1DC24125-348F-44D6-BB3C-3A161EFE5B6B - d3dd1764941fe0b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "TinyProcessLib::Process::Process(std::__1::function&lt;void ()&gt; const&amp;, std::__1::function&lt;void (char const*, unsigned long)&gt;, std::__1::function&lt;void (char const*, unsigned long)&gt;, bool, TinyProcessLib::Config const&amp;)"
-                  moduleName = "NEL_VirtualControlSurface"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/cristianvogel/Desktop/Programming/iPlug2/Examples/NEL_VirtualControlSurface/tiny-process/process_unix.cpp"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "16"
-                  endingLineNumber = "16"
-                  offsetFromSymbolStart = "32">
-               </Location>
-               <Location
-                  uuid = "1DC24125-348F-44D6-BB3C-3A161EFE5B6B - d3dd1764941fe0b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "TinyProcessLib::Process::Process(std::__1::function&lt;void ()&gt; const&amp;, std::__1::function&lt;void (char const*, unsigned long)&gt;, std::__1::function&lt;void (char const*, unsigned long)&gt;, bool, TinyProcessLib::Config const&amp;)"
-                  moduleName = "NEL_VirtualControlSurface"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/cristianvogel/Desktop/Programming/iPlug2/Examples/NEL_VirtualControlSurface/tiny-process/process_unix.cpp"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "20"
-                  endingLineNumber = "20"
-                  offsetFromSymbolStart = "32">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "25EA329A-8C5F-4B39-9B66-45BF9229E52A"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "tiny-process/process.cpp"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
-            landmarkName = "Process::Process(command, path, read_stdout, read_stderr, open_stdin, config)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "2E206562-FAF6-400B-BC05-1083EF206D9E"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "tiny-process/process.cpp"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
-            landmarkName = "Process::Process(command, path, read_stdout, read_stderr, open_stdin, config)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "D6869152-EF0A-47E5-938F-B11E173E199F"
-            shouldBeEnabled = "No"
+            uuid = "DED0E8C3-2053-47BD-9A75-1970EEE40911"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NEL_VirtualControlSurface.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "16"
-            endingLineNumber = "16"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
             landmarkName = "NEL_VirtualControlSurface::NEL_VirtualControlSurface(info)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F04445A2-6E22-493D-BA88-82B5D395E8CB"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NEL_VirtualControlSurface.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
+            landmarkName = "NEL_VirtualControlSurface::launchNetworkingThreads()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

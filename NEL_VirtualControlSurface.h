@@ -40,7 +40,7 @@ enum EStatusMessages
   kNumStatusMessages
 };
 
-class NEL_VirtualControlSurface final : public Plugin, public OSCReceiver
+class NEL_VirtualControlSurface final : public Plugin //public OSCReceiver
 {
 public:
   NEL_VirtualControlSurface(const InstanceInfo& info);
@@ -58,9 +58,9 @@ public:
   std::unique_ptr<OSCSender> oscSender;
   void initOSCSender( const char * IP = "127.0.0.1",  int port = 8080 );
  
-  void OnOSCMessage(OscMessageRead& msg) override;
+  //void OnOSCMessage(OscMessageRead& msg) override;
   std::atomic_bool beSlimeConnected {false};
-  std::mutex mtx;           // mutex for critical section in network thread
+  std::mutex mtx; // mutex for critical section in network thread
   
   IText consoleFont;
   std::unique_ptr<GlobSeqHelpers> gsh = std::make_unique<GlobSeqHelpers>();

@@ -10,7 +10,7 @@
 
 NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
     : Plugin(info, MakeConfig(kNumParams, kNumPresets))
-    , OSCReceiver(9090)
+    //, OSCReceiver(9090)
 {
 
     launchNetworkingThreads();
@@ -23,17 +23,18 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
     {
         return MakeGraphics(*this, PLUG_WIDTH, PLUG_HEIGHT, PLUG_FPS, GetScaleForScreen(PLUG_HEIGHT));
     };
-
+#pragma mark Layout lambda function initialiser
     mLayoutFunc = [&](IGraphics * pGraphics)
     {
         // start layout lambda function
+        // load all dependencies once here
         pGraphics->AttachCornerResizer(EUIResizerMode::Scale, false);
-        pGraphics->AttachPanelBackground(COLOR_NEL_TUNGSTEN);
+        pGraphics->AttachPanelBackground(NEL_TUNGSTEN);
         pGraphics->LoadFont("Roboto-Regular", ROBOTO_FN);
         pGraphics->LoadFont("Menlo", MENLO_FN);
-
-
-        const IVStyle rescanButtonStyle
+        
+  
+      const IVStyle rescanButtonStyle
         {
             true, // Show label
             false, // Show value
@@ -68,7 +69,7 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
 
 #pragma mark console text
         //▼ small logging console output status update text
-        consoleFont = IText ( 12.f, "Menlo").WithFGColor(COLOR_NEL_TUNGSTEN_FGBlend);
+        consoleFont = IText ( 12.f, "Menlo").WithFGColor(NEL_TUNGSTEN_FGBlend);
         pGraphics->AttachControl(new ITextControl(consoleBounds, consoleText.c_str(), consoleFont, false), kCtrlNetStatus);
         pGraphics->AttachControl(new ILambdaControl( consoleBounds,
                                  [this](ILambdaControl * pCaller, IGraphics & g, IRECT & rect)
@@ -88,11 +89,11 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
             (new NELDoubleDial(
                  dualDialBounds
                  , {kDualDialInner + d, kDualDialOuter + d}
-                 , GetSwatch( Lunada, d % 3)
-                 , GetSwatch( Lunada, (d + 1) % 3)
-                 , GetSwatch( Lunada, (d + 2) % 3)
+                 , getSwatch( Lunada, d % 3)
+                 , getSwatch( Lunada, (d + 1) % 3)
+                 , getSwatch( Lunada, (d + 2) % 3)
              ), kCtrlFluxDial + d
-            );
+             )->As<NELDoubleDial>()->setButtonStates(pGraphics->LoadSVG(NEL_BUTTON_ON), pGraphics->LoadSVG(NEL_BUTTON_OFF));
         }
 
 #pragma mark network button / OSC value output
@@ -120,7 +121,7 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
                     return;
                 }
                 dynamic_cast<IVectorBase *>(pCaller)->
-                SetColor(kPR, IColor::LinearInterpolateBetween(COLOR_NEL_LUNADA_stop2, kPR, static_cast<float>(progress)));
+                SetColor(kPR, IColor::LinearInterpolateBetween(NEL_LUNADA_stop2, kPR, static_cast<float>(progress)));
                 pCaller->SetDirty(false);
             }
             , 1000  ); //click flash duration
@@ -271,52 +272,52 @@ void NEL_VirtualControlSurface::ProcessBlock(sample **inputs, sample **outputs, 
 }
 #endif
 
-void NEL_VirtualControlSurface::OnOSCMessage(OscMessageRead& msg)  {
-  
-  int nbrArgs = msg.GetNumArgs();
-  char type;
-  int index = 0;
-  char oscMessage[128];
-  char address[64];
-  strcpy(address, "");
-  const char * m = msg.PopWord();
-  while (m)
-  {
-        strcat(address, "/");
-        strcat(address, m);
-        m = msg.PopWord();
-    };
- 
-  
-  while (nbrArgs) {
-    
-    msg.GetIndexedArg(index, &type);
-    switch (type)
-    {
-        case 'i':
-        {
-          const int* pValue = msg.PopIntArg(false);
-          if (pValue) sprintf(oscMessage, "%s %i", address, *pValue);
-          break;
-        }
-        case 'f': {
-          const float* pValue = msg.PopFloatArg(false);
-          if (pValue) sprintf(oscMessage, "%s %f", address, *pValue);
-          break;
-        }
-        case 's': {
-          const char* pValue = msg.PopStringArg(false);
-          if (pValue) sprintf(oscMessage, "%s %s", address, pValue);
-          break;
-        }
-        default : break;
-    }
-    nbrArgs--;
-  }
-  
-  consoleText = oscMessage;
-  
-}
+//void NEL_VirtualControlSurface::OnOSCMessage(OscMessageRead& msg)  {
+//
+//  int nbrArgs = msg.GetNumArgs();
+//  char type;
+//  int index = 0;
+//  char oscMessage[128];
+//  char address[64];
+//  strcpy(address, "");
+//  const char * m = msg.PopWord();
+//  while (m)
+//  {
+//        strcat(address, "/");
+//        strcat(address, m);
+//        m = msg.PopWord();
+//    };
+//
+//
+//  while (nbrArgs) {
+//
+//    msg.GetIndexedArg(index, &type);
+//    switch (type)
+//    {
+//        case 'i':
+//        {
+//          const int* pValue = msg.PopIntArg(false);
+//          if (pValue) sprintf(oscMessage, "%s %i", address, *pValue);
+//          break;
+//        }
+//        case 'f': {
+//          const float* pValue = msg.PopFloatArg(false);
+//          if (pValue) sprintf(oscMessage, "%s %f", address, *pValue);
+//          break;
+//        }
+//        case 's': {
+//          const char* pValue = msg.PopStringArg(false);
+//          if (pValue) sprintf(oscMessage, "%s %s", address, pValue);
+//          break;
+//        }
+//        default : break;
+//    }
+//    nbrArgs--;
+//  }
+//
+//  consoleText = oscMessage;
+//
+//}
 
 void NEL_VirtualControlSurface::initOSCSender( const char * IP, int port ) {
   

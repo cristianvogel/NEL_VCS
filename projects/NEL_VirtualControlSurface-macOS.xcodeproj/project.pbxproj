@@ -493,7 +493,7 @@
 		3E474FDA24B62A2F008DA40E /* buttonMotherOfPearl.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = buttonMotherOfPearl.svg; path = ../resources/img/buttonMotherOfPearl.svg; sourceTree = "<group>"; };
 		3E474FDB24B62ACE008DA40E /* buttonPlainBlue.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = buttonPlainBlue.svg; path = ../resources/img/buttonPlainBlue.svg; sourceTree = "<group>"; };
 		3E474FDD24B62C86008DA40E /* buttonPlainBlue_ON.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = buttonPlainBlue_ON.svg; path = ../resources/img/buttonPlainBlue_ON.svg; sourceTree = "<group>"; };
-		3E474FDE24B62EEA008DA40E /* NELDoubleDial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NELDoubleDial.h; sourceTree = "<group>"; };
+		3E474FDE24B62EEA008DA40E /* NELDoubleDial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NELDoubleDial.h; path = ../NELDoubleDial.h; sourceTree = "<group>"; };
 		3E474FE024B634EA008DA40E /* GlobSeqHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GlobSeqHelpers.h; path = ../GlobSeqHelpers.h; sourceTree = "<group>"; };
 		3EC56BC224B8905D002D64B0 /* process_unix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = process_unix.cpp; sourceTree = "<group>"; };
 		3EC56BC324B8905D002D64B0 /* process.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = process.cpp; sourceTree = "<group>"; };

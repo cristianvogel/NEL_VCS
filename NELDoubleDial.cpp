@@ -8,9 +8,6 @@
 #include "IPlugTimer.h"
 #include "NELDoubleDial.h"
 #include <iostream>
-#define NEL_BUTTON_OFF "buttonPlainBlue.svg"
-#define NEL_BUTTON_ON "buttonPlainBlue_ON.svg"
-
 
 NELDoubleDial::NELDoubleDial(
               const IRECT& bounds
@@ -25,16 +22,16 @@ NELDoubleDial::NELDoubleDial(
 , mAngle1(a1)
 , mAngle2(a2)
 , mAnchorAngle(aAnchor)
-, mFlashRate(flashRate)
-, mColourStop1( stop1 )
-, mColourStop2( stop2 )
-, mColourStop3( stop3 )
+, innerCircleFlashRate(flashRate)
+, colourStop1( stop1 )
+, colourStop2( stop2 )
+, colourStop3( stop3 )
 {//constructor body
 
   mTimer = std::unique_ptr<Timer>(
                                   Timer::Create([&](Timer& t)
                                     {
-    mTimerCount = (mFlashRate > 0.0f) ? mTimerCount + (mFlashRate * 0.1f) : 0;
+    mTimerCount = (innerCircleFlashRate > 0.0f) ? mTimerCount + (innerCircleFlashRate * 0.1f) : 0;
                                       SetDirty(false);
                                     }
                                     , 10.0f)
@@ -52,14 +49,13 @@ NELDoubleDial::NELDoubleDial(
   SetValue(0.5, 0);
   SetValue(0.5, 1);
   
+  
 }
 
 void NELDoubleDial::Draw(IGraphics& g) {
 
   float radius;
   
-  std::vector<const ISVG> buttonStates { g.LoadSVG(NEL_BUTTON_OFF) , g.LoadSVG(NEL_BUTTON_ON) } ;
-    
   if(mRECT.W() > mRECT.H())
     radius = (mRECT.H()/2.f);
   else
@@ -71,7 +67,7 @@ void NELDoubleDial::Draw(IGraphics& g) {
   
   float angle = mAngle1 + (static_cast<float>(GetValue(0)) * (mAngle2 - mAngle1));
  
-  IColor interpStage = IColor::LinearInterpolateBetween(mColourStop2, mColourStop3, static_cast<float>(fmin(1.0f, GetValue(0)*2.0f)));
+  IColor interpStage = IColor::LinearInterpolateBetween(colourStop2, colourStop3, static_cast<float>(fmin(1.0f, GetValue(0)*2.0f)));
   
 #pragma mark button indicator
   g.DrawSVG(buttonStates[ static_cast<int>(mTimerCount) % 2 ], mRECT.GetCentredInside(fmin(mRECT.W(), 50.0f + (NBR_DUALDIALS * 1.618f))));
@@ -79,12 +75,12 @@ void NELDoubleDial::Draw(IGraphics& g) {
   
 #pragma mark outer internal LED
   g.DrawCircle(COLOR_WHITE, cx, cy, radius,nullptr, 0.5f);
-  g.DrawArc(IColor::LinearInterpolateBetween(mColourStop1, interpStage, static_cast<float>(GetValue(0))),
+  g.DrawArc(IColor::LinearInterpolateBetween(colourStop1, interpStage, static_cast<float>(GetValue(0))),
             cx, cy, radius,
             angle >= mAnchorAngle ? mAnchorAngle : mAnchorAngle - (mAnchorAngle - angle),
             angle >= mAnchorAngle ? angle : mAnchorAngle, &mBlend, mTrackSize);
 
-  g.DrawArc( (static_cast<float>(GetValue(0)) > 0.5f) ? mColourStop2.WithOpacity(0.75f)  : COLOR_GRAY.WithOpacity(0.75f)
+  g.DrawArc( (static_cast<float>(GetValue(0)) > 0.5f) ? colourStop2.WithOpacity(0.75f)  : COLOR_GRAY.WithOpacity(0.75f)
             , cx, cy, radius
             , mAnchorAngle // todo: animate with VUMeter value
             , -mAnchorAngle
@@ -97,14 +93,14 @@ void NELDoubleDial::Draw(IGraphics& g) {
   angle = mAngle1 + (static_cast<float>(GetValue(1)) * (mAngle2 - mAngle1));
   
   g.DrawCircle(COLOR_GRAY, cx, cy, radius,nullptr, 0.5f);
-  g.DrawArc(IColor::LinearInterpolateBetween(mColourStop1, mColourStop2, static_cast<float>(GetValue(1))),
+  g.DrawArc(IColor::LinearInterpolateBetween(colourStop1, colourStop2, static_cast<float>(GetValue(1))),
              cx, cy, radius,
             angle >= mAnchorAngle ? mAnchorAngle : mAnchorAngle - (mAnchorAngle - angle),
             angle >= mAnchorAngle ? angle : mAnchorAngle, &mBlend, mTrackSize);
   
   
 #pragma mark Inner status LED
-   g.DrawArc( (static_cast<float>(GetValue(1)) > 0.5f) ? mColourStop1 : COLOR_GRAY
+   g.DrawArc( (static_cast<float>(GetValue(1)) > 0.5f) ? colourStop1 : COLOR_GRAY
              , cx, cy, radius + mTrackSize
              , -mAnchorAngle
              , mAnchorAngle
@@ -161,8 +157,11 @@ void NELDoubleDial::OnMouseWheel(float x, float y, const IMouseMod& mod, float d
 
 void NELDoubleDial::setFlashRate(float  rate)
 {
-  mFlashRate = rate;
+  innerCircleFlashRate = rate;
 }
 
-
+void NELDoubleDial::setButtonStates(const ISVG on, const ISVG off){
+  buttonStates.push_back(on);
+  buttonStates.push_back(off);
+}
 
