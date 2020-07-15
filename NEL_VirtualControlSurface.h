@@ -1,7 +1,9 @@
 #pragma once
 
+
 #include "IPlug_include_in_plug_hdr.h"
-#include "IPlugOSC.h"
+#include "NEL_VCS_Constants.h"
+#include "NEL_OSC_Methods.hpp"
 #include "GlobSeqHelpers.h"
 #include "NELDoubleDial.h"
 #include <atomic>
@@ -40,12 +42,13 @@ enum EStatusMessages
   kNumStatusMessages
 };
 
-class NEL_VirtualControlSurface final : public Plugin //public OSCReceiver
+class NEL_VirtualControlSurface final : public iplug::Plugin // bug: public OSCReceiver
 {
 public:
-  NEL_VirtualControlSurface(const InstanceInfo& info);
+  NEL_VirtualControlSurface(const iplug::InstanceInfo& info);
   ~NEL_VirtualControlSurface();
 
+  NEL_OSC nel_osc;
   std::string beSlimeName = "";
   std::vector<std::string> cnsl =
   {
@@ -54,11 +57,11 @@ public:
   };
   std::string beSlimeIP = "⋯";
   std::string consoleText = "";
-  WDL_String senderNetworkInfo;
-  std::unique_ptr<OSCSender> oscSender;
-  void initOSCSender( const char * IP = "127.0.0.1",  int port = 8080 );
- 
-  //void OnOSCMessage(OscMessageRead& msg) override;
+
+  // bug: iPlugOSC.h wont allow both send and receive
+  // void OnOSCMessage(OscMessageRead& msg) override;
+  // WDL_String senderNetworkInfo;
+  
   std::atomic_bool beSlimeConnected {false};
   std::mutex mtx; // mutex for critical section in network thread
   
@@ -70,6 +73,6 @@ private:
   void launchNetworkingThreads();
   
 #if IPLUG_DSP // http://bit.ly/2S64BDd
-  void ProcessBlock(sample** inputs, sample** outputs, int nFrames) override;
+ // void ProcessBlock(iplug::sample** inputs, iplug::sample** outputs, int nFrames) override;
 #endif
 };

@@ -25,6 +25,11 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		3E77259524BB5C3B00DDE318 /* NEL_OSC_Methods.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E77259324BB5C3B00DDE318 /* NEL_OSC_Methods.cpp */; };
+		3E77259624BB5C3B00DDE318 /* NEL_OSC_Methods.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E77259324BB5C3B00DDE318 /* NEL_OSC_Methods.cpp */; };
+		3E77259724BB5C3B00DDE318 /* NEL_OSC_Methods.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E77259324BB5C3B00DDE318 /* NEL_OSC_Methods.cpp */; };
+		3E77259824BB5C3B00DDE318 /* NEL_OSC_Methods.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E77259324BB5C3B00DDE318 /* NEL_OSC_Methods.cpp */; };
+		3E77259924BB5C3B00DDE318 /* NEL_OSC_Methods.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E77259324BB5C3B00DDE318 /* NEL_OSC_Methods.cpp */; };
 		3EA669E924B5A643006D193B /* IPlugOSC_msg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F5369C120C446430089212E /* IPlugOSC_msg.cpp */; };
 		3EA669EA24B5A644006D193B /* IPlugOSC_msg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F5369C120C446430089212E /* IPlugOSC_msg.cpp */; };
 		3EA669EC24B5A646006D193B /* IPlugOSC_msg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F5369C120C446430089212E /* IPlugOSC_msg.cpp */; };
@@ -495,16 +500,17 @@
 		3E474FDD24B62C86008DA40E /* buttonPlainBlue_ON.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = buttonPlainBlue_ON.svg; path = ../resources/img/buttonPlainBlue_ON.svg; sourceTree = "<group>"; };
 		3E474FDE24B62EEA008DA40E /* NELDoubleDial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NELDoubleDial.h; path = ../NELDoubleDial.h; sourceTree = "<group>"; };
 		3E474FE024B634EA008DA40E /* GlobSeqHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GlobSeqHelpers.h; path = ../GlobSeqHelpers.h; sourceTree = "<group>"; };
+		3E77259324BB5C3B00DDE318 /* NEL_OSC_Methods.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = NEL_OSC_Methods.cpp; path = ../NEL_OSC_Methods.cpp; sourceTree = "<group>"; };
+		3E77259424BB5C3B00DDE318 /* NEL_OSC_Methods.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = NEL_OSC_Methods.hpp; path = ../NEL_OSC_Methods.hpp; sourceTree = "<group>"; };
 		3EC56BC224B8905D002D64B0 /* process_unix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = process_unix.cpp; sourceTree = "<group>"; };
 		3EC56BC324B8905D002D64B0 /* process.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = process.cpp; sourceTree = "<group>"; };
 		3EC56BC424B8905D002D64B0 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		3EC56BC524B8905D002D64B0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3EC56BC624B8905D002D64B0 /* process_win.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = process_win.cpp; sourceTree = "<group>"; };
 		3EC56BC724B8905D002D64B0 /* process.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = process.hpp; sourceTree = "<group>"; };
-		3EDD351C24B6257800AB3B50 /* NEL_VCS_Constants.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = NEL_VCS_Constants.hpp; path = ../NEL_VCS_Constants.hpp; sourceTree = "<group>"; };
+		3ED446C024BF1B4800D9ED3E /* NEL_VCS_Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NEL_VCS_Constants.h; path = ../NEL_VCS_Constants.h; sourceTree = "<group>"; };
 		3EE825EB24B50B8C00A36392 /* GlobSeqHelpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GlobSeqHelpers.cpp; path = ../GlobSeqHelpers.cpp; sourceTree = "<group>"; };
 		3EE825F124B50BBD00A36392 /* NELDoubleDial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NELDoubleDial.cpp; path = ../NELDoubleDial.cpp; sourceTree = "<group>"; };
-		3EE825F224B50BBD00A36392 /* NEL_VCS_Constants.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = NEL_VCS_Constants.hpp; path = ../NEL_VCS_Constants.hpp; sourceTree = "<group>"; };
 		3EFE76A824B51130009A3AC7 /* connection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = connection.h; sourceTree = "<group>"; };
 		3EFE76A924B51130009A3AC7 /* jnetlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jnetlib.h; sourceTree = "<group>"; };
 		3EFE76AA24B51130009A3AC7 /* util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = util.cpp; sourceTree = "<group>"; };
@@ -972,13 +978,15 @@
 		089C166AFE841209C02AAC07 /* IPlugExample */ = {
 			isa = PBXGroup;
 			children = (
+				3ED446C024BF1B4800D9ED3E /* NEL_VCS_Constants.h */,
+				3E77259324BB5C3B00DDE318 /* NEL_OSC_Methods.cpp */,
+				3E77259424BB5C3B00DDE318 /* NEL_OSC_Methods.hpp */,
 				3EC56BC124B8905D002D64B0 /* tiny-process */,
 				52FBBED30D0CF143001C8B8A /* config.h */,
 				089C1671FE841209C02AAC07 /* Frameworks */,
 				3EE825EB24B50B8C00A36392 /* GlobSeqHelpers.cpp */,
 				3E474FE024B634EA008DA40E /* GlobSeqHelpers.h */,
 				3EFE76A724B51130009A3AC7 /* jnetlib */,
-				3EDD351C24B6257800AB3B50 /* NEL_VCS_Constants.hpp */,
 				4F3862ED2014BBEC0009F402 /* NEL_VirtualControlSurface.cpp */,
 				4F3862EE2014BBEC0009F402 /* NEL_VirtualControlSurface.h */,
 				3EE825F124B50BBD00A36392 /* NELDoubleDial.cpp */,
@@ -987,7 +995,6 @@
 				19C28FB8FE9D52D311CA2CBB /* Products */,
 				4F9313232315CA1100DB2383 /* README.md */,
 				089C167CFE841241C02AAC07 /* Resources */,
-				3EE825F224B50BBD00A36392 /* NEL_VCS_Constants.hpp */,
 			);
 			name = IPlugExample;
 			sourceTree = "<group>";
@@ -2399,6 +2406,7 @@
 				4F63696E20A463090022C370 /* IControls.cpp in Sources */,
 				4F03A5AD20A4621100EBDFFB /* IGraphics.cpp in Sources */,
 				4F5F344220C0226200487201 /* IPlugPaths.mm in Sources */,
+				3E77259624BB5C3B00DDE318 /* NEL_OSC_Methods.cpp in Sources */,
 				4F6369EC20A466470022C370 /* IControl.cpp in Sources */,
 				3EC56BC924B8906D002D64B0 /* process.cpp in Sources */,
 				4FB1F58A20E4B005004157C8 /* IGraphicsMac.mm in Sources */,
@@ -2426,6 +2434,7 @@
 			files = (
 				3EFE76C824B51131009A3AC7 /* listen.cpp in Sources */,
 				3EC56BCC24B89071002D64B0 /* process.cpp in Sources */,
+				3E77259924BB5C3B00DDE318 /* NEL_OSC_Methods.cpp in Sources */,
 				4F78BE3222E7429B00AD537E /* IPlugAUv3Appex.m in Sources */,
 				3EA669EE24B5A649006D193B /* IPlugOSC_msg.cpp in Sources */,
 				3EFE76C024B51131009A3AC7 /* httpserv.cpp in Sources */,
@@ -2443,6 +2452,7 @@
 			files = (
 				4F03A5AF20A4621100EBDFFB /* IGraphics.cpp in Sources */,
 				3EE825F524B50BBD00A36392 /* NELDoubleDial.cpp in Sources */,
+				3E77259824BB5C3B00DDE318 /* NEL_OSC_Methods.cpp in Sources */,
 				4F6369E020A464BB0022C370 /* IGraphicsNanoVG_src.m in Sources */,
 				4F6369EE20A466470022C370 /* IControl.cpp in Sources */,
 				4F1A528C205D916F00CF2908 /* IPlugAU.cpp in Sources */,
@@ -2583,6 +2593,7 @@
 				4F81591A205D50EB00393585 /* pluginview.cpp in Sources */,
 				4F815982205D50EB00393585 /* fstring.cpp in Sources */,
 				4F815995205D51F000393585 /* vstpresetfile.cpp in Sources */,
+				3E77259724BB5C3B00DDE318 /* NEL_OSC_Methods.cpp in Sources */,
 				4F815983205D50EB00393585 /* timer.cpp in Sources */,
 				4F815989205D50EB00393585 /* funknown.cpp in Sources */,
 				4FB1F58B20E4B006004157C8 /* IGraphicsMac.mm in Sources */,
@@ -2683,6 +2694,7 @@
 			files = (
 				B885CBC52304AE7300D73128 /* IPlugProcessor.cpp in Sources */,
 				4F10D3D9203A6719003EF82A /* RtMidi.cpp in Sources */,
+				3E77259524BB5C3B00DDE318 /* NEL_OSC_Methods.cpp in Sources */,
 				3EC56BC824B8906B002D64B0 /* process.cpp in Sources */,
 				4FA9F80421F760C1004E6FE2 /* IGraphicsLice_src.mm in Sources */,
 				4F6369DD20A464BB0022C370 /* IGraphicsNanoVG_src.m in Sources */,

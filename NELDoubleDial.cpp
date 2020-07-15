@@ -28,10 +28,10 @@ NELDoubleDial::NELDoubleDial(
 , colourStop3( stop3 )
 {//constructor body
 
-  mTimer = std::unique_ptr<Timer>(
-                                  Timer::Create([&](Timer& t)
+  mTimer = std::unique_ptr<iplug::Timer>(
+                                         iplug::Timer::Create([&](iplug::Timer& t)
                                     {
-    mTimerCount = (innerCircleFlashRate > 0.0f) ? mTimerCount + (innerCircleFlashRate * 0.1f) : 0;
+                                      mTimerCount = (innerCircleFlashRate > 0.0f) ? mTimerCount + (innerCircleFlashRate * 0.1f) : 0;
                                       SetDirty(false);
                                     }
                                     , 10.0f)
@@ -55,7 +55,7 @@ NELDoubleDial::NELDoubleDial(
 void NELDoubleDial::Draw(IGraphics& g) {
 
   float radius;
-  
+  //frameCount = 1 + (frameCount%65534) ;
   if(mRECT.W() > mRECT.H())
     radius = (mRECT.H()/2.f);
   else
@@ -69,8 +69,9 @@ void NELDoubleDial::Draw(IGraphics& g) {
  
   IColor interpStage = IColor::LinearInterpolateBetween(colourStop2, colourStop3, static_cast<float>(fmin(1.0f, GetValue(0)*2.0f)));
   
-#pragma mark button indicator
-  g.DrawSVG(buttonStates[ static_cast<int>(mTimerCount) % 2 ], mRECT.GetCentredInside(fmin(mRECT.W(), 50.0f + (NBR_DUALDIALS * 1.618f))));
+#pragma mark flashing button indicator
+  
+  g.DrawSVG(buttonStates[ togglePulse() ? 1 : 0 ], mRECT.GetCentredInside(fmin(mRECT.W(), 50.0f + (NBR_DUALDIALS * 1.618f))));
   
   
 #pragma mark outer internal LED
@@ -107,7 +108,6 @@ void NELDoubleDial::Draw(IGraphics& g) {
              , &mBlend
              , mTrackSize * 0.618f
              );
- 
 }
 
 void NELDoubleDial::OnMouseDrag(float x, float y, float dX, float dY, const IMouseMod& mod)
@@ -121,7 +121,7 @@ void NELDoubleDial::OnMouseDrag(float x, float y, float dX, float dY, const IMou
   else
     mMouseDragValue += static_cast<double>(dX / static_cast<double>(dragBounds.R - dragBounds.L) / gearing);
   
-  mMouseDragValue = Clip(mMouseDragValue, 0., 1.);
+  mMouseDragValue = iplug::Clip(mMouseDragValue, 0., 1.);
  
   /* QUANTISATION / STEPPED DIAL
       double v = mMouseDragValue;
@@ -155,12 +155,18 @@ void NELDoubleDial::OnMouseWheel(float x, float y, const IMouseMod& mod, float d
   SetDirty();
 }
 
+const bool& NELDoubleDial::togglePulse()
+{
+  if (static_cast<int>(mTimerCount) % 2) pulse = !pulse;
+  return pulse;
+}
+
 void NELDoubleDial::setFlashRate(float  rate)
 {
   innerCircleFlashRate = rate;
 }
 
-void NELDoubleDial::setButtonStates(const ISVG on, const ISVG off){
+void NELDoubleDial::setButtonStates(const ISVG& on, const ISVG& off){
   buttonStates.push_back(on);
   buttonStates.push_back(off);
 }

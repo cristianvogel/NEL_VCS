@@ -7,22 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A8181937-6F18-4F6C-B266-7EFC94D9E27B"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "NEL_VirtualControlSurface.cpp"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
-            landmarkName = "NEL_VirtualControlSurface::NEL_VirtualControlSurface(info)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "FB483026-6FE5-46EB-B7AC-F9DF0ED212D7"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -40,7 +24,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "DB8D4303-9731-4C05-A030-5FD87F6FF0B7"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../IPlug/Extras/OSC/IPlugOSC.h"
@@ -56,7 +40,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "7656F576-BC03-49E3-BB1F-3B3D2916E738"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../IPlug/Extras/OSC/IPlugOSC.h"
@@ -87,32 +71,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "DED0E8C3-2053-47BD-9A75-1970EEE40911"
-            shouldBeEnabled = "Yes"
+            uuid = "238AC408-B402-4487-8EC2-D0C6D1083FBF"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "NEL_VirtualControlSurface.cpp"
+            filePath = "../../IPlug/Extras/OSC/IPlugOSC.h"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
-            landmarkName = "NEL_VirtualControlSurface::NEL_VirtualControlSurface(info)"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
+            landmarkName = "OSCDevice(dest, maxpacket, sendsleep, listen_addr)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F04445A2-6E22-493D-BA88-82B5D395E8CB"
+            uuid = "7BD9C6AB-E82E-4549-884F-2E9AC0DEE733"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "NEL_VirtualControlSurface.cpp"
+            filePath = "../../IPlug/Extras/OSC/IPlugOSC.h"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "175"
-            endingLineNumber = "175"
-            landmarkName = "NEL_VirtualControlSurface::launchNetworkingThreads()"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
+            landmarkName = "OSCDevice(dest, maxpacket, sendsleep, listen_addr)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

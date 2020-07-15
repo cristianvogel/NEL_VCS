@@ -9,10 +9,10 @@
 
 #include <stdio.h>
 #include "IControl.h"
-#include "NEL_VCS_Constants.hpp"
 #include "IPlugTimer.h"
+#include "NEL_VCS_Constants.h"
 
-using namespace iplug;
+//using namespace iplug;
 using namespace iplug::igraphics;
 
 class NELDoubleDial : public IKnobControlBase
@@ -21,16 +21,16 @@ public:
   NELDoubleDial(
                 const IRECT& bounds
                 , const std::initializer_list< int >& params
-                , const IColor& stop1 = getSwatch( Lunada, 0)
-                , const IColor& stop2 = getSwatch( Lunada, 1)
-                , const IColor& stop3 = getSwatch( Lunada, 2)
+                , const iplug::igraphics::IColor& stop1 = getSwatch( Lunada, 0)
+                , const iplug::igraphics::IColor& stop2 = getSwatch( Lunada, 1)
+                , const iplug::igraphics::IColor& stop3 = getSwatch( Lunada, 2)
                 , float flashRate = 0.0f
                 , float a1 = -135.f, float a2 = 135.f, float aAnchor = -135.f
                 );
  
   double mTimerCount = 0.0;
-  std::unique_ptr<Timer> mTimer;
-  Boolean pulse = false;
+  std::unique_ptr<iplug::Timer> mTimer;
+  bool pulse { false };
   
   
   
@@ -39,9 +39,9 @@ public:
   void OnMouseWheel(float x, float y, const IMouseMod& mod, float d) override;
 
   void setFlashRate(float);
-  Boolean togglePulse() { pulse = !pulse; return pulse;}
+  const bool& togglePulse();
   
-  void setButtonStates( ISVG on , ISVG off);
+  void setButtonStates( const ISVG& on , const ISVG& off);
   
 private:
   double mMouseDragValue = 0;
@@ -53,10 +53,11 @@ private:
   float mTrackSize = static_cast<float> ( fmax( 4, 14 - NBR_DUALDIALS) );
   float mAnchorAngle; // for bipolar arc
   
-  IColor colourStop1;
-  IColor colourStop2;
-  IColor colourStop3;
+  iplug::igraphics::IColor colourStop1;
+  iplug::igraphics::IColor colourStop2;
+  iplug::igraphics::IColor colourStop3;
   float innerCircleFlashRate = 0.0f;
   std::vector<ISVG> buttonStates;
+  int16_t frameCount {0};
 };
 
