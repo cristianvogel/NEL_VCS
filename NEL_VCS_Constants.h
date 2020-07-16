@@ -10,7 +10,6 @@
 #define NEL_BUTTON_OFF "buttonPlainBlue.svg"
 #define NEL_BUTTON_ON "buttonPlainBlue_ON.svg"
 
-
 #pragma mark NEL_Colours
 const iplug::igraphics::IColor NEL_TUNGSTEN(255, 27, 27, 30);
 const iplug::igraphics::IColor NEL_TUNGSTEN_FGBlend( 255, 230,  87,  74  );

@@ -28,10 +28,10 @@ NELDoubleDial::NELDoubleDial(
 , colourStop3( stop3 )
 {//constructor body
 
-  mTimer = std::unique_ptr<iplug::Timer>(
+  doubleDialPulseTimer = std::unique_ptr<iplug::Timer>(
                                          iplug::Timer::Create([&](iplug::Timer& t)
                                     {
-                                      mTimerCount = (innerCircleFlashRate > 0.0f) ? mTimerCount + (innerCircleFlashRate * 0.1f) : 0;
+                                      doubleDialTimerCount = (innerCircleFlashRate > 0.0f) ? doubleDialTimerCount + (innerCircleFlashRate * 0.1f) : 0;
                                       SetDirty(false);
                                     }
                                     , 10.0f)
@@ -45,11 +45,8 @@ NELDoubleDial::NELDoubleDial(
   {
     SetParamIdx(param, valIdx++);
   }
-  
   SetValue(0.5, 0);
   SetValue(0.5, 1);
-  
-  
 }
 
 void NELDoubleDial::Draw(IGraphics& g) {
@@ -157,7 +154,8 @@ void NELDoubleDial::OnMouseWheel(float x, float y, const IMouseMod& mod, float d
 
 const bool& NELDoubleDial::togglePulse()
 {
-  if (static_cast<int>(mTimerCount) % 2) pulse = !pulse;
+  if (static_cast<int>(doubleDialTimerCount) % 2) pulse = !pulse;
+  
   return pulse;
 }
 

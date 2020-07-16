@@ -28,8 +28,8 @@ public:
                 , float a1 = -135.f, float a2 = 135.f, float aAnchor = -135.f
                 );
  
-  double mTimerCount = 0.0;
-  std::unique_ptr<iplug::Timer> mTimer;
+  double doubleDialTimerCount = 0;
+  std::unique_ptr<iplug::Timer> doubleDialPulseTimer;
   bool pulse { false };
   
   

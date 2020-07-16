@@ -44,6 +44,12 @@
 		3EC56BCF24B89215002D64B0 /* process_unix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC56BC224B8905D002D64B0 /* process_unix.cpp */; };
 		3EC56BD024B89217002D64B0 /* process_unix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC56BC224B8905D002D64B0 /* process_unix.cpp */; };
 		3EC56BD124B8921A002D64B0 /* process_unix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC56BC224B8905D002D64B0 /* process_unix.cpp */; };
+		3ECD47C224BFA30B006821B5 /* IPlugOSC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ECD47C124BFA303006821B5 /* IPlugOSC.cpp */; };
+		3ECD47C324BFA30C006821B5 /* IPlugOSC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ECD47C124BFA303006821B5 /* IPlugOSC.cpp */; };
+		3ECD47C424BFA30C006821B5 /* IPlugOSC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ECD47C124BFA303006821B5 /* IPlugOSC.cpp */; };
+		3ECD47C524BFA30D006821B5 /* IPlugOSC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ECD47C124BFA303006821B5 /* IPlugOSC.cpp */; };
+		3ECD47C624BFA30F006821B5 /* IPlugOSC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ECD47C124BFA303006821B5 /* IPlugOSC.cpp */; };
+		3ECD47C724BFA310006821B5 /* IPlugOSC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ECD47C124BFA303006821B5 /* IPlugOSC.cpp */; };
 		3EE825ED24B50B8C00A36392 /* GlobSeqHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE825EB24B50B8C00A36392 /* GlobSeqHelpers.cpp */; };
 		3EE825EE24B50B8C00A36392 /* GlobSeqHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE825EB24B50B8C00A36392 /* GlobSeqHelpers.cpp */; };
 		3EE825EF24B50B8C00A36392 /* GlobSeqHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE825EB24B50B8C00A36392 /* GlobSeqHelpers.cpp */; };
@@ -508,6 +514,7 @@
 		3EC56BC524B8905D002D64B0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3EC56BC624B8905D002D64B0 /* process_win.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = process_win.cpp; sourceTree = "<group>"; };
 		3EC56BC724B8905D002D64B0 /* process.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = process.hpp; sourceTree = "<group>"; };
+		3ECD47C124BFA303006821B5 /* IPlugOSC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IPlugOSC.cpp; sourceTree = "<group>"; };
 		3ED446C024BF1B4800D9ED3E /* NEL_VCS_Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NEL_VCS_Constants.h; path = ../NEL_VCS_Constants.h; sourceTree = "<group>"; };
 		3EE825EB24B50B8C00A36392 /* GlobSeqHelpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GlobSeqHelpers.cpp; path = ../GlobSeqHelpers.cpp; sourceTree = "<group>"; };
 		3EE825F124B50BBD00A36392 /* NELDoubleDial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NELDoubleDial.cpp; path = ../NELDoubleDial.cpp; sourceTree = "<group>"; };
@@ -1275,6 +1282,7 @@
 		4F5369BE20C446430089212E /* OSC */ = {
 			isa = PBXGroup;
 			children = (
+				3ECD47C124BFA303006821B5 /* IPlugOSC.cpp */,
 				4F5369BF20C446430089212E /* IPlugOSC_msg.h */,
 				4F5369C020C446430089212E /* IPlugOSC.h */,
 				4F5369C120C446430089212E /* IPlugOSC_msg.cpp */,
@@ -2405,6 +2413,7 @@
 				4FDAC0EB207D76C600299363 /* IPlugTimer.cpp in Sources */,
 				4F63696E20A463090022C370 /* IControls.cpp in Sources */,
 				4F03A5AD20A4621100EBDFFB /* IGraphics.cpp in Sources */,
+				3ECD47C324BFA30C006821B5 /* IPlugOSC.cpp in Sources */,
 				4F5F344220C0226200487201 /* IPlugPaths.mm in Sources */,
 				3E77259624BB5C3B00DDE318 /* NEL_OSC_Methods.cpp in Sources */,
 				4F6369EC20A466470022C370 /* IControl.cpp in Sources */,
@@ -2435,6 +2444,7 @@
 				3EFE76C824B51131009A3AC7 /* listen.cpp in Sources */,
 				3EC56BCC24B89071002D64B0 /* process.cpp in Sources */,
 				3E77259924BB5C3B00DDE318 /* NEL_OSC_Methods.cpp in Sources */,
+				3ECD47C624BFA30F006821B5 /* IPlugOSC.cpp in Sources */,
 				4F78BE3222E7429B00AD537E /* IPlugAUv3Appex.m in Sources */,
 				3EA669EE24B5A649006D193B /* IPlugOSC_msg.cpp in Sources */,
 				3EFE76C024B51131009A3AC7 /* httpserv.cpp in Sources */,
@@ -2465,6 +2475,7 @@
 				3EC56BD024B89217002D64B0 /* process_unix.cpp in Sources */,
 				4FA9F80721F760C1004E6FE2 /* IGraphicsLice_src.mm in Sources */,
 				4FA9F81021F76177004E6FE2 /* IGraphicsAGG_src.mm in Sources */,
+				3ECD47C524BFA30D006821B5 /* IPlugOSC.cpp in Sources */,
 				4F993F7423055C96000313AF /* IPlugProcessor.cpp in Sources */,
 				4F8C10E320BA2796006320CD /* IGraphicsEditorDelegate.cpp in Sources */,
 				3EFE76CF24B51131009A3AC7 /* httpget.cpp in Sources */,
@@ -2522,6 +2533,7 @@
 				4F3EE1DB231438D000004786 /* IPlugAPP_main.cpp in Sources */,
 				4F3EE1DC231438D000004786 /* IControls.cpp in Sources */,
 				4F3EE1DD231438D000004786 /* IGraphicsMac.mm in Sources */,
+				3ECD47C724BFA310006821B5 /* IPlugOSC.cpp in Sources */,
 				4F3EE1DE231438D000004786 /* NEL_VirtualControlSurface.cpp in Sources */,
 				4F3EE1DF231438D000004786 /* IPopupMenuControl.cpp in Sources */,
 				4F3EE1E0231438D000004786 /* IPlugAPIBase.cpp in Sources */,
@@ -2584,6 +2596,7 @@
 				3EA669EA24B5A644006D193B /* IPlugOSC_msg.cpp in Sources */,
 				4FA9F80621F760C1004E6FE2 /* IGraphicsLice_src.mm in Sources */,
 				3EFE76CA24B51131009A3AC7 /* asyncdns.cpp in Sources */,
+				3ECD47C424BFA30C006821B5 /* IPlugOSC.cpp in Sources */,
 				4F9828B8140A9EB700F3FCC1 /* IPlugAPIBase.cpp in Sources */,
 				4F81597F205D50EB00393585 /* fdynlib.cpp in Sources */,
 				4F815919205D50EB00393585 /* memorystream.cpp in Sources */,
@@ -2719,6 +2732,7 @@
 				4FD16D4013B635A0001D0217 /* swell-misc.mm in Sources */,
 				4FD16D4213B635AB001D0217 /* swell-wnd.mm in Sources */,
 				4FD16D4413B635B2001D0217 /* swell.cpp in Sources */,
+				3ECD47C224BFA30B006821B5 /* IPlugOSC.cpp in Sources */,
 				3EE825ED24B50B8C00A36392 /* GlobSeqHelpers.cpp in Sources */,
 				4F690CA3203A45C700A4A13E /* IPlugAPP_host.cpp in Sources */,
 				4F1A5282205D913300CF2908 /* IPlugAPP.cpp in Sources */,

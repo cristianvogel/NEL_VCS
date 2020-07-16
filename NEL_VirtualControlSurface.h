@@ -42,7 +42,7 @@ enum EStatusMessages
   kNumStatusMessages
 };
 
-class NEL_VirtualControlSurface final : public iplug::Plugin // bug: public OSCReceiver
+class NEL_VirtualControlSurface final : public iplug::Plugin
 {
 public:
   NEL_VirtualControlSurface(const iplug::InstanceInfo& info);
@@ -55,13 +55,10 @@ public:
     "⚇ localhost",
     "⚉ "
   };
-  std::string beSlimeIP = "⋯";
+ 
   std::string consoleText = "";
-
-  // bug: iPlugOSC.h wont allow both send and receive
-  // void OnOSCMessage(OscMessageRead& msg) override;
-  // WDL_String senderNetworkInfo;
   
+  std::string beSlimeIP = "?";
   std::atomic_bool beSlimeConnected {false};
   std::mutex mtx; // mutex for critical section in network thread
   

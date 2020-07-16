@@ -9,10 +9,12 @@
 #include <string>
 #include <vector>
 
-NEL_OSC::NEL_OSC( const char * IP , int port )
+NEL_OSC::NEL_OSC( const char * IP , int port ) 
  {
    IP = IP;
    port = port;
+   messageLog = std::make_unique<std::vector<std::string>>(2);
+   SetReceivePort(9090);
  };
  NEL_OSC::~NEL_OSC() {  }; // to-do: close ports
 
@@ -79,10 +81,8 @@ void NEL_OSC::sendOSC( const std::string & addressStem, const float & arg )
     oscSender->SendOSCMessage(msg);
   }
 }
-
-/* not using yet due to receiver bug in iPlug OSC. Will be overide to OSCReceiver::OnOscMessage() pure virtual func
  
-void NEL_OSC::OnOSCMessage(OscMessageRead& msg)  {
+void NEL_OSC::OnOSCMessage(iplug::OscMessageRead& msg)  {
 
   int nbrArgs = msg.GetNumArgs();
   char type;
@@ -124,9 +124,13 @@ void NEL_OSC::OnOSCMessage(OscMessageRead& msg)  {
     }
     nbrArgs--;
   }
-
-  consoleText = oscMessage;
-
+  messageLog->at(1) = messageLog->at(0);
+  messageLog->at(0) = oscMessage;
 }
 
- */
+bool NEL_OSC::newMessage() { return (messageLog->at(1) != messageLog->at(0));   }
+
+std::string NEL_OSC::getLatestMessage() {
+  std::string r =  messageLog->at(0);
+  messageLog->at(0) = messageLog->at(1);
+  return r; }

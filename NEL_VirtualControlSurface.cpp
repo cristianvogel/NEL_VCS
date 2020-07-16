@@ -16,7 +16,6 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
 {
     consoleText = cnsl[kMsgScanning];
     launchNetworkingThreads();
-
     InitParamRange(kDualDialInner, kDualDialInner + NBR_DUALDIALS - 1, 1, "Dual Dial %i", 0, 0., 1., 0, "%", 0, "Inner Value");
     InitParamRange(kDualDialOuter, kDualDialOuter + NBR_DUALDIALS - 1, 1, "Dual Dial %i", 0, 0., 1., 0, "%", 0, "Outer Value");
 
@@ -75,13 +74,19 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
         //▼ small logging console output status update text
         consoleFont = IText ( 12.f, "Menlo").WithFGColor(NEL_TUNGSTEN_FGBlend);
         pGraphics->AttachControl(new ITextControl(consoleBounds, consoleText.c_str(), consoleFont, false), kCtrlNetStatus);
+        
       
         pGraphics->AttachControl(new ILambdaControl( consoleBounds,
                                                                     [this](ILambdaControl* pCaller, IGraphics& g, IRECT& rect)
                                                                       {
+                                                                       
                                                                         ITextControl* cnsl = dynamic_cast<ITextControl*>(g.GetControlWithTag(kCtrlNetStatus));
+                                                                       if ( nel_osc.newMessage()) {
+                                                                         consoleText = nel_osc.getLatestMessage();
+                                                                         cnsl->SetText(consoleFont.WithFGColor(NEL_TUNGSTEN));
+                                                                       } else { cnsl->SetText(consoleFont.WithFGColor(NEL_TUNGSTEN_FGBlend));}
                                                                         cnsl->SetStr(consoleText.c_str());
-                                                                        cnsl->SetDirty();
+                                                                        cnsl->SetDirty(true); // not sure if this is needed
                                                                       },
                                                                     DEFAULT_ANIMATION_DURATION, true /*loop*/, false /*start imediately*/));
 #pragma mark dual dials
@@ -123,6 +128,7 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
                 if(progress > 1.)
                 {
                     pCaller->OnEndAnimation();
+                    consoleText = cnsl[kMsgScanning];
                     return;
                 }
                 dynamic_cast<IVectorBase *>(pCaller)->
@@ -136,12 +142,12 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
                 pDialLoop->SetActionFunction ( [this, i] (IControl* pDialLambda)
                 {
                   {
-                      //todo: avoid crash when hardware connection is lost.
-                      //Needs IP change method implementation in iPlugOSC.h
                     std::vector<float> floatArgs;
                     floatArgs.push_back(pDialLambda->GetValue(0));
                     floatArgs.push_back(pDialLambda->GetValue(1));
+                    
                     nel_osc.sendOSC( "/dualDial/" + std::to_string(i), floatArgs );
+                    
                   }
                 });
                 pDialLoop->SetDirty();
