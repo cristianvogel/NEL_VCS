@@ -12,10 +12,11 @@ using namespace iplug;
 
 NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
     : Plugin(info, MakeConfig(kNumParams, kNumPresets))
-    //, OSCReceiver(9090)
+
 {
     consoleText = cnsl[kMsgScanning];
-    launchNetworkingThreads();
+    osc.launchNetworkingThread();
+    
     InitParamRange(kDualDialInner, kDualDialInner + NBR_DUALDIALS - 1, 1, "Dual Dial %i", 0, 0., 1., 0, "%", 0, "Inner Value");
     InitParamRange(kDualDialOuter, kDualDialOuter + NBR_DUALDIALS - 1, 1, "Dual Dial %i", 0, 0., 1., 0, "%", 0, "Outer Value");
 
@@ -77,18 +78,25 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
         
       
         pGraphics->AttachControl(new ILambdaControl( consoleBounds,
-                                                                    [this](ILambdaControl* pCaller, IGraphics& g, IRECT& rect)
-                                                                      {
-                                                                       
-                                                                        ITextControl* cnsl = dynamic_cast<ITextControl*>(g.GetControlWithTag(kCtrlNetStatus));
-                                                                       if ( nel_osc.newMessage()) {
-                                                                         consoleText = nel_osc.getLatestMessage();
-                                                                         cnsl->SetText(consoleFont.WithFGColor(NEL_TUNGSTEN));
-                                                                       } else { cnsl->SetText(consoleFont.WithFGColor(NEL_TUNGSTEN_FGBlend));}
-                                                                        cnsl->SetStr(consoleText.c_str());
-                                                                        cnsl->SetDirty(true); // not sure if this is needed
-                                                                      },
-                                                                    DEFAULT_ANIMATION_DURATION, true /*loop*/, false /*start imediately*/));
+                    [this](ILambdaControl* pCaller, IGraphics& g, IRECT& rect) {
+                        
+                        
+                        if (osc.getBeSlimeIP()!="") {
+                          beSlimeIP = osc.getBeSlimeIP();
+                          beSlimeName = osc.getBeSlimeName();
+                          // osc.changeDestination(beSlimeIP, 8000);   //crashes, bug in IPlugOSC
+                          consoleText = cnsl[kMsgConnected] + beSlimeName;
+                        }
+                        
+                        ITextControl* cnsl = dynamic_cast<ITextControl*>(g.GetControlWithTag(kCtrlNetStatus));
+                       if ( osc.newMessage()) {
+                         consoleText = osc.getLatestMessage();
+                         cnsl->SetText(consoleFont.WithFGColor(NEL_TUNGSTEN));
+                       } else { cnsl->SetText(consoleFont.WithFGColor(NEL_TUNGSTEN_FGBlend));}
+                        cnsl->SetStr(consoleText.c_str());
+                        cnsl->SetDirty(true); // not sure if this is needed
+                  },
+                DEFAULT_ANIMATION_DURATION, true /*loop*/, false /*start imediately*/));
 #pragma mark dual dials
         //▼ rows of dual concentric dials with two paramIdx
         for (int d = 0; d < NBR_DUALDIALS; d++)
@@ -146,7 +154,7 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
                     floatArgs.push_back(pDialLambda->GetValue(0));
                     floatArgs.push_back(pDialLambda->GetValue(1));
                     
-                    nel_osc.sendOSC( "/dualDial/" + std::to_string(i), floatArgs );
+                    osc.sendOSC( "/dualDial/" + std::to_string(i), floatArgs );
                     
                   }
                 });
@@ -162,94 +170,13 @@ NEL_VirtualControlSurface::~NEL_VirtualControlSurface()
     // some kind of naive attempt to kill all detached processes by launchNetworkingThreads()
 }
 
-#pragma mark ZeroConfNetworking -
-/*
- Launches two threaded system tasks firstly to browse for zeroconfig name of the Kyma hardware
- and secondly to extract the IP address.
- OSCSender is then instantiated with the IP address when known, inside the IP extraction thread.
- */
-void NEL_VirtualControlSurface::launchNetworkingThreads(){
-
-  std::thread slimeThread( [this] () {
-      
-       TinyProcessLib::Process zeroConfProcess  ("dns-sd -B _ssh._tcp.", "", [this] (const char *bytes, size_t n)
-                                                 {
-                                                   std::cout << "\nOutput from zero conf stdout:\n" << std::string(bytes, n);
-                                                   //extract beslime name
-                                                   std::stringstream ss(bytes);
-                                                   std::string line;
-
-                                                   while(std::getline(ss,line,'\n'))
-                                                   { //start process to extract beslime name
-                                                     
-                                                     if(line.find("beslime") != std::string::npos)
-                                                     {
-                                                       const auto beslimeId = line.substr(line.find("beslime") + 8,3);
-                                                       const auto hardwareName = "beslime-" + beslimeId;
-                                                       std::cout << "☑︎ dns-sd extracted name: " << hardwareName << std::endl;
-                                                       mtx.lock();
-                                                        beSlimeName = hardwareName;
-                                                       mtx.unlock();
-                                                       if (!line.empty())
-                                                       {
-                                                           std::cout << std::endl << "Launching IP Scan thread..." << std::endl;
-                                                         
-                                                           std::thread slimeIPThread( [this] ()
-                                                         { //start process to extract beslime IP
-                                                             
-                                                             TinyProcessLib::Process ipGrab (
-                                                                                             "dns-sd -G v4 " +
-                                                                                             beSlimeName + ".local.",
-                                                                                             "",
-                                                                                             [this] ( const char *bytes, size_t n )
-                                                             {
-                                                               std::cout << "\nOutput from IP search stdout:\n" << std::string(bytes, n);
-                                                               std::stringstream ssip(bytes);
-                                                               std::string ipLine;
-                                                              
-                                                               while(std::getline(ssip,ipLine,'\n'))
-                                                               {
-                                                                 if(ipLine.find("Rmv") != std::string::npos)
-                                                                 {
-                                                                    mtx.lock();
-                                                                      nel_osc.oscSender.reset();
-                                                                      nel_osc.initOSCSender(); //todo: *safely* fallback to localhost when hardware lost
-                                                                      consoleText = cnsl[kMsgScanning];
-                                                                      ipLine.erase();
-                                                                      beSlimeConnected = false;
-                                                                    mtx.unlock();
-                                                                    break;
-                                                                 }
-                                                                 
-                                                                 if (!ipLine.empty()) {
-                                                                   if(ipLine.find("beslime") != std::string::npos)
-                                                                    {
-                                                                       auto ip = (ipLine.substr(ipLine.find(" 169.")+1,16));
-                                                                       std::cout << "☑︎ dns-sd extracted IP: " << ip << std::endl;
-                                                                       mtx.lock();
-                                                                         beSlimeIP = gsh->chomp(ip);
-                                                                         cnsl[kMsgConnected] = cnsl[kMsgConnected] + beSlimeName;
-                                                                         consoleText = cnsl[kMsgConnected];
-                                                                         nel_osc.initKyma(beSlimeIP.c_str(), 8000);
-                                                                         beSlimeConnected = true;
-                                                                       mtx.unlock();
-                                                                    }
-                                                                 }
-                                                               }
-                                                               return false;   });
-                                                           });
-                                                        
-                                                         slimeIPThread.detach();
-                                                       }
-                                                     }
-                                                   } //outer while loop close
-                                             return false;  });
-                                            });
- 
-   slimeThread.detach();
-}
 
 #endif
+
+
+
+
+
 
 #if IPLUG_DSP
 // not using
@@ -258,6 +185,7 @@ void NEL_VirtualControlSurface::launchNetworkingThreads(){
 //   
 //}
 #endif
+
 
 
 

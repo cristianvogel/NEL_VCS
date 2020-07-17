@@ -8,6 +8,7 @@
 #include "NEL_OSC_Methods.hpp"
 #include <string>
 #include <vector>
+#include <thread>
 
 NEL_OSC::NEL_OSC( const char * IP , int port ) 
  {
@@ -25,14 +26,15 @@ if (oscSender == nullptr) {
   }
 }
 
-void NEL_OSC::initKyma( const char* kymaIP, int kymaPort ) {
-  initOSCSender(kymaIP , kymaPort);
-  sendOSC("/osc/respondTo", 1 ); //hardware handshake
-}
+
+//void NEL_OSC::initKyma( const char* kymaIP, int kymaPort ) {
+//  initOSCSender(kymaIP , kymaPort);
+//  sendOSC("/osc/respondTo", 1 ); //hardware handshake
+//}
 
 void NEL_OSC::sendOSC( const std::string & addressStem, const std::vector<float> & args )
 {
-  if (!oscSender) initOSCSender();
+  if (!oscSender) initOSCSender( getBeSlimeIP().c_str(), 8000 );
   if (oscSendActive)
   {
     iplug::OscMessageWrite msg;
@@ -46,7 +48,7 @@ void NEL_OSC::sendOSC( const std::string & addressStem, const std::vector<float>
 
 void NEL_OSC::sendOSC( const std::string & addressStem, const std::vector<int> & args )
 {
-  if (!oscSender) initOSCSender();
+  if (!oscSender) initOSCSender( getBeSlimeIP().c_str(), 8000 );
   if (oscSendActive)
   {
     iplug::OscMessageWrite msg;
@@ -60,7 +62,7 @@ void NEL_OSC::sendOSC( const std::string & addressStem, const std::vector<int> &
 
 void NEL_OSC::sendOSC( const std::string & addressStem, const int & arg )
 {
-  if (!oscSender) initOSCSender();
+  if (!oscSender) initOSCSender( getBeSlimeIP().c_str(), 8000 );
   if (oscSendActive)
   {
     iplug::OscMessageWrite msg;
@@ -72,7 +74,7 @@ void NEL_OSC::sendOSC( const std::string & addressStem, const int & arg )
 
 void NEL_OSC::sendOSC( const std::string & addressStem, const float & arg )
 {
-  if (!oscSender) initOSCSender();
+  if (!oscSender) initOSCSender( getBeSlimeIP().c_str(), 8000 );
   if (oscSendActive)
   {
     iplug::OscMessageWrite msg;
@@ -134,3 +136,30 @@ std::string NEL_OSC::getLatestMessage() {
   std::string r =  messageLog->at(0);
   messageLog->at(0) = messageLog->at(1);
   return r; }
+
+void NEL_OSC::changeDestination( const std::string & IP, int port) {
+  oscSender->SetDesination(IP.c_str(), port);
+}
+
+void NEL_OSC::launchNetworkingThread(){
+
+  std::thread slimeThread( [this] () {
+    
+    zeroConf.init();
+    
+  });
+ 
+   slimeThread.detach();
+}
+
+std::string NEL_OSC::getBeSlimeIP() {
+  std::string IP = zeroConf.addressToString();
+  if (IP == "0.0.0.0") IP = "127.0.0.1" ;
+  return IP;
+}
+
+std::string NEL_OSC::getBeSlimeName() {
+  return zeroConf.hostNameToString();
+}
+
+

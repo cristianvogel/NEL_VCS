@@ -9,6 +9,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include "mDNS_IPExtract.h"
 #include "IPlugOSC.h"
 
 class NEL_OSC : public iplug::OSCReceiver
@@ -22,19 +23,25 @@ public:
   std::unique_ptr<std::vector<std::string>> messageLog;
   
   std::unique_ptr<iplug::OSCSender> oscSender;
-  void initOSCSender( const char* IP = "127.0.0.1",  int port = 8080 );
-  void initKyma( const char * IP = "beslime-877.local", int port = 8000);
+  void initOSCSender( const char* IP ,  int port );
+  // void initKyma( const char * IP = "", int port = 8000); //todo: Kyma handshake
   bool oscSendActive {true}; //todo: make UI button to disable OSC activity
   void sendOSC( const std::string & , const std::vector<float> &  );
   void sendOSC( const std::string & , const std::vector<int> &  );
   void sendOSC( const std::string & , const int & );
   void sendOSC( const std::string & , const float & );
+  void changeDestination( const std::string &, int );
   
   void OnOSCMessage(iplug::OscMessageRead& msg) override;
   WDL_String senderNetworkInfo;
   std::string getLatestMessage();
   bool newMessage();
-
+  void launchNetworkingThread();
+  std::string getBeSlimeIP();
+  std::string getBeSlimeName();
+  
+private:
+  mDNS zeroConf;
 };
 
 

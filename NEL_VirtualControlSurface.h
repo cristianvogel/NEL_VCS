@@ -48,7 +48,7 @@ public:
   NEL_VirtualControlSurface(const iplug::InstanceInfo& info);
   ~NEL_VirtualControlSurface();
 
-  NEL_OSC nel_osc;
+  NEL_OSC osc;
   std::string beSlimeName = "";
   std::vector<std::string> cnsl =
   {
@@ -58,16 +58,14 @@ public:
  
   std::string consoleText = "";
   
-  std::string beSlimeIP = "?";
+  std::string beSlimeIP = "";
   std::atomic_bool beSlimeConnected {false};
   std::mutex mtx; // mutex for critical section in network thread
   
   IText consoleFont;
   std::unique_ptr<GlobSeqHelpers> gsh = std::make_unique<GlobSeqHelpers>();
 
-  
-private:
-  void launchNetworkingThreads();
+
   
 #if IPLUG_DSP // http://bit.ly/2S64BDd
  // void ProcessBlock(iplug::sample** inputs, iplug::sample** outputs, int nFrames) override;
