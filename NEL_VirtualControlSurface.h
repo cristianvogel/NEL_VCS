@@ -48,7 +48,7 @@ public:
   NEL_VirtualControlSurface(const iplug::InstanceInfo& info);
   ~NEL_VirtualControlSurface();
 
-  NEL_OSC osc;
+  NEL_OSC nelosc;
   std::string beSlimeName = "";
   std::vector<std::string> cnsl =
   {
@@ -60,7 +60,6 @@ public:
   
   std::string beSlimeIP = "";
   std::atomic_bool beSlimeConnected {false};
-  std::mutex mtx; // mutex for critical section in network thread
   
   IText consoleFont;
   std::unique_ptr<GlobSeqHelpers> gsh = std::make_unique<GlobSeqHelpers>();

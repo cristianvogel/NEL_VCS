@@ -1,7 +1,7 @@
 //
 //  mDNS_IPExtract.cpp
 //  NEL_VirtualControlSurface-macOS
-//
+//  Bonjour browser and IP resolver
 //  Created by Cristian Andres Vogel on 17/07/2020.
 //
 
@@ -62,13 +62,21 @@ void mDNS::addrinfo_callback(DNSServiceRef sdRef,
            hostName = inHostname;
            
            // Extract IPv4 address
-           // https://stackoverflow.com/questions/1276294/getting-ipv4-address-from-a-sockaddr-structure
+           //https://stackoverflow.com/questions/1276294/getting-ipv4-address-from-a-sockaddr-structure
           struct sockaddr_in *addr_in = (struct sockaddr_in *) address;
           char *s = inet_ntoa(addr_in->sin_addr);
           extractedIP = s;
           printf("IP address: %s\n", s);
-          addr_rslv_lock = strcmp(s,"0.0.0.0") == 0 ? 1 : 0;
+          //addr_rslv_lock = strcmp(s,"0.0.0.0") == 0 ? 1 : 0;
         }
+      if (!(flags & kDNSServiceFlagsAdd)) {
+        //service removed
+        extractedIP = "127.0.0.1";
+        hostName = "localhost";
+      }
+      
+      
+      
     }
   // If there are no more callbacks expected, release 'addr_rslv_lock'.
          //addr_rslv_lock = flags & kDNSServiceFlagsMoreComing;
@@ -91,7 +99,7 @@ void mDNS::resolve_callback(DNSServiceRef resolveRef,
                  const unsigned char *txtRecord,
                  void *context)
 {
-     std::cout << "in resolve callback" << std::endl;
+    
     if (errorCode != kDNSServiceErr_NoError) {
         fprintf(stderr, "(Browser) %d\n", errorCode);
     } else {
@@ -118,7 +126,7 @@ void mDNS::resolve_callback(DNSServiceRef resolveRef,
             // 'addrinfo_callback' clears 'addr_rslv_lock' when all IP address
             // have been processed, breaking out of the 'while' and allowing the
             // thread to continue running.
-        //    while (addr_rslv_lock && DNSServiceProcessResult(addressRef) == kDNSServiceErr_NoError) { continue; }
+
            while (addr_rslv_lock && DNSServiceProcessResult(addressRef) == kDNSServiceErr_NoError) { continue; }
             
             DNSServiceRefDeallocate(addressRef);
@@ -188,8 +196,8 @@ void mDNS::mdns_thread_func() {
     DNSServiceErrorType error = DNSServiceBrowse(&browseRef,
                                                  0,                // no flags
                                                  0,                // all network interfaces
-                                                 "_ssh._tcp",   // service type
-                                                 "local.",               // default domains
+                                                 "_ssh._tcp",     // service type for BeSlime
+                                                 "local.",         // default domains
                                                  browse_callback,  // callback function
                                                  NULL);            // no context
     

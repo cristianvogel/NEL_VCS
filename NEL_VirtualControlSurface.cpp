@@ -1,4 +1,8 @@
+// NEL_Virtual Control Surface
+// 𝌺 Created by Cristian Vogel / NeverEngineLabs 2020
+
 #include "NEL_VirtualControlSurface.h"
+#include "NEL_OSC_Methods.hpp"
 #include "IPlug_include_in_plug_src.h"
 #include "IControls.h"
 #include "tiny-process/process.hpp"
@@ -12,10 +16,11 @@ using namespace iplug;
 
 NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
     : Plugin(info, MakeConfig(kNumParams, kNumPresets))
+    , nelosc( "localhost", 8080)
 
 {
     consoleText = cnsl[kMsgScanning];
-    osc.launchNetworkingThread();
+    nelosc.launchNetworkingThread();
     
     InitParamRange(kDualDialInner, kDualDialInner + NBR_DUALDIALS - 1, 1, "Dual Dial %i", 0, 0., 1., 0, "%", 0, "Inner Value");
     InitParamRange(kDualDialOuter, kDualDialOuter + NBR_DUALDIALS - 1, 1, "Dual Dial %i", 0, 0., 1., 0, "%", 0, "Outer Value");
@@ -81,18 +86,27 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
                     [this](ILambdaControl* pCaller, IGraphics& g, IRECT& rect) {
                         
                         
-                        if (osc.getBeSlimeIP()!="") {
-                          beSlimeIP = osc.getBeSlimeIP();
-                          beSlimeName = osc.getBeSlimeName();
-                          // osc.changeDestination(beSlimeIP, 8000);   //crashes, bug in IPlugOSC
+                        if (nelosc.getBeSlimeIP()!="") {
+                          beSlimeIP = nelosc.getBeSlimeIP();
+                          beSlimeName = nelosc.getBeSlimeName();
+                         // osc.changeDestination(beSlimeIP, 8000);
+                          // to do change host when Kyma hardware connected
                           consoleText = cnsl[kMsgConnected] + beSlimeName;
                         }
+          
+          if (nelosc.getBeSlimeResponse() ) {
+            std::cout << "BeSlime responded." << std::endl;
+            g.GetControlWithTag(kCtrlReScan)->Animate();
+            nelosc.resetBeSlimeResponse(); }
                         
                         ITextControl* cnsl = dynamic_cast<ITextControl*>(g.GetControlWithTag(kCtrlNetStatus));
-                       if ( osc.newMessage()) {
-                         consoleText = osc.getLatestMessage();
-                         cnsl->SetText(consoleFont.WithFGColor(NEL_TUNGSTEN));
-                       } else { cnsl->SetText(consoleFont.WithFGColor(NEL_TUNGSTEN_FGBlend));}
+          
+          //todo : flash new message
+//                       if ( osc.newMessage()) {
+//                         consoleText = osc.getLatestMessage();
+//                         cnsl->SetText(consoleFont.WithFGColor(NEL_TUNGSTEN));
+                     
+                         cnsl->SetText(consoleFont.WithFGColor(NEL_TUNGSTEN_FGBlend));
                         cnsl->SetStr(consoleText.c_str());
                         cnsl->SetDirty(true); // not sure if this is needed
                   },
@@ -154,7 +168,7 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
                     floatArgs.push_back(pDialLambda->GetValue(0));
                     floatArgs.push_back(pDialLambda->GetValue(1));
                     
-                    osc.sendOSC( "/dualDial/" + std::to_string(i), floatArgs );
+                    nelosc.sendOSC( "/dualDial/" + std::to_string(i), floatArgs );
                     
                   }
                 });

@@ -1,7 +1,7 @@
 //
 //  mDNS_IPExtract.h
 //  NEL_VirtualControlSurface-macOS
-//
+//  Bonjour browser and IP resolver
 //  Created by Cristian Andres Vogel on 17/07/2020.
 //
 #pragma once
@@ -84,6 +84,7 @@ class mDNS {
    * a thread dedicated to mDNS operations.
    */
   void mdns_thread_func();
+  
   
 public:
 

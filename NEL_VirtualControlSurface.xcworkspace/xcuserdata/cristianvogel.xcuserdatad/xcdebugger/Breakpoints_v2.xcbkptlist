@@ -7,48 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "FB483026-6FE5-46EB-B7AC-F9DF0ED212D7"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../IPlug/Extras/OSC/IPlugOSC.h"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "200"
-            endingLineNumber = "200">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "DB8D4303-9731-4C05-A030-5FD87F6FF0B7"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../IPlug/Extras/OSC/IPlugOSC.h"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "200"
-            endingLineNumber = "200">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "7656F576-BC03-49E3-BB1F-3B3D2916E738"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../IPlug/Extras/OSC/IPlugOSC.h"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "200"
-            endingLineNumber = "200">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "FB4FCA71-B5E7-49BE-9A28-27B69217728B"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -60,70 +18,6 @@
             endingLineNumber = "1493"
             landmarkName = "IGraphics"
             landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "238AC408-B402-4487-8EC2-D0C6D1083FBF"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../IPlug/Extras/OSC/IPlugOSC.h"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
-            landmarkName = "OSCInterface"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "7BD9C6AB-E82E-4549-884F-2E9AC0DEE733"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../IPlug/Extras/OSC/IPlugOSC.h"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
-            landmarkName = "OSCInterface"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "89271267-6E85-43DE-8C9B-B4B0C4E76B24"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "NEL_OSC_Methods.cpp"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
-            landmarkName = "NEL_OSC::OnOSCMessage(msg)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "235786DB-85C2-4926-9170-D6DE025ECC51"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "NEL_VirtualControlSurface.cpp"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
-            landmarkName = "NEL_VirtualControlSurface::NEL_VirtualControlSurface(info)"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -145,38 +39,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "EF0A94FB-36DF-4EBF-9EA8-A99CC197C1B5"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "NEL_OSC_Methods.cpp"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
-            landmarkName = "unknown"
-            landmarkType = "0">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "5ADD5931-92B7-4EE8-A436-223B39B36B30"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "NEL_VirtualControlSurface.cpp"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
-            landmarkName = "NEL_VirtualControlSurface::NEL_VirtualControlSurface(info)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "BC9AF440-84F9-4FD1-9570-A29D25481839"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -184,8 +46,8 @@
             filePath = "NEL_VirtualControlSurface.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
             landmarkName = "NEL_VirtualControlSurface::NEL_VirtualControlSurface(info)"
             landmarkType = "7">
          </BreakpointContent>
@@ -193,15 +55,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "6FACFB2E-E6DB-472A-BA71-4905CE15A54C"
-            shouldBeEnabled = "Yes"
+            uuid = "E1B0C94D-21E9-4E44-A8B0-571312644ACC"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NEL_VirtualControlSurface.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
             landmarkName = "NEL_VirtualControlSurface::NEL_VirtualControlSurface(info)"
             landmarkType = "7">
          </BreakpointContent>
@@ -209,48 +71,598 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D68C47AE-9176-40B1-957D-A89A263A96D3"
+            uuid = "F7E1E755-DB1A-4195-9FD4-C0FFAD7E4B17"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "NEL_OSC_Methods.cpp"
+            filePath = "../../IPlug/Extras/OSC/IPlugOSC_msg.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "158"
-            endingLineNumber = "158"
-            landmarkName = "NEL_OSC::getBeSlimeIP()"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
+            landmarkName = "OscMessageRead::GetMessage()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5CA6DA54-3753-49A7-825B-D7C8DC2B4359"
+            uuid = "FEE9B0D4-4C8B-4385-8FBD-B911B7516054"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../WDL/ptrlist.h"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "WDL_PtrList"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "FEE9B0D4-4C8B-4385-8FBD-B911B7516054 - fb0d57c3208f1cfe"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WDL_PtrList&lt;iplug::IChannelData&lt;float, double&gt; &gt;::GetSize() const"
+                  moduleName = "NEL_VirtualControlSurface"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianvogel/Desktop/Programming/iPlug2/WDL/ptrlist.h"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "FEE9B0D4-4C8B-4385-8FBD-B911B7516054 - eb21b80b3c8aefa6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WDL_PtrList&lt;WDL_String&gt;::GetSize() const"
+                  moduleName = "NEL_VirtualControlSurface"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianvogel/Desktop/Programming/iPlug2/WDL/ptrlist.h"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "FEE9B0D4-4C8B-4385-8FBD-B911B7516054 - dfa75e05e668891"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WDL_PtrList&lt;iplug::IOConfig&gt;::GetSize() const"
+                  moduleName = "NEL_VirtualControlSurface"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianvogel/Desktop/Programming/iPlug2/WDL/ptrlist.h"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "FEE9B0D4-4C8B-4385-8FBD-B911B7516054 - e08f96186249fc82"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WDL_PtrList&lt;iplug::IBusInfo&gt;::GetSize() const"
+                  moduleName = "NEL_VirtualControlSurface"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianvogel/Desktop/Programming/iPlug2/WDL/ptrlist.h"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "FEE9B0D4-4C8B-4385-8FBD-B911B7516054 - b492b2462ddcb93a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WDL_PtrList&lt;iplug::igraphics::IPopupMenu::Item&gt;::GetSize() const"
+                  moduleName = "NEL_VirtualControlSurface"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianvogel/Desktop/Programming/iPlug2/WDL/ptrlist.h"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "FEE9B0D4-4C8B-4385-8FBD-B911B7516054 - fe25c7f8c79ec679"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WDL_PtrList&lt;void&gt;::GetSize() const"
+                  moduleName = "NEL_VirtualControlSurface"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianvogel/Desktop/Programming/iPlug2/WDL/ptrlist.h"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "FEE9B0D4-4C8B-4385-8FBD-B911B7516054 - a315c7c22a95d897"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WDL_PtrList&lt;Swell_vNEL_VirtualControlSurface_hwnd&gt;::GetSize() const"
+                  moduleName = "NEL_VirtualControlSurface"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianvogel/Desktop/Programming/iPlug2/WDL/ptrlist.h"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "FEE9B0D4-4C8B-4385-8FBD-B911B7516054 - 9188345ffa58fbe3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WDL_PtrList&lt;NSTableColumn&gt;::GetSize() const"
+                  moduleName = "NEL_VirtualControlSurface"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianvogel/Desktop/Programming/iPlug2/WDL/ptrlist.h"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "FEE9B0D4-4C8B-4385-8FBD-B911B7516054 - 326a0543e50bb9e5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WDL_PtrList&lt;JNL_IListen&gt;::GetSize() const"
+                  moduleName = "NEL_VirtualControlSurface"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianvogel/Desktop/Programming/iPlug2/WDL/ptrlist.h"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "FEE9B0D4-4C8B-4385-8FBD-B911B7516054 - 71fc50082fae726e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WDL_PtrList&lt;WebServerBaseClass::WS_conInst&gt;::GetSize() const"
+                  moduleName = "NEL_VirtualControlSurface"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianvogel/Desktop/Programming/iPlug2/WDL/ptrlist.h"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "FEE9B0D4-4C8B-4385-8FBD-B911B7516054 - 1df4c2459816337f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WDL_PtrList&lt;HTREEITEM__&gt;::GetSize() const"
+                  moduleName = "NEL_VirtualControlSurface"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianvogel/Desktop/Programming/iPlug2/WDL/ptrlist.h"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "FEE9B0D4-4C8B-4385-8FBD-B911B7516054 - 68c1fdab4a64baa5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WDL_PtrList&lt;SWELL_ListView_Row&gt;::GetSize() const"
+                  moduleName = "NEL_VirtualControlSurface"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianvogel/Desktop/Programming/iPlug2/WDL/ptrlist.h"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "FEE9B0D4-4C8B-4385-8FBD-B911B7516054 - c5bd4bf8f2ab75e5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WDL_PtrList&lt;char&gt;::GetSize() const"
+                  moduleName = "NEL_VirtualControlSurface"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianvogel/Desktop/Programming/iPlug2/WDL/ptrlist.h"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "FEE9B0D4-4C8B-4385-8FBD-B911B7516054 - dbaf02db9cb4fcf"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WDL_PtrList&lt;NSString&gt;::GetSize() const"
+                  moduleName = "NEL_VirtualControlSurface"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianvogel/Desktop/Programming/iPlug2/WDL/ptrlist.h"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "FEE9B0D4-4C8B-4385-8FBD-B911B7516054 - 639ebf5838da239a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WDL_PtrList&lt;swell_pendingClipboardStates&gt;::GetSize() const"
+                  moduleName = "NEL_VirtualControlSurface"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianvogel/Desktop/Programming/iPlug2/WDL/ptrlist.h"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "FEE9B0D4-4C8B-4385-8FBD-B911B7516054 - 7c22b8954bfdfc9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WDL_PtrList&lt;iplug::OSCDevice&gt;::GetSize() const"
+                  moduleName = "NEL_VirtualControlSurface"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianvogel/Desktop/Programming/iPlug2/WDL/ptrlist.h"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "FEE9B0D4-4C8B-4385-8FBD-B911B7516054 - b1e79988cd06f6e0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WDL_PtrList&lt;double&gt;::GetSize() const"
+                  moduleName = "NEL_VirtualControlSurface"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianvogel/Desktop/Programming/iPlug2/WDL/ptrlist.h"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "FEE9B0D4-4C8B-4385-8FBD-B911B7516054 - b29a4ef8f2fd89cb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WDL_PtrList&lt;iplug::IParam&gt;::GetSize() const"
+                  moduleName = "NEL_VirtualControlSurface"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianvogel/Desktop/Programming/iPlug2/WDL/ptrlist.h"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "FEE9B0D4-4C8B-4385-8FBD-B911B7516054 - d1e704efc2455f48"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WDL_PtrList&lt;iplug::igraphics::IBubbleControl&gt;::GetSize() const"
+                  moduleName = "NEL_VirtualControlSurface"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianvogel/Desktop/Programming/iPlug2/WDL/ptrlist.h"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "FEE9B0D4-4C8B-4385-8FBD-B911B7516054 - 3ea7a5a62e1721e6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WDL_PtrList&lt;iplug::igraphics::IControl&gt;::GetSize() const"
+                  moduleName = "NEL_VirtualControlSurface"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianvogel/Desktop/Programming/iPlug2/WDL/ptrlist.h"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "FEE9B0D4-4C8B-4385-8FBD-B911B7516054 - 85a5d4376e0e3c8b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WDL_PtrList&lt;iplug::igraphics::StaticStorage&lt;iplug::igraphics::APIBitmap&gt;::DataKey&gt;::GetSize() const"
+                  moduleName = "NEL_VirtualControlSurface"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianvogel/Desktop/Programming/iPlug2/WDL/ptrlist.h"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "FEE9B0D4-4C8B-4385-8FBD-B911B7516054 - 1a5abce45cff0cee"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WDL_PtrList&lt;iplug::igraphics::StaticStorage&lt;iplug::igraphics::SVGHolder&gt;::DataKey&gt;::GetSize() const"
+                  moduleName = "NEL_VirtualControlSurface"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianvogel/Desktop/Programming/iPlug2/WDL/ptrlist.h"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "FEE9B0D4-4C8B-4385-8FBD-B911B7516054 - 3c957942d2fd9ce4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WDL_PtrList&lt;iplug::igraphics::StaticStorage&lt;iplug::igraphics::CoreTextFontDescriptor&gt;::DataKey&gt;::GetSize() const"
+                  moduleName = "NEL_VirtualControlSurface"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianvogel/Desktop/Programming/iPlug2/WDL/ptrlist.h"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "FEE9B0D4-4C8B-4385-8FBD-B911B7516054 - a067f9e466bc4c7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WDL_PtrList&lt;iplug::igraphics::StaticStorage&lt;iplug::igraphics::IFontData&gt;::DataKey&gt;::GetSize() const"
+                  moduleName = "NEL_VirtualControlSurface"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianvogel/Desktop/Programming/iPlug2/WDL/ptrlist.h"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "FEE9B0D4-4C8B-4385-8FBD-B911B7516054 - eda93d05ff1cdac"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WDL_PtrList&lt;iplug::igraphics::IPopupMenuControl::MenuPanel&gt;::GetSize() const"
+                  moduleName = "NEL_VirtualControlSurface"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianvogel/Desktop/Programming/iPlug2/WDL/ptrlist.h"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "FEE9B0D4-4C8B-4385-8FBD-B911B7516054 - 446439d7655a8150"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WDL_PtrList&lt;iplug::igraphics::IRECT&gt;::GetSize() const"
+                  moduleName = "NEL_VirtualControlSurface"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianvogel/Desktop/Programming/iPlug2/WDL/ptrlist.h"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "FEE9B0D4-4C8B-4385-8FBD-B911B7516054 - 849f24da56d5ee4e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WDL_PtrList&lt;iplug::IPreset&gt;::GetSize() const"
+                  moduleName = "NEL_VirtualControlSurface"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianvogel/Desktop/Programming/iPlug2/WDL/ptrlist.h"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "FEE9B0D4-4C8B-4385-8FBD-B911B7516054 - ae658a85c7a3abc9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WDL_PtrList&lt;HDC__&gt;::GetSize() const"
+                  moduleName = "NEL_VirtualControlSurface"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianvogel/Desktop/Programming/iPlug2/WDL/ptrlist.h"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "FEE9B0D4-4C8B-4385-8FBD-B911B7516054 - a37cb59227fb3e2d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WDL_PtrList&lt;HGDIOBJ__&gt;::GetSize() const"
+                  moduleName = "NEL_VirtualControlSurface"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianvogel/Desktop/Programming/iPlug2/WDL/ptrlist.h"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "61B5C9A4-59CB-4B5E-84DC-654B91600EB5"
+            shouldBeEnabled = "No"
+            nameForDebugger = "Does not reach here when getting message from Kyma"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../IPlug/Extras/OSC/IPlugOSC_msg.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "OscMessageRead::OscMessageRead(buf, len)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "684BE345-75B2-4856-9F98-04C73590BB98"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NEL_PacketListener.hpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "NEL_PacketListener"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "684BE345-75B2-4856-9F98-04C73590BB98 - 91012b161d2d789"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NEL_PacketListener::NEL_PacketListener(char const*, int)"
+                  moduleName = "NEL_VirtualControlSurface"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianvogel/Desktop/Programming/iPlug2/Examples/NEL_VirtualControlSurface/NEL_PacketListener.hpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "24"
+                  endingLineNumber = "24"
+                  offsetFromSymbolStart = "23">
+               </Location>
+               <Location
+                  uuid = "684BE345-75B2-4856-9F98-04C73590BB98 - 91012b161d2d789"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NEL_PacketListener::NEL_PacketListener(char const*, int)"
+                  moduleName = "NEL_VirtualControlSurface"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianvogel/Desktop/Programming/iPlug2/Examples/NEL_VirtualControlSurface/NEL_PacketListener.hpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "24"
+                  endingLineNumber = "24"
+                  offsetFromSymbolStart = "23">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E81B3885-2BE6-4ECD-999E-6BED1B510B04"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NEL_OSC_Methods.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
+            landmarkName = "NEL_OSC::NEL_OSC(host, port)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F8BAC711-87D1-4CD9-946A-D65FE94CC1AB"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../IPlug/Extras/OSC/IPlugOSC.cpp"
+            filePath = "osc/OscPacketListener.h"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "423"
-            endingLineNumber = "423"
-            landmarkName = "OSCSender::SetDesination(ip, port)"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "ProcessBundle(b, remoteEndpoint)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E790403A-D3CB-477D-8D40-E87EDB66804A"
+            uuid = "95925ACC-9A89-4B0E-AAC2-A2AC0C824785"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "NEL_OSC_Methods.cpp"
+            filePath = "NEL_PacketListener.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
-            landmarkName = "NEL_OSC::getBeSlimeName()"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "NEL_PacketListener::ProcessMessage(m, remoteEndpoint)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "151F0073-63B4-4754-891A-FF9061FC0BE5"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NEL_PacketListener.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "NEL_PacketListener::NEL_PacketListener(port, listener)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -9,39 +9,57 @@
 #include <string>
 #include <iostream>
 #include <vector>
-#include "mDNS_IPExtract.h"
-#include "IPlugOSC.h"
 
-class NEL_OSC : public iplug::OSCReceiver
+#include "mDNS_IPExtract.h"
+#include "NEL_PacketListener.hpp"
+#include "NEL_PacketSender.hpp"
+#include <iostream>
+#include <cstring>
+
+#include <mutex>
+
+
+static bool beSlimeResponse = false;
+
+class NEL_OSC
 {
 public:
-  NEL_OSC( const char * IP  = "127.0.0.1", int port = 8080 );
+  NEL_OSC( const char * host , int port );
   ~NEL_OSC();
     
-  const char * IP;
-  int port;
+  const char * _host;
+  int _port;
   std::unique_ptr<std::vector<std::string>> messageLog;
   
-  std::unique_ptr<iplug::OSCSender> oscSender;
+  NEL_PacketListener listener();
+  std::unique_ptr<osc::NEL_PacketSender> senderOSC;
+  
   void initOSCSender( const char* IP ,  int port );
-  // void initKyma( const char * IP = "", int port = 8000); //todo: Kyma handshake
+  void initKyma(); 
   bool oscSendActive {true}; //todo: make UI button to disable OSC activity
   void sendOSC( const std::string & , const std::vector<float> &  );
   void sendOSC( const std::string & , const std::vector<int> &  );
   void sendOSC( const std::string & , const int & );
   void sendOSC( const std::string & , const float & );
-  void changeDestination( const std::string &, int );
+ // void changeDestination( const std::string &, int );
   
-  void OnOSCMessage(iplug::OscMessageRead& msg) override;
-  WDL_String senderNetworkInfo;
+  std::mutex mtx; // mutex for critical section in network thread
+  
   std::string getLatestMessage();
-  bool newMessage();
+
   void launchNetworkingThread();
+  
+  bool getBeSlimeResponse();
+  void resetBeSlimeResponse();
   std::string getBeSlimeIP();
   std::string getBeSlimeName();
   
 private:
   mDNS zeroConf;
+
 };
+
+
+
 
 
