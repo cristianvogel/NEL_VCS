@@ -58,7 +58,6 @@ namespace osc {
     ~NEL_PacketSender() { }
     
     UdpTransmitSocket transmitSocket;
-    
-  
+
   };
 }

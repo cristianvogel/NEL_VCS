@@ -12,13 +12,13 @@
 #include <thread>
 
 
-NEL_OSC::NEL_OSC( const char * host  , int port  ) 
-   
+NEL_OSC::NEL_OSC( const char * host  , int port  ) :
+   listenerOSC (8080, listenerOSC)
  {
    _host = host ;
    _port = port;
    messageLog = std::make_unique<std::vector<std::string>>(2);
-    
+   
  };
  NEL_OSC::~NEL_OSC() {  }; // to-do: close ports
 
@@ -29,8 +29,17 @@ NEL_OSC::NEL_OSC( const char * host  , int port  )
 */
 void NEL_OSC::launchNetworkingThread(){
   std::thread slimeThread( [this] () { zeroConf.init(); } );
+  std::thread listener ( [this] () { initOSCListener(  8080  ); } );
   slimeThread.detach();
+  listener.detach();
 }
+
+void NEL_OSC::initOSCListener ( int port ) {
+
+  listenerOSC.m_receiveSocket->Run();
+
+}
+
 
 void NEL_OSC::initOSCSender( const char* IP, int port ) {
 
@@ -52,7 +61,7 @@ void NEL_OSC::initKyma() {
 }
 
 
-#pragma mark sending
+#pragma mark sending needs migrating to OSCpack
 
 void NEL_OSC::sendOSC( const std::string & addressStem, const std::vector<float> & args )
 {
@@ -113,73 +122,14 @@ void NEL_OSC::sendOSC( const std::string & addressStem, const float & arg )
     }
 }
  
-
-#pragma mark Receiving ( needs migrating to OSCPack )
-//void NEL_OSC::OnOSCMessage(iplug::OscMessageRead& msg)  {
-//
-//
-//  printf( "I: %s", msg.GetMessage());
-//  if (strcmp( msg.GetMessage() , "/osc/response_from") == 0) {
-//    beSlimeResponse = true;
-//  }
-//
-//  int nbrArgs = msg.GetNumArgs();
-//  char type;
-//  int index = 0;
-//  char oscMessage[128];
-//  char address[64];
-//  strcpy(address, "");
-//  const char * m = msg.PopWord();
-//  while (m)
-//  {
-//        strcat(address, "/");
-//        strcat(address, m);
-//        m = msg.PopWord();
-//  };
-//
-//
-//  while (nbrArgs) {
-//
-//    msg.GetIndexedArg(index, &type);
-//    switch (type)
-//    {
-//        case 'i':
-//        {
-//          const int* pValue = msg.PopIntArg(false);
-//          if (pValue) sprintf(oscMessage, "%s %i", address, *pValue);
-//          break;
-//        }
-//        case 'f': {
-//          const float* pValue = msg.PopFloatArg(false);
-//          if (pValue) sprintf(oscMessage, "%s %f", address, *pValue);
-//          break;
-//        }
-//        case 's': {
-//          const char* pValue = msg.PopStringArg(false);
-//          if (pValue) sprintf(oscMessage, "%s %s", address, pValue);
-//          break;
-//        }
-//        default : break;
-//    }
-//    nbrArgs--;
-//  }
-//  messageLog->at(1) = messageLog->at(0);
-//  messageLog->at(0) = oscMessage;
-//}
-//
-//bool NEL_OSC::newMessage() { return (messageLog->at(1) != messageLog->at(0));   }
-//
-//std::string NEL_OSC::getLatestMessage() {
-//  std::string r =  messageLog->at(0);
-//  messageLog->at(0) = messageLog->at(1);
-//  return r; }
-//
-//void NEL_OSC::changeDestination( const std::string & IP, int port) {
-//  if (senderOSC) senderOSC->SetDestination(IP.c_str(), port);
-//}
-
-
 #pragma mark getters
+
+std::string NEL_OSC::getLatestMessage() {
+  
+  if ( listenerOSC.messageReceived && !(listenerOSC.getMostRecentMessage().empty()) )  return listenerOSC.getMostRecentMessage();
+  else return "";
+}
+
 std::string NEL_OSC::getBeSlimeIP() {
   mtx.lock();
   std::string IP = zeroConf.addressToString();
@@ -189,8 +139,8 @@ std::string NEL_OSC::getBeSlimeIP() {
 }
 
 std::string NEL_OSC::getBeSlimeName() {
-  std::string n {""};
   mtx.lock();
+  std::string n {""};
   n = zeroConf.hostNameToString();
   mtx.unlock();
   return n;

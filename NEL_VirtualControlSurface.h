@@ -64,7 +64,8 @@ public:
   IText consoleFont;
   std::unique_ptr<GlobSeqHelpers> gsh = std::make_unique<GlobSeqHelpers>();
 
-
+  void defaultConsoleText();
+  
   
 #if IPLUG_DSP // http://bit.ly/2S64BDd
  // void ProcessBlock(iplug::sample** inputs, iplug::sample** outputs, int nFrames) override;

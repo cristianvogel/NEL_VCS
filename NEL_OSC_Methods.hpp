@@ -31,10 +31,12 @@ public:
   int _port;
   std::unique_ptr<std::vector<std::string>> messageLog;
   
-  NEL_PacketListener listener();
+  NEL_PacketListener listenerOSC;
   std::unique_ptr<osc::NEL_PacketSender> senderOSC;
   
+  void launchNetworkingThread();
   void initOSCSender( const char* IP ,  int port );
+  void initOSCListener ( int port);
   void initKyma(); 
   bool oscSendActive {true}; //todo: make UI button to disable OSC activity
   void sendOSC( const std::string & , const std::vector<float> &  );
@@ -46,13 +48,12 @@ public:
   std::mutex mtx; // mutex for critical section in network thread
   
   std::string getLatestMessage();
-
-  void launchNetworkingThread();
   
   bool getBeSlimeResponse();
   void resetBeSlimeResponse();
   std::string getBeSlimeIP();
   std::string getBeSlimeName();
+  
   
 private:
   mDNS zeroConf;

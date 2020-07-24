@@ -17,11 +17,19 @@ class NEL_PacketListener : public osc::OscPacketListener {
   
 public:
   
-  NEL_PacketListener(  int , PacketListener );
+  NEL_PacketListener(  int , PacketListener& );
   ~NEL_PacketListener();
   
-  const char * _destinationHost;
-  int _destinationPort;
+  const char * m_destinationHost;
+  int m_destinationPort;
+  std::unique_ptr<UdpListeningReceiveSocket> m_receiveSocket;
+  
+  std::atomic_bool messageReceived{false};
+  std::string mostRecentMessage{""};
+  
+  std::string getMostRecentMessage(  );
+  void setMostRecentMessage( const std::string& );
+  std::mutex msgMutex;
 
 protected:
   void ProcessMessage( const osc::ReceivedMessage& m,

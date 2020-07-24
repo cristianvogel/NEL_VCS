@@ -84,7 +84,6 @@
 		3E42D72624C88B890078FDF2 /* NEL_PacketSender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E42D72224C88B890078FDF2 /* NEL_PacketSender.cpp */; };
 		3E42D72724C88B890078FDF2 /* NEL_PacketSender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E42D72224C88B890078FDF2 /* NEL_PacketSender.cpp */; };
 		3E42D72824C88B890078FDF2 /* NEL_PacketSender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E42D72224C88B890078FDF2 /* NEL_PacketSender.cpp */; };
-		3E42D72924C88B890078FDF2 /* NEL_PacketSender.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3E42D72324C88B890078FDF2 /* NEL_PacketSender.hpp */; };
 		3E42D73C24C8BEDE0078FDF2 /* connection.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E42D72B24C8BEDD0078FDF2 /* connection.h */; };
 		3E42D73D24C8BEDE0078FDF2 /* jnetlib.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E42D72C24C8BEDD0078FDF2 /* jnetlib.h */; };
 		3E42D73E24C8BEDE0078FDF2 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E42D72D24C8BEDD0078FDF2 /* util.cpp */; };
@@ -130,6 +129,7 @@
 		3E42D76624C8BEDE0078FDF2 /* connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E42D73A24C8BEDE0078FDF2 /* connection.cpp */; };
 		3E42D76724C8BEDE0078FDF2 /* connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E42D73A24C8BEDE0078FDF2 /* connection.cpp */; };
 		3E42D76824C8BEDE0078FDF2 /* irc_util.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E42D73B24C8BEDE0078FDF2 /* irc_util.h */; };
+		3E50A5C024C8CA5400025F2F /* NEL_PacketSender.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3E42D72324C88B890078FDF2 /* NEL_PacketSender.hpp */; };
 		3E61745D24C1E58F00762320 /* mDNS_IPExtract.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E61745C24C1E58F00762320 /* mDNS_IPExtract.cpp */; };
 		3E61745E24C1E58F00762320 /* mDNS_IPExtract.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E61745C24C1E58F00762320 /* mDNS_IPExtract.cpp */; };
 		3E61745F24C1E58F00762320 /* mDNS_IPExtract.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E61745C24C1E58F00762320 /* mDNS_IPExtract.cpp */; };
@@ -1986,7 +1986,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E42D72124C885810078FDF2 /* NEL_PacketListener.hpp in Headers */,
-				3E42D72924C88B890078FDF2 /* NEL_PacketSender.hpp in Headers */,
 				3E42D70824C884050078FDF2 /* PacketListener.h in Headers */,
 				3E42D6E124C881CA0078FDF2 /* OscException.h in Headers */,
 				3E42D76224C8BEDE0078FDF2 /* asyncdns.h in Headers */,
@@ -1999,6 +1998,7 @@
 				3E42D70624C884050078FDF2 /* UdpSocket.h in Headers */,
 				3E42D70724C884050078FDF2 /* TimerListener.h in Headers */,
 				3E42D75924C8BEDE0078FDF2 /* httpserv.h in Headers */,
+				3E50A5C024C8CA5400025F2F /* NEL_PacketSender.hpp in Headers */,
 				3E42D6E024C881CA0078FDF2 /* OscHostEndianness.h in Headers */,
 				3E42D75A24C8BEDE0078FDF2 /* netinc.h in Headers */,
 				3E42D73C24C8BEDE0078FDF2 /* connection.h in Headers */,
