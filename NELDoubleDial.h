@@ -27,12 +27,12 @@ public:
                 , float flashRate = 0.0f
                 , float a1 = -135.f, float a2 = 135.f, float aAnchor = -135.f
                 );
- 
-  double doubleDialTimerCount = 0;
-  std::unique_ptr<iplug::Timer> doubleDialPulseTimer;
+   
+  float timerMillis { 0 };
+  iplug::Timer* doubleDialPulseTimer;
   bool pulse { false };
   
-  
+  std::function<void( iplug::Timer & )> timerFunc = nullptr;
   
   void Draw(IGraphics& p) override;
   void OnMouseDrag(float x, float y, float dX, float dY, const IMouseMod& mod) override;
@@ -44,6 +44,7 @@ public:
   void setButtonStates( const ISVG& on , const ISVG& off);
   
 private:
+  const float rateMillisFactor = 1000.f;
   double mMouseDragValue = 0;
   float mTrackToHandleDistance = 4.f;
   float mInnerPointerFrac = 0.1f;
@@ -58,6 +59,5 @@ private:
   iplug::igraphics::IColor colourStop3;
   float innerCircleFlashRate = 0.0f;
   std::vector<ISVG> buttonStates;
-  int16_t frameCount {0};
 };
 

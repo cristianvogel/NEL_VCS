@@ -48,6 +48,7 @@ public:
   std::mutex mtx; // mutex for critical section in network thread
   
   std::string getLatestMessage();
+  const std::vector<float> getLatestFloatArgs();
   
   bool getBeSlimeResponse();
   void resetBeSlimeResponse();

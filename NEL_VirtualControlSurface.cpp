@@ -97,9 +97,9 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
                           beSlimeIP = nelosc.getBeSlimeIP();
                           beSlimeName = nelosc.getBeSlimeName();
 
-            if ( !beSlimeName.empty() ) {
-              beSlimeConnected = true;
-            };
+                          if ( !beSlimeName.empty() ) {
+                            beSlimeConnected = true;
+                          };
                           consoleText = cnsl[kMsgConnected] + beSlimeName;
             
             // osc.changeDestination(beSlimeIP, 8000);
@@ -117,6 +117,9 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
           }
             cnsl->SetStr(consoleText.c_str());
             cnsl->SetDirty(true); // not sure if this is needed
+          
+            updateAllDialPulseFromOSC();
+          
       } , DEFAULT_ANIMATION_DURATION, true /*loop*/, true /*start imediately*/));
       
 #pragma mark dual dials
@@ -155,7 +158,7 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
                 [this] (IControl * pCaller)
             {
                 auto progress = pCaller->GetAnimationProgress();
-                if(progress > 1.)
+                if (progress > 1.)
                 {
                     pCaller->OnEndAnimation();
                     consoleText = cnsl[kMsgScanning];
@@ -171,13 +174,10 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
                 IControl *pDialLoop = pCaller->GetUI()->GetControlWithTag(kCtrlFluxDial + i);
                 pDialLoop->SetActionFunction ( [this, i] (IControl* pDialLambda)
                 {
-                  {
                     std::vector<float> floatArgs;
                     floatArgs.push_back(pDialLambda->GetValue(0));
                     floatArgs.push_back(pDialLambda->GetValue(1));
                     nelosc.sendOSC( "/dualDial/" + std::to_string(i), floatArgs );
-                    
-                  }
                 });
                 pDialLoop->SetDirty();
             }
@@ -198,6 +198,19 @@ void NEL_VirtualControlSurface::defaultConsoleText() {
   
 }
 
+void NEL_VirtualControlSurface::updateAllDialPulseFromOSC() {
+  std::string::size_type oscValue = nelosc.getLatestMessage().find("/dial/pulse");
+  const std::vector<float>& floatArgs = nelosc.getLatestFloatArgs();
+  if (oscValue != std::string::npos)
+  {
+    for (int i = 0; i < NBR_DUALDIALS; i++)
+      {
+          IControl *pDialLoop = GetUI()->GetControlWithTag(kCtrlFluxDial + i);
+          pDialLoop->As<NELDoubleDial>()->setFlashRate( floatArgs.at( i % floatArgs.size() ) );
+          pDialLoop->SetDirty(true);
+      }
+  }
+}
 
 #endif
 

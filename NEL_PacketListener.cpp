@@ -30,7 +30,9 @@ NEL_PacketListener::NEL_PacketListener(  int port , PacketListener& listener) : 
   
 };
 
-NEL_PacketListener::~NEL_PacketListener() {}
+NEL_PacketListener::~NEL_PacketListener() {
+  m_receiveSocket.release();
+}
 
 void NEL_PacketListener::ProcessMessage(const osc::ReceivedMessage& m, const IpEndpointName& remoteEndpoint)  {
  
@@ -63,14 +65,14 @@ void NEL_PacketListener::ProcessMessage(const osc::ReceivedMessage& m, const IpE
           std::basic_stringstream<char> msgAndArgs;
           while ( arg != m.ArgumentsEnd() ) {
           if ( arg->IsFloat() ) { floatArgs.push_back( (arg++) -> AsFloat() ); }
-//todo:
-//          if ((arg++)->IsInt32()) { }
-//          if ((arg++)->IsBlob()) { }
           }
+          
+          setMostRecentFloatArgs( floatArgs );
+          
           msgAndArgs << addr;
           for ( float f: floatArgs) {
-            
            msgAndArgs << " " << f;
+            
           }
           setMostRecentMessage(msgAndArgs.str());
         }
@@ -83,6 +85,8 @@ void NEL_PacketListener::ProcessMessage(const osc::ReceivedMessage& m, const IpE
     }
 }
 
+#pragma mark getters
+
 void NEL_PacketListener::setMostRecentMessage( const std::string& msg ) {
   
   msgMutex.lock();
@@ -91,7 +95,16 @@ void NEL_PacketListener::setMostRecentMessage( const std::string& msg ) {
   msgMutex.unlock();
 }
 
-std::string NEL_PacketListener::getMostRecentMessage() {
+void NEL_PacketListener::setMostRecentFloatArgs(const std::vector<float>& floatArgs)
+{
+  msgMutex.lock();
+  m_floatArgs.clear();
+    std::copy(floatArgs.begin(), floatArgs.end(), std::back_inserter(m_floatArgs));
+  msgMutex.unlock();
+}
+
+#pragma mark setters
+const std::string NEL_PacketListener::getMostRecentMessage() {
   msgMutex.lock();
     std::string msg{ "" };
     msg = mostRecentMessage;
@@ -99,3 +112,19 @@ std::string NEL_PacketListener::getMostRecentMessage() {
   return msg;
 }
 
+const std::string NEL_PacketListener::getMostRecentAddress() {
+  msgMutex.lock();
+    std::string addr{ "" };
+    addr = mostRecentAddr;
+  msgMutex.unlock();
+  return addr;
+}
+
+//todo: figure out how to mutex lock this
+const std::vector<float> NEL_PacketListener::getMostRecentFloatArgs() {
+  std::vector<float> args;
+  msgMutex.lock();
+    std::copy(m_floatArgs.begin(), m_floatArgs.end(), std::back_inserter(args));
+  msgMutex.unlock();
+  return args;
+}

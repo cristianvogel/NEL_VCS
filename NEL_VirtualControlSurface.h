@@ -65,6 +65,7 @@ public:
   std::unique_ptr<GlobSeqHelpers> gsh = std::make_unique<GlobSeqHelpers>();
 
   void defaultConsoleText();
+  void updateAllDialPulseFromOSC();
   
   
 #if IPLUG_DSP // http://bit.ly/2S64BDd

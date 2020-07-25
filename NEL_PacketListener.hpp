@@ -11,7 +11,7 @@
 #include "osc/OscReceivedElements.h"
 #include "osc/OscPacketListener.h"
 #include "ip/UdpSocket.h"
-
+#include <vector>
 
 class NEL_PacketListener : public osc::OscPacketListener {
   
@@ -25,16 +25,23 @@ public:
   std::unique_ptr<UdpListeningReceiveSocket> m_receiveSocket;
   
   std::atomic_bool messageReceived{false};
-  std::string mostRecentMessage{""};
   
-  std::string getMostRecentMessage(  );
+  const std::string getMostRecentMessage( );
+  const std::string getMostRecentAddress( );
+  const std::vector<float> getMostRecentFloatArgs( );
+  
   void setMostRecentMessage( const std::string& );
+  void setMostRecentAddress( const std::string& );
+  void setMostRecentFloatArgs( const std::vector<float>& );
+  
   std::mutex msgMutex;
 
 protected:
   void ProcessMessage( const osc::ReceivedMessage& m,
                                 const IpEndpointName& remoteEndpoint ) ;
-
+  std::vector<float> m_floatArgs;
+  std::string mostRecentMessage{""};
+  std::string mostRecentAddr{""};
 };
 
 

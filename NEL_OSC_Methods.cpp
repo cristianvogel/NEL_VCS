@@ -69,13 +69,7 @@ void NEL_OSC::sendOSC( const std::string & addressStem, const std::vector<float>
   if (oscSendActive)
   {
     
-    //todo: send float args
-//    iplug::OscMessageWrite msg;
-//    msg.PushWord( addressStem.c_str() );
-//    for (int i=0; i<args.size() ; i++) {
-//      msg.PushFloatArg( args.at(i));
-//    }
-//    senderOSC->SendOSCMessage(msg);
+   
   }
 }
 
@@ -128,6 +122,11 @@ std::string NEL_OSC::getLatestMessage() {
   
   if ( listenerOSC.messageReceived && !(listenerOSC.getMostRecentMessage().empty()) )  return listenerOSC.getMostRecentMessage();
   else return "";
+}
+
+const std::vector<float> NEL_OSC::getLatestFloatArgs() {
+  
+  return listenerOSC.getMostRecentFloatArgs();
 }
 
 std::string NEL_OSC::getBeSlimeIP() {
