@@ -51,7 +51,7 @@ private:
   float mOuterPointerFrac = 1.f;
   float mPointerThickness = 2.5f;
   float mAngle1, mAngle2;
-  float mTrackSize = static_cast<float> ( fmax( 4, 14 - NBR_DUALDIALS) );
+  float mTrackSize = static_cast<float> ( fmax( 4, 20 - NBR_DUALDIALS) );
   float mAnchorAngle; // for bipolar arc
   
   iplug::igraphics::IColor colourStop1;

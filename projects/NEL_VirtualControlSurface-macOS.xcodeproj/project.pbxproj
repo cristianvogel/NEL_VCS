@@ -79,11 +79,6 @@
 		3E42D71F24C885810078FDF2 /* NEL_PacketListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E42D71A24C885810078FDF2 /* NEL_PacketListener.cpp */; };
 		3E42D72024C885810078FDF2 /* NEL_PacketListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E42D71A24C885810078FDF2 /* NEL_PacketListener.cpp */; };
 		3E42D72124C885810078FDF2 /* NEL_PacketListener.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3E42D71B24C885810078FDF2 /* NEL_PacketListener.hpp */; };
-		3E42D72424C88B890078FDF2 /* NEL_PacketSender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E42D72224C88B890078FDF2 /* NEL_PacketSender.cpp */; };
-		3E42D72524C88B890078FDF2 /* NEL_PacketSender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E42D72224C88B890078FDF2 /* NEL_PacketSender.cpp */; };
-		3E42D72624C88B890078FDF2 /* NEL_PacketSender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E42D72224C88B890078FDF2 /* NEL_PacketSender.cpp */; };
-		3E42D72724C88B890078FDF2 /* NEL_PacketSender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E42D72224C88B890078FDF2 /* NEL_PacketSender.cpp */; };
-		3E42D72824C88B890078FDF2 /* NEL_PacketSender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E42D72224C88B890078FDF2 /* NEL_PacketSender.cpp */; };
 		3E42D73C24C8BEDE0078FDF2 /* connection.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E42D72B24C8BEDD0078FDF2 /* connection.h */; };
 		3E42D73D24C8BEDE0078FDF2 /* jnetlib.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E42D72C24C8BEDD0078FDF2 /* jnetlib.h */; };
 		3E42D73E24C8BEDE0078FDF2 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E42D72D24C8BEDD0078FDF2 /* util.cpp */; };
@@ -2634,7 +2629,6 @@
 				3E42D6FD24C884050078FDF2 /* NetworkingUtils.cpp in Sources */,
 				3E42D73F24C8BEDE0078FDF2 /* util.cpp in Sources */,
 				4FB1F59020E4B010004157C8 /* IGraphicsMac_view.mm in Sources */,
-				3E42D72524C88B890078FDF2 /* NEL_PacketSender.cpp in Sources */,
 				4FA9F80E21F76177004E6FE2 /* IGraphicsAGG_src.mm in Sources */,
 				3E42D74F24C8BEDE0078FDF2 /* listen.cpp in Sources */,
 				4F993F7223055C96000313AF /* IPlugProcessor.cpp in Sources */,
@@ -2698,7 +2692,6 @@
 				3E42D75624C8BEDE0078FDF2 /* asyncdns.cpp in Sources */,
 				4FB1F59320E4B013004157C8 /* IGraphicsMac_view.mm in Sources */,
 				4FD52136202A5BD000A4D22A /* dfx-au-utilities.c in Sources */,
-				3E42D72724C88B890078FDF2 /* NEL_PacketSender.cpp in Sources */,
 				4FCE29DA21D6ED70004BCBA1 /* ITextEntryControl.cpp in Sources */,
 				4F5F344420C0226200487201 /* IPlugPaths.mm in Sources */,
 				4F35DEB0207E5C5A00867D8F /* IPlugPluginBase.cpp in Sources */,
@@ -2801,7 +2794,6 @@
 				3E42D76724C8BEDE0078FDF2 /* connection.cpp in Sources */,
 				3E42D75224C8BEDE0078FDF2 /* listen.cpp in Sources */,
 				3E42D6D724C881CA0078FDF2 /* OscOutboundPacketStream.cpp in Sources */,
-				3E42D72824C88B890078FDF2 /* NEL_PacketSender.cpp in Sources */,
 				4F78BE2922E7406D00AD537E /* IPlugTimer.cpp in Sources */,
 				3E42D70E24C884050078FDF2 /* IpEndpointName.cpp in Sources */,
 				4F78BE2A22E7406D00AD537E /* IPlugPaths.mm in Sources */,
@@ -2862,7 +2854,6 @@
 				4F815991205D51F000393585 /* vstcomponentbase.cpp in Sources */,
 				4F03A5AE20A4621100EBDFFB /* IGraphics.cpp in Sources */,
 				4F815987205D50EB00393585 /* conststringtable.cpp in Sources */,
-				3E42D72624C88B890078FDF2 /* NEL_PacketSender.cpp in Sources */,
 				4F722020225C1EB100FF0E7C /* commoniids.cpp in Sources */,
 				4FB1F59220E4B012004157C8 /* IGraphicsMac_view.mm in Sources */,
 				4F81598D205D51F000393585 /* vstaudioeffect.cpp in Sources */,
@@ -2991,7 +2982,6 @@
 				4F03A5AC20A4621100EBDFFB /* IGraphics.cpp in Sources */,
 				4F2EA978203A50EA008E4850 /* IPlugAPP_dialog.cpp in Sources */,
 				4FAFFE5821495A4800A6E72D /* RtAudio.cpp in Sources */,
-				3E42D72424C88B890078FDF2 /* NEL_PacketSender.cpp in Sources */,
 				4F6FD2B122675B6300FC59E6 /* IGraphicsCoreText.mm in Sources */,
 				3E61745D24C1E58F00762320 /* mDNS_IPExtract.cpp in Sources */,
 				4F690C9B203A345100A4A13E /* IPlugAPP_main.cpp in Sources */,

@@ -13,11 +13,13 @@
 
 
 NEL_OSC::NEL_OSC( const char * host  , int port  ) :
-   listenerOSC (8080, listenerOSC)
+   listener (8080, listener)
+  
  {
    _host = host ;
    _port = port;
    messageLog = std::make_unique<std::vector<std::string>>(2);
+   initOSCSender("localhost", 9090);
    
  };
  NEL_OSC::~NEL_OSC() {  }; // to-do: close ports
@@ -36,97 +38,39 @@ void NEL_OSC::launchNetworkingThread(){
 
 void NEL_OSC::initOSCListener ( int port ) {
 
-  listenerOSC.m_receiveSocket->Run();
+  listener.m_receiveSocket->Run();
 
 }
 
 
 void NEL_OSC::initOSCSender( const char* IP, int port ) {
 
-if (senderOSC == nullptr) {
-  senderOSC = std::make_unique<osc::NEL_PacketSender>(IP, port);
-  initKyma();
+if (sender == nullptr) {
+  sender = std::make_unique<osc::NEL_PacketSender>(IP, port);
+  if ( getBeSlimeName() != "localhost") initKyma();
   }
 }
 
 void NEL_OSC::initKyma() {
-  if (!senderOSC) initOSCSender( getBeSlimeIP().c_str(), 8000 );
+  if (!sender) initOSCSender( getBeSlimeIP().c_str(), 8000 );
   else {
-    
-     // todo: write SetDestination method
-      // senderOSC->SetDestination(getBeSlimeIP().c_str(), 8000);
-    
+    sender->changeTargetHost(getBeSlimeName().c_str());
   }
-  sendOSC("/osc/respond_to", static_cast<int>(_port) ); //hardware handshake should receive /osc/response_from
+  sender->sendOSC("/osc/respond_to", _port); //hardware handshake should receive /osc/response_from
 }
 
-
-#pragma mark sending needs migrating to OSCpack
-
-void NEL_OSC::sendOSC( const std::string & addressStem, const std::vector<float> & args )
-{
-  if (!senderOSC) initOSCSender( getBeSlimeIP().c_str(), 8000 );
-  if (oscSendActive)
-  {
-    
-   
-  }
-}
-
-void NEL_OSC::sendOSC( const std::string & addressStem, const std::vector<int> & args )
-{
-  if (!senderOSC) initOSCSender( getBeSlimeIP().c_str(), 8000 );
-  if (oscSendActive)
-  {
-    //todo: send int args
-//    iplug::OscMessageWrite msg;
-//    msg.PushWord( addressStem.c_str() );
-//    for (int i=0; i<args.size() ; i++) {
-//      msg.PushIntArg( args.at(i));
-//    }
-//    senderOSC->SendOSCMessage(msg);
-  }
-}
-
-void NEL_OSC::sendOSC( const std::string & addressStem, const int & arg )
-{
-  if (!senderOSC) initOSCSender( getBeSlimeIP().c_str(), 8000 );
-  if (oscSendActive) {
-    //todo: send one int arg
-//  {
-//    iplug::OscMessageWrite msg;
-//    msg.PushWord( addressStem.c_str() );
-//    msg.PushIntArg( arg);
-//    senderOSC->SendOSCMessage(msg);
-//  }
-    }
-}
-
-void NEL_OSC::sendOSC( const std::string & addressStem, const float & arg )
-{
-  if (!senderOSC) initOSCSender( getBeSlimeIP().c_str(), 8000 );
-  if (oscSendActive) {
-    //todo: send one float arg
-//  {
-//    iplug::OscMessageWrite msg;
-//    msg.PushWord( addressStem.c_str() );
-//    msg.PushFloatArg( arg);
-//    senderOSC->SendOSCMessage(msg);
-//  }
-    }
-}
  
 #pragma mark getters
 
 std::string NEL_OSC::getLatestMessage() {
   
-  if ( listenerOSC.messageReceived && !(listenerOSC.getMostRecentMessage().empty()) )  return listenerOSC.getMostRecentMessage();
+  if ( listener.messageReceived && !(listener.getMostRecentMessage().empty()) )  return listener.getMostRecentMessage();
   else return "";
 }
 
 const std::vector<float> NEL_OSC::getLatestFloatArgs() {
   
-  return listenerOSC.getMostRecentFloatArgs();
+  return listener.getMostRecentFloatArgs();
 }
 
 std::string NEL_OSC::getBeSlimeIP() {

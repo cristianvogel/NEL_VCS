@@ -36,7 +36,6 @@
 */
 
 #pragma once
-#include "NEL_PacketSender.hpp"
 
 #include <cstdlib>
 #include <cstring>
@@ -47,17 +46,51 @@
 #include "ip/UdpSocket.h"
 #include "ip/IpEndpointName.h"
 
-#define IP_MTU_SIZE 1536
+#define OUTPUT_BUFFER_SIZE 1536
 
 namespace osc {
+
+
+
   class NEL_PacketSender
   {
   public:
-    NEL_PacketSender(  const char * host, int port) :  transmitSocket( IpEndpointName( host, port ) ) { }
+    NEL_PacketSender(  const char * host, int port) :
+      transmitSocket( IpEndpointName( host, port ) )  , udpTargetPort( port ) { }
     
     ~NEL_PacketSender() { }
     
     UdpTransmitSocket transmitSocket;
-
+    
+    int udpTargetPort;
+    
+    void sendOSC(const std::string& msg , const float& arg)
+    {
+      char buffer[OUTPUT_BUFFER_SIZE];
+      osc::OutboundPacketStream p( buffer, OUTPUT_BUFFER_SIZE );
+      p << osc::BeginBundleImmediate << osc::BeginMessage( msg.c_str() ) << arg << osc::EndMessage << osc::EndBundle;
+      transmitSocket.Send( p.Data(), p.Size() );
+    }
+    
+    void sendOSC(const std::string& msg , const std::vector<float>& args)
+    {
+      char buffer[OUTPUT_BUFFER_SIZE];
+      osc::OutboundPacketStream p( buffer, OUTPUT_BUFFER_SIZE );
+      p << osc::BeginBundleImmediate << osc::BeginMessage( msg.c_str() );
+      
+      for (float f : args) {
+        p << f;
+      }
+      p << osc::EndMessage << osc::EndBundle;
+      transmitSocket.Send( p.Data(), p.Size() );
+    }
+    
+    void changeTargetHost( const char * hostname ) {
+      
+      transmitSocket.Connect ( IpEndpointName ( hostname , 8000 ) );
+    }
+    
+    
   };
+
 }

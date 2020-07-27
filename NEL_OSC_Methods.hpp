@@ -31,18 +31,15 @@ public:
   int _port;
   std::unique_ptr<std::vector<std::string>> messageLog;
   
-  NEL_PacketListener listenerOSC;
-  std::unique_ptr<osc::NEL_PacketSender> senderOSC;
+  NEL_PacketListener listener;
+  std::unique_ptr<osc::NEL_PacketSender> sender;
   
   void launchNetworkingThread();
   void initOSCSender( const char* IP ,  int port );
   void initOSCListener ( int port);
   void initKyma(); 
   bool oscSendActive {true}; //todo: make UI button to disable OSC activity
-  void sendOSC( const std::string & , const std::vector<float> &  );
-  void sendOSC( const std::string & , const std::vector<int> &  );
-  void sendOSC( const std::string & , const int & );
-  void sendOSC( const std::string & , const float & );
+  
  // void changeDestination( const std::string &, int );
   
   std::mutex mtx; // mutex for critical section in network thread

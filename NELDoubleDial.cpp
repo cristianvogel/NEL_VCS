@@ -42,7 +42,7 @@ NELDoubleDial::NELDoubleDial(
     SetDirty(false);
   };
   
-  doubleDialPulseTimer->Create(timerFunc, 100.0f);
+  doubleDialPulseTimer->Create(timerFunc, 50.0f);
   
   int maxNTracks = static_cast<int>(params.size());
   SetNVals(maxNTracks);
@@ -89,7 +89,7 @@ void NELDoubleDial::Draw(IGraphics& g) {
             , mAnchorAngle // todo: animate with VUMeter value
             , -mAnchorAngle
             , &mBlend
-             , mTrackSize * 0.618f
+            , mTrackSize * 0.75f
             );
 
 #pragma mark inner internal LED arc

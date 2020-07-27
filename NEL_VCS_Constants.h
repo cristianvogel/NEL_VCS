@@ -6,7 +6,7 @@
 //
 #pragma once
 
-#define NBR_DUALDIALS 6
+#define NBR_DUALDIALS 8
 #define NEL_BUTTON_OFF "buttonPlainBlue.svg"
 #define NEL_BUTTON_ON "buttonPlainBlue_ON.svg"
 

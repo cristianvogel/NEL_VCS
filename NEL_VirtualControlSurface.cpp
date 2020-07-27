@@ -73,7 +73,7 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
 
 #pragma mark mainCanvas
         // main app GUI IRECT
-        const IRECT b = pGraphics->GetBounds().GetScaledAboutCentre(0.95f);
+      const IRECT b = pGraphics->GetBounds().GetScaledAboutCentre(0.95f);
         const IRECT consoleBounds = b.GetFromBottom( 12.f ).GetGridCell(0, 1, 1);
 
 #pragma mark console text
@@ -98,12 +98,10 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
                           beSlimeName = nelosc.getBeSlimeName();
 
                           if ( !beSlimeName.empty() ) {
+                            nelosc.sender->changeTargetHost(beSlimeIP.c_str());
                             beSlimeConnected = true;
                           };
                           consoleText = cnsl[kMsgConnected] + beSlimeName;
-            
-            // osc.changeDestination(beSlimeIP, 8000);
-             // to do change host when Kyma hardware connected
                         }
                         
           ITextControl* cnsl = dynamic_cast<ITextControl*>(g.GetControlWithTag(kCtrlNetStatus));
@@ -126,8 +124,9 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
         //▼ rows of dual concentric dials with two paramIdx
         for (int d = 0; d < NBR_DUALDIALS; d++)
         {
-
-            const IRECT dualDialBounds = b.GetGridCell(0, 0, 4, 1).SubRectHorizontal(NBR_DUALDIALS, d).FracRect(EDirection::Horizontal, 0.75f);
+//int cellIndex, int nRows, int nColumns, EDirection dir = EDirection::Horizontal, int nCells = 1
+          const IRECT dualDialBounds = b.GetGridCell( d , 2 , NBR_DUALDIALS/2 ).GetScaledAboutCentre(0.75f);
+          
             pGraphics->AttachControl
             (new NELDoubleDial(
                  dualDialBounds
@@ -177,7 +176,7 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
                     std::vector<float> floatArgs;
                     floatArgs.push_back(pDialLambda->GetValue(0));
                     floatArgs.push_back(pDialLambda->GetValue(1));
-                    nelosc.sendOSC( "/dualDial/" + std::to_string(i), floatArgs );
+                    nelosc.sender->sendOSC( "/dualDial/" + std::to_string(i), floatArgs );
                 });
                 pDialLoop->SetDirty();
             }
