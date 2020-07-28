@@ -53,3 +53,35 @@ static iplug::igraphics::IColor getSwatch(int gradient, int stop)
          return NEL_MEMARIANI_stop1;
   }
 }
+
+static iplug::igraphics::IVStyle rescanButtonStyleDef() {
+  const iplug::igraphics::IVStyle rescanButtonStyleDef
+  {
+    true, // Show label
+    false, // Show value
+    {
+      iplug::igraphics::DEFAULT_SHCOLOR, // Background
+      iplug::igraphics::COLOR_TRANSLUCENT, // Foreground
+      iplug::igraphics::COLOR_LIGHT_GRAY, // Pressed
+      iplug::igraphics::COLOR_TRANSPARENT, // Frame
+      iplug::igraphics::DEFAULT_HLCOLOR, // Highlight
+      iplug::igraphics::DEFAULT_SHCOLOR, // Shadow
+      iplug::igraphics::COLOR_BLACK, // Extra 1
+      iplug::igraphics::DEFAULT_X2COLOR, // Extra 2
+      iplug::igraphics::DEFAULT_X3COLOR  // Extra 3
+    }, // Colors
+    iplug::igraphics::IText(
+          12.f,
+          iplug::igraphics::COLOR_LIGHT_GRAY,
+          "Menlo",
+          iplug::igraphics::EAlign::Center,
+          iplug::igraphics::EVAlign::Middle,
+          0.f,
+          iplug::igraphics::DEFAULT_TEXTENTRY_BGCOLOR,
+          iplug::igraphics::DEFAULT_TEXTENTRY_FGCOLOR
+          ) // Label text
+  };
+  return rescanButtonStyleDef;
+}
+
+

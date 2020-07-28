@@ -6,10 +6,11 @@
 //
 
 #include "IPlugTimer.h"
-#include "NELDoubleDial.h"
+#include "NEL_DualDial.h"
+#include "GlobSeqHelpers.h"
 #include <iostream>
 
-NELDoubleDial::NELDoubleDial(
+NEL_DualDial::NEL_DualDial(
               const IRECT& bounds
               , const std::initializer_list<int>& params
               , const IColor& stop1
@@ -34,7 +35,6 @@ NELDoubleDial::NELDoubleDial(
     timerMillis += innerCircleFlashRate;
     if (timerMillis>1.0f)
     {
-     
       timerMillis = 0;
       togglePulse();
       SetDirty(true);
@@ -56,9 +56,12 @@ NELDoubleDial::NELDoubleDial(
   SetValue(0.5, 1);
 }
 
-void NELDoubleDial::Draw(IGraphics& g) {
+void NEL_DualDial::Draw(IGraphics& g) {
 
   float radius;
+  int tickFan = std::abs(mAnchorAngle)*2;
+  int tickStep = tickFan / tickMarks;
+  
   if(mRECT.W() > mRECT.H())
     radius = (mRECT.H()/2.f);
   else
@@ -67,6 +70,8 @@ void NELDoubleDial::Draw(IGraphics& g) {
   const float cx = mRECT.MW(), cy = mRECT.MH();
   
   radius -= (mTrackSize/2.f);
+  
+  radius = radius * 0.8f;
   
   float angle = mAngle1 + (static_cast<float>(GetValue(0)) * (mAngle2 - mAngle1));
  
@@ -77,8 +82,23 @@ void NELDoubleDial::Draw(IGraphics& g) {
   g.DrawSVG( buttonStates [ pulse ? 1 : 0 ], mRECT.GetCentredInside(fmin(mRECT.W(), 50.0f + (NBR_DUALDIALS * 1.618f))));
   
   
-#pragma mark outer internal LED arc
+#pragma mark outer arc and ticks
   g.DrawCircle(COLOR_WHITE, cx, cy, radius,nullptr, 0.5f);
+  
+  float tickIndex = 0;
+  float opacity = 0;
+  float outerRingVal = static_cast<float>(GetValue(0));
+  float innerRingVal = static_cast<float>(GetValue(1));
+  
+  for (int i= mAnchorAngle; i<= angle; i+= tickStep) {
+    tickIndex+= 1.0f / tickMarks;
+    if (i < angle) opacity = GlobSeqHelpers::lerp(0.1f, 1.0f , tickIndex ) ;
+    else opacity = 1;
+    g.DrawRadialLine( interpStage.WithContrast( innerRingVal ).WithOpacity(opacity) , cx, cy, i , radius + 10,  radius + 12 , &mBlend , tickIndex + innerRingVal);
+  }
+  
+
+  
   g.DrawArc(IColor::LinearInterpolateBetween(colourStop1, interpStage, static_cast<float>(GetValue(0))),
             cx, cy, radius,
             angle >= mAnchorAngle ? mAnchorAngle : mAnchorAngle - (mAnchorAngle - angle),
@@ -86,24 +106,30 @@ void NELDoubleDial::Draw(IGraphics& g) {
 
   g.DrawArc( (static_cast<float>(GetValue(0)) > 0.5f) ? colourStop2.WithOpacity(0.75f)  : COLOR_GRAY.WithOpacity(0.75f)
             , cx, cy, radius
-            , mAnchorAngle // todo: animate with VUMeter value
+            , mAnchorAngle // todo: animate with VUMeter value?
             , -mAnchorAngle
             , &mBlend
             , mTrackSize * 0.75f
             );
 
 #pragma mark inner internal LED arc
-  radius -= mTrackSize;
-  angle = mAngle1 + (static_cast<float>(GetValue(1)) * (mAngle2 - mAngle1));
   
+  angle = mAngle1 + (static_cast<float>(GetValue(1)) * (mAngle2 - mAngle1));
+  for (int i= mAnchorAngle + (tickStep/2); i<= angle; i+= tickStep) {
+    tickIndex+= 1.0f / tickMarks;
+    if (i < angle) opacity = GlobSeqHelpers::lerp(0.05f, 0.9f , tickIndex ) ;
+    else opacity = 1;
+    g.DrawRadialLine( interpStage.WithContrast( outerRingVal ).WithOpacity(opacity) , cx, cy, i , radius + 10,  radius + 14 , &mBlend , tickIndex + outerRingVal/2 );
+  }
+  radius -= mTrackSize;
   g.DrawCircle(COLOR_GRAY, cx, cy, radius,nullptr, 0.5f);
   g.DrawArc(IColor::LinearInterpolateBetween(colourStop1, colourStop2, static_cast<float>(GetValue(1))),
              cx, cy, radius,
             angle >= mAnchorAngle ? mAnchorAngle : mAnchorAngle - (mAnchorAngle - angle),
             angle >= mAnchorAngle ? angle : mAnchorAngle, &mBlend, mTrackSize);
+
   
-  
-#pragma mark Inner status LED segment
+#pragma mark Inner status LED affirmation segment
    g.DrawArc( (static_cast<float>(GetValue(1)) > 0.5f) ? colourStop1 : COLOR_GRAY
              , cx, cy, radius + mTrackSize
              , -mAnchorAngle
@@ -113,7 +139,7 @@ void NELDoubleDial::Draw(IGraphics& g) {
              );
 }
 
-void NELDoubleDial::OnMouseDrag(float x, float y, float dX, float dY, const IMouseMod& mod)
+void NEL_DualDial::OnMouseDrag(float x, float y, float dX, float dY, const IMouseMod& mod)
 {
   double gearing = IsFineControl(mod, false) ? mGearing * 10.0 : mGearing;
   
@@ -130,26 +156,26 @@ void NELDoubleDial::OnMouseDrag(float x, float y, float dX, float dY, const IMou
   SetDirty();
 }
 
-void NELDoubleDial::OnMouseWheel(float x, float y, const IMouseMod& mod, float d)
+void NEL_DualDial::OnMouseWheel(float x, float y, const IMouseMod& mod, float d)
 {
   double gearing = IsFineControl(mod, true) ? -0.001 : -0.01;
   SetValue(GetValue(1) + gearing * d, 1);
   SetDirty();
 }
 
-const bool& NELDoubleDial::togglePulse()
+const bool& NEL_DualDial::togglePulse()
 {
   pulse = !pulse;
   return pulse;
 }
 
-void NELDoubleDial::setFlashRate(float  rate)
+void NEL_DualDial::setFlashRate(float  rate)
 {
   innerCircleFlashRate = rate ;
 }
 
 
-void NELDoubleDial::setButtonStates(const ISVG& on, const ISVG& off){
+void NEL_DualDial::setButtonStates(const ISVG& on, const ISVG& off){
   buttonStates.push_back(on);
   buttonStates.push_back(off);
 }

@@ -12,13 +12,14 @@
 #include "IPlugTimer.h"
 #include "NEL_VCS_Constants.h"
 
+
 //using namespace iplug;
 using namespace iplug::igraphics;
 
-class NELDoubleDial : public IKnobControlBase
+class NEL_DualDial : public IKnobControlBase
 {
 public:
-  NELDoubleDial(
+  NEL_DualDial(
                 const IRECT& bounds
                 , const std::initializer_list< int >& params
                 , const iplug::igraphics::IColor& stop1 = getSwatch( Lunada, 0)
@@ -29,19 +30,19 @@ public:
                 );
    
   float timerMillis { 0 };
+  void setFlashRate(float);
   iplug::Timer* doubleDialPulseTimer;
-  bool pulse { false };
-  
   std::function<void( iplug::Timer & )> timerFunc = nullptr;
+  const bool& togglePulse();
+  bool pulse { false };
   
   void Draw(IGraphics& p) override;
   void OnMouseDrag(float x, float y, float dX, float dY, const IMouseMod& mod) override;
   void OnMouseWheel(float x, float y, const IMouseMod& mod, float d) override;
-
-  void setFlashRate(float);
-  const bool& togglePulse();
   
   void setButtonStates( const ISVG& on , const ISVG& off);
+  
+  int tickMarks {10};
   
 private:
   const float rateMillisFactor = 1000.f;

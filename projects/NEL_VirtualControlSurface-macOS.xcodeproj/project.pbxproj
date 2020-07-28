@@ -155,14 +155,10 @@
 		3ECD47C524BFA30D006821B5 /* IPlugOSC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ECD47C124BFA303006821B5 /* IPlugOSC.cpp */; };
 		3ECD47C624BFA30F006821B5 /* IPlugOSC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ECD47C124BFA303006821B5 /* IPlugOSC.cpp */; };
 		3ECD47C724BFA310006821B5 /* IPlugOSC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ECD47C124BFA303006821B5 /* IPlugOSC.cpp */; };
-		3EE825ED24B50B8C00A36392 /* GlobSeqHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE825EB24B50B8C00A36392 /* GlobSeqHelpers.cpp */; };
-		3EE825EE24B50B8C00A36392 /* GlobSeqHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE825EB24B50B8C00A36392 /* GlobSeqHelpers.cpp */; };
-		3EE825EF24B50B8C00A36392 /* GlobSeqHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE825EB24B50B8C00A36392 /* GlobSeqHelpers.cpp */; };
-		3EE825F024B50B8C00A36392 /* GlobSeqHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE825EB24B50B8C00A36392 /* GlobSeqHelpers.cpp */; };
-		3EE825F324B50BBD00A36392 /* NELDoubleDial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE825F124B50BBD00A36392 /* NELDoubleDial.cpp */; };
-		3EE825F424B50BBD00A36392 /* NELDoubleDial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE825F124B50BBD00A36392 /* NELDoubleDial.cpp */; };
-		3EE825F524B50BBD00A36392 /* NELDoubleDial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE825F124B50BBD00A36392 /* NELDoubleDial.cpp */; };
-		3EE825F624B50BBD00A36392 /* NELDoubleDial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE825F124B50BBD00A36392 /* NELDoubleDial.cpp */; };
+		3EE825F324B50BBD00A36392 /* NEL_DualDial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE825F124B50BBD00A36392 /* NEL_DualDial.cpp */; };
+		3EE825F424B50BBD00A36392 /* NEL_DualDial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE825F124B50BBD00A36392 /* NEL_DualDial.cpp */; };
+		3EE825F524B50BBD00A36392 /* NEL_DualDial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE825F124B50BBD00A36392 /* NEL_DualDial.cpp */; };
+		3EE825F624B50BBD00A36392 /* NEL_DualDial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE825F124B50BBD00A36392 /* NEL_DualDial.cpp */; };
 		4F03A57A20A4621100EBDFFB /* IGraphicsLice.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F03A54A20A4621000EBDFFB /* IGraphicsLice.h */; };
 		4F03A57B20A4621100EBDFFB /* IGraphicsAGG.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F03A54B20A4621000EBDFFB /* IGraphicsAGG.h */; };
 		4F03A58320A4621100EBDFFB /* IGraphicsLice_src.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F03A54D20A4621000EBDFFB /* IGraphicsLice_src.h */; };
@@ -624,12 +620,13 @@
 		3E474FDA24B62A2F008DA40E /* buttonMotherOfPearl.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = buttonMotherOfPearl.svg; path = ../resources/img/buttonMotherOfPearl.svg; sourceTree = "<group>"; };
 		3E474FDB24B62ACE008DA40E /* buttonPlainBlue.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = buttonPlainBlue.svg; path = ../resources/img/buttonPlainBlue.svg; sourceTree = "<group>"; };
 		3E474FDD24B62C86008DA40E /* buttonPlainBlue_ON.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = buttonPlainBlue_ON.svg; path = ../resources/img/buttonPlainBlue_ON.svg; sourceTree = "<group>"; };
-		3E474FDE24B62EEA008DA40E /* NELDoubleDial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NELDoubleDial.h; path = ../NELDoubleDial.h; sourceTree = "<group>"; };
+		3E474FDE24B62EEA008DA40E /* NEL_DualDial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NEL_DualDial.h; path = ../NEL_DualDial.h; sourceTree = "<group>"; };
 		3E474FE024B634EA008DA40E /* GlobSeqHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GlobSeqHelpers.h; path = ../GlobSeqHelpers.h; sourceTree = "<group>"; };
 		3E61745C24C1E58F00762320 /* mDNS_IPExtract.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = mDNS_IPExtract.cpp; path = ../mDNS_IPExtract.cpp; sourceTree = "<group>"; };
 		3E61746224C1E6DE00762320 /* mDNS_IPExtract.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mDNS_IPExtract.h; sourceTree = "<group>"; };
 		3E77259324BB5C3B00DDE318 /* NEL_OSC_Methods.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = NEL_OSC_Methods.cpp; path = ../NEL_OSC_Methods.cpp; sourceTree = "<group>"; };
 		3E77259424BB5C3B00DDE318 /* NEL_OSC_Methods.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = NEL_OSC_Methods.hpp; path = ../NEL_OSC_Methods.hpp; sourceTree = "<group>"; };
+		3EB033C924D06E3A00DD8B77 /* NEL_VCS_Enums.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = NEL_VCS_Enums.hpp; path = ../NEL_VCS_Enums.hpp; sourceTree = "<group>"; };
 		3EC56BC224B8905D002D64B0 /* process_unix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = process_unix.cpp; sourceTree = "<group>"; };
 		3EC56BC324B8905D002D64B0 /* process.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = process.cpp; sourceTree = "<group>"; };
 		3EC56BC424B8905D002D64B0 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -638,8 +635,7 @@
 		3EC56BC724B8905D002D64B0 /* process.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = process.hpp; sourceTree = "<group>"; };
 		3ECD47C124BFA303006821B5 /* IPlugOSC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IPlugOSC.cpp; sourceTree = "<group>"; };
 		3ED446C024BF1B4800D9ED3E /* NEL_VCS_Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NEL_VCS_Constants.h; path = ../NEL_VCS_Constants.h; sourceTree = "<group>"; };
-		3EE825EB24B50B8C00A36392 /* GlobSeqHelpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GlobSeqHelpers.cpp; path = ../GlobSeqHelpers.cpp; sourceTree = "<group>"; };
-		3EE825F124B50BBD00A36392 /* NELDoubleDial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NELDoubleDial.cpp; path = ../NELDoubleDial.cpp; sourceTree = "<group>"; };
+		3EE825F124B50BBD00A36392 /* NEL_DualDial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NEL_DualDial.cpp; path = ../NEL_DualDial.cpp; sourceTree = "<group>"; };
 		4F03A54A20A4621000EBDFFB /* IGraphicsLice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGraphicsLice.h; sourceTree = "<group>"; };
 		4F03A54B20A4621000EBDFFB /* IGraphicsAGG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGraphicsAGG.h; sourceTree = "<group>"; };
 		4F03A54C20A4621000EBDFFB /* IGraphicsLice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IGraphicsLice.cpp; sourceTree = "<group>"; };
@@ -1090,6 +1086,7 @@
 		089C166AFE841209C02AAC07 /* IPlugExample */ = {
 			isa = PBXGroup;
 			children = (
+				3EB033C924D06E3A00DD8B77 /* NEL_VCS_Enums.hpp */,
 				3E42D72224C88B890078FDF2 /* NEL_PacketSender.cpp */,
 				3E42D72324C88B890078FDF2 /* NEL_PacketSender.hpp */,
 				3E42D72A24C8BEDD0078FDF2 /* jnetlib */,
@@ -1105,12 +1102,11 @@
 				3EC56BC124B8905D002D64B0 /* tiny-process */,
 				52FBBED30D0CF143001C8B8A /* config.h */,
 				089C1671FE841209C02AAC07 /* Frameworks */,
-				3EE825EB24B50B8C00A36392 /* GlobSeqHelpers.cpp */,
 				3E474FE024B634EA008DA40E /* GlobSeqHelpers.h */,
 				4F3862ED2014BBEC0009F402 /* NEL_VirtualControlSurface.cpp */,
 				4F3862EE2014BBEC0009F402 /* NEL_VirtualControlSurface.h */,
-				3EE825F124B50BBD00A36392 /* NELDoubleDial.cpp */,
-				3E474FDE24B62EEA008DA40E /* NELDoubleDial.h */,
+				3EE825F124B50BBD00A36392 /* NEL_DualDial.cpp */,
+				3E474FDE24B62EEA008DA40E /* NEL_DualDial.h */,
 				32C88E010371C26100C91783 /* Other Sources */,
 				19C28FB8FE9D52D311CA2CBB /* Products */,
 				4F9313232315CA1100DB2383 /* README.md */,
@@ -2662,7 +2658,7 @@
 			files = (
 				4F03A5AF20A4621100EBDFFB /* IGraphics.cpp in Sources */,
 				3E42D6E624C881CA0078FDF2 /* OscReceivedElements.cpp in Sources */,
-				3EE825F524B50BBD00A36392 /* NELDoubleDial.cpp in Sources */,
+				3EE825F524B50BBD00A36392 /* NEL_DualDial.cpp in Sources */,
 				3E77259824BB5C3B00DDE318 /* NEL_OSC_Methods.cpp in Sources */,
 				4F6369E020A464BB0022C370 /* IGraphicsNanoVG_src.m in Sources */,
 				4F6369EE20A466470022C370 /* IControl.cpp in Sources */,
@@ -2696,7 +2692,6 @@
 				4F5F344420C0226200487201 /* IPlugPaths.mm in Sources */,
 				4F35DEB0207E5C5A00867D8F /* IPlugPluginBase.cpp in Sources */,
 				3E42D71F24C885810078FDF2 /* NEL_PacketListener.cpp in Sources */,
-				3EE825EF24B50B8C00A36392 /* GlobSeqHelpers.cpp in Sources */,
 				4F78D95C13B63BA50032E0F3 /* IPlugParameter.cpp in Sources */,
 				3E42D6EB24C881CA0078FDF2 /* OscPrintReceivedElements.cpp in Sources */,
 				4FB1F58C20E4B006004157C8 /* IGraphicsMac.mm in Sources */,
@@ -2728,12 +2723,11 @@
 				4F3EE1CE231438D000004786 /* IGraphicsAGG_src.mm in Sources */,
 				4F3EE1CF231438D000004786 /* swell-menu.mm in Sources */,
 				4F3EE1D0231438D000004786 /* IGraphicsMac_view.mm in Sources */,
-				3EE825F624B50BBD00A36392 /* NELDoubleDial.cpp in Sources */,
+				3EE825F624B50BBD00A36392 /* NEL_DualDial.cpp in Sources */,
 				4F3EE1D1231438D000004786 /* swell-appstub.mm in Sources */,
 				4F3EE1D2231438D000004786 /* swell-misc.mm in Sources */,
 				4F3EE1D3231438D000004786 /* swell-wnd.mm in Sources */,
 				4F3EE1D4231438D000004786 /* swell.cpp in Sources */,
-				3EE825F024B50B8C00A36392 /* GlobSeqHelpers.cpp in Sources */,
 				4F3EE1D5231438D000004786 /* IPlugAPP_host.cpp in Sources */,
 				4F3EE1D6231438D000004786 /* IPlugAPP.cpp in Sources */,
 				4F3EE1D7231438D000004786 /* IGraphics.cpp in Sources */,
@@ -2815,7 +2809,7 @@
 				4F6FD2B322675B6300FC59E6 /* IGraphicsCoreText.mm in Sources */,
 				3EC56BCA24B8906E002D64B0 /* process.cpp in Sources */,
 				3EC56BCF24B89215002D64B0 /* process_unix.cpp in Sources */,
-				3EE825F424B50BBD00A36392 /* NELDoubleDial.cpp in Sources */,
+				3EE825F424B50BBD00A36392 /* NEL_DualDial.cpp in Sources */,
 				3E42D6DB24C881CA0078FDF2 /* OscTypes.cpp in Sources */,
 				4F815973205D50EB00393585 /* vstinitiids.cpp in Sources */,
 				4F81597E205D50EB00393585 /* fdebug.cpp in Sources */,
@@ -2867,7 +2861,6 @@
 				4F9A82F9213DE80400BE63A4 /* IPopupMenuControl.cpp in Sources */,
 				4F8C10E220BA2796006320CD /* IGraphicsEditorDelegate.cpp in Sources */,
 				3E42D74B24C8BEDE0078FDF2 /* webserver.cpp in Sources */,
-				3EE825EE24B50B8C00A36392 /* GlobSeqHelpers.cpp in Sources */,
 				4F81597D205D50EB00393585 /* fbuffer.cpp in Sources */,
 				3E42D75F24C8BEDE0078FDF2 /* httpget.cpp in Sources */,
 				3E42D75024C8BEDE0078FDF2 /* listen.cpp in Sources */,
@@ -2965,7 +2958,7 @@
 				3E42D6D924C881CA0078FDF2 /* OscTypes.cpp in Sources */,
 				4FD16D3E13B63595001D0217 /* swell-menu.mm in Sources */,
 				4FB1F59120E4B011004157C8 /* IGraphicsMac_view.mm in Sources */,
-				3EE825F324B50BBD00A36392 /* NELDoubleDial.cpp in Sources */,
+				3EE825F324B50BBD00A36392 /* NEL_DualDial.cpp in Sources */,
 				4F5C5F6B21BED08700E024A7 /* swell-appstub.mm in Sources */,
 				3E42D71C24C885810078FDF2 /* NEL_PacketListener.cpp in Sources */,
 				4FD16D4013B635A0001D0217 /* swell-misc.mm in Sources */,
@@ -2975,7 +2968,6 @@
 				4FD16D4413B635B2001D0217 /* swell.cpp in Sources */,
 				3ECD47C224BFA30B006821B5 /* IPlugOSC.cpp in Sources */,
 				3E42D73E24C8BEDE0078FDF2 /* util.cpp in Sources */,
-				3EE825ED24B50B8C00A36392 /* GlobSeqHelpers.cpp in Sources */,
 				4F690CA3203A45C700A4A13E /* IPlugAPP_host.cpp in Sources */,
 				3E42D70A24C884050078FDF2 /* IpEndpointName.cpp in Sources */,
 				4F1A5282205D913300CF2908 /* IPlugAPP.cpp in Sources */,

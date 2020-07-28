@@ -5,42 +5,16 @@
 #include "NEL_VCS_Constants.h"
 #include "NEL_OSC_Methods.hpp"
 #include "GlobSeqHelpers.h"
-#include "NELDoubleDial.h"
+#include "NEL_VCS_Enums.hpp"
+#include "NEL_DualDial.h"
+
+
 #include <atomic>
 
 const int kNumPresets = 1;
 
-#pragma mark NEL_Enumerators
-enum EParams
-{
-  kNetstatus = 0,
-  kReScan,
-  kDualDialInner,
-  kDualDialOuter = kDualDialInner + NBR_DUALDIALS,
-  kNumParams = kDualDialOuter + NBR_DUALDIALS
-};
+#pragma mark NEL_enumerators
 
-enum EControlTags
-{
-  kCtrlNetStatus = 0,
-  kCtrlReScan,
-  kCtrlFluxDial,
-  kNumCtrlTags = kCtrlFluxDial + NBR_DUALDIALS
-};
-
-enum EControlDialTags
-{
-  kCtrlFluxDialInner = 0,
-  kCtrlFluxDialOuter = kCtrlFluxDialInner + NBR_DUALDIALS,
-  kNumCtrlFluxDials = kCtrlFluxDialOuter + NBR_DUALDIALS
-};
-
-enum EStatusMessages
-{
-  kMsgScanning = 0,
-  kMsgConnected,
-  kNumStatusMessages
-};
 
 class NEL_VirtualControlSurface final : public iplug::Plugin
 {
@@ -61,11 +35,12 @@ public:
   std::string beSlimeIP = "";
   std::atomic_bool beSlimeConnected {false};
   
-  IText consoleFont;
+  IText consoleTextDef;
+  IText numericDisplayTextDef;
   std::unique_ptr<GlobSeqHelpers> gsh = std::make_unique<GlobSeqHelpers>();
 
   void defaultConsoleText();
-  void updateAllDialPulseFromOSC();
+  void updateAllDialPulseFromOSC( IGraphics & );
   
   
 #if IPLUG_DSP // http://bit.ly/2S64BDd
