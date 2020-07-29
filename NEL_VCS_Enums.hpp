@@ -53,14 +53,12 @@ enum EStatusMessages
   kNumStatusMessages
 };
 
-enum IPlugControlTags
+enum EDisplays
 {
-
+  kCtrlTagDisplay = 500,
+  kCtrlPlot,
+  kNumDisplays
 };
-
-
-
-
 
 
 #endif /* NEL_VCS_Enums_hpp */

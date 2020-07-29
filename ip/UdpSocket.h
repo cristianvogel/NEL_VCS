@@ -65,7 +65,7 @@ public:
     void DetachSocketListener( UdpSocket *socket, PacketListener *listener );
 
     void AttachPeriodicTimerListener( int periodMilliseconds, TimerListener *listener );
-	void AttachPeriodicTimerListener(
+	 void AttachPeriodicTimerListener(
             int initialDelayMilliseconds, int periodMilliseconds, TimerListener *listener );
     void DetachPeriodicTimerListener( TimerListener *listener );  
 

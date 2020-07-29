@@ -30,6 +30,8 @@ public:
     "⚉ "
   };
  
+  std::string dialSendAddress = "/dualDial/";
+  
   std::string consoleText = "";
   
   std::string beSlimeIP = "";
@@ -37,11 +39,11 @@ public:
   
   IText consoleTextDef;
   IText numericDisplayTextDef;
-  std::unique_ptr<GlobSeqHelpers> gsh = std::make_unique<GlobSeqHelpers>();
+  
 
   void defaultConsoleText();
   void updateAllDialPulseFromOSC( IGraphics & );
-  
+  std::unique_ptr<GlobSeqHelpers> gsh = std::make_unique<GlobSeqHelpers>();
   
 #if IPLUG_DSP // http://bit.ly/2S64BDd
  // void ProcessBlock(iplug::sample** inputs, iplug::sample** outputs, int nFrames) override;

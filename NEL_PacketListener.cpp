@@ -43,6 +43,8 @@ void NEL_PacketListener::ProcessMessage(const osc::ReceivedMessage& m, const IpE
         // example of parsing single messages. osc::OsckPacketListener
         // handles the bundle traversal.
         
+        log.addMessageData( addr, m.ArgumentCount() );
+      
         if( std::strcmp( addr, "/osc/response_from" ) == 0 ){
             // example #1 -- argument stream interface
             osc::ReceivedMessageArgumentStream args = m.ArgumentStream();
@@ -51,6 +53,7 @@ void NEL_PacketListener::ProcessMessage(const osc::ReceivedMessage& m, const IpE
             
             std::cout << "received '/osc/response_from' message with arguments: "
                 << a1 << "\n";
+            hardwareConnected = true;
             
         } else {
             // example #2 -- argument iterator interface, supports
@@ -63,6 +66,7 @@ void NEL_PacketListener::ProcessMessage(const osc::ReceivedMessage& m, const IpE
                         
           std::vector<float> floatArgs;
           std::basic_stringstream<char> msgAndArgs;
+          
           while ( arg != m.ArgumentsEnd() ) {
           if ( arg->IsFloat() ) { floatArgs.push_back( (arg++) -> AsFloat() ); }
           }
@@ -72,7 +76,6 @@ void NEL_PacketListener::ProcessMessage(const osc::ReceivedMessage& m, const IpE
           msgAndArgs << addr;
           for ( float f: floatArgs) {
            msgAndArgs << " " << f;
-            
           }
           setMostRecentMessage(msgAndArgs.str());
         }

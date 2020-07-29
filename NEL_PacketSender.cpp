@@ -39,7 +39,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <iostream>
-
+#include <vector>
 #include "osc/OscOutboundPacketStream.h"
 
 #include "ip/UdpSocket.h"
@@ -47,3 +47,30 @@
 
 #define IP_MTU_SIZE 1536
 
+void osc::NEL_PacketSender::sendOSC(const std::string& msg , const float& arg)
+{
+  char buffer[OUTPUT_BUFFER_SIZE];
+  osc::OutboundPacketStream p( buffer, OUTPUT_BUFFER_SIZE );
+  p << osc::BeginBundleImmediate << osc::BeginMessage( msg.c_str() ) << arg << osc::EndMessage << osc::EndBundle;
+  transmitSocket.Send( p.Data(), p.Size() );
+  
+}
+
+void osc::NEL_PacketSender::sendOSC(const std::string& msg , const std::vector<float>& args)
+{
+  char buffer[OUTPUT_BUFFER_SIZE];
+  osc::OutboundPacketStream p( buffer, OUTPUT_BUFFER_SIZE );
+  p << osc::BeginBundleImmediate << osc::BeginMessage( msg.c_str() );
+  
+  for (float f : args) {
+    p << f;
+  }
+  p << osc::EndMessage << osc::EndBundle;
+  transmitSocket.Send( p.Data(), p.Size() );
+  
+}
+
+void osc::NEL_PacketSender::changeTargetHost( const char * hostname ) {
+  
+  transmitSocket.Connect ( IpEndpointName ( hostname , 8000 ) );
+}

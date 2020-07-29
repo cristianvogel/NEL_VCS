@@ -27,6 +27,8 @@ NEL_DualDial::NEL_DualDial(
 , colourStop1( stop1 )
 , colourStop2( stop2 )
 , colourStop3( stop3 )
+, tickMarkSVG( nullptr )
+
 {//constructor body
  
   
@@ -90,14 +92,14 @@ void NEL_DualDial::Draw(IGraphics& g) {
   float outerRingVal = static_cast<float>(GetValue(0));
   float innerRingVal = static_cast<float>(GetValue(1));
   
-  for (int i= mAnchorAngle; i<= angle; i+= tickStep) {
-    tickIndex+= 1.0f / tickMarks;
-    if (i < angle) opacity = GlobSeqHelpers::lerp(0.1f, 1.0f , tickIndex ) ;
-    else opacity = 1;
-    g.DrawRadialLine( interpStage.WithContrast( innerRingVal ).WithOpacity(opacity) , cx, cy, i , radius + 10,  radius + 12 , &mBlend , tickIndex + innerRingVal);
-  }
-  
 
+  
+  for (int i= mAnchorAngle + (tickStep/2); i<= angle; i+= tickStep) {
+     tickIndex+= 1.0f / tickMarks;
+     if (i < angle) opacity = GlobSeqHelpers::lerp(0.05f, 0.9f , tickIndex ) ;
+     else opacity = 1;
+     g.DrawRadialLine( interpStage.WithContrast( outerRingVal ).WithOpacity(opacity) , cx, cy, i , radius + 10,  radius + 12 , &mBlend , tickIndex + outerRingVal );
+   }
   
   g.DrawArc(IColor::LinearInterpolateBetween(colourStop1, interpStage, static_cast<float>(GetValue(0))),
             cx, cy, radius,
@@ -106,21 +108,24 @@ void NEL_DualDial::Draw(IGraphics& g) {
 
   g.DrawArc( (static_cast<float>(GetValue(0)) > 0.5f) ? colourStop2.WithOpacity(0.75f)  : COLOR_GRAY.WithOpacity(0.75f)
             , cx, cy, radius
-            , mAnchorAngle // todo: animate with VUMeter value?
+            , mAnchorAngle
             , -mAnchorAngle
             , &mBlend
             , mTrackSize * 0.75f
             );
 
-#pragma mark inner internal LED arc
+#pragma mark inner arc and ticks
   
   angle = mAngle1 + (static_cast<float>(GetValue(1)) * (mAngle2 - mAngle1));
-  for (int i= mAnchorAngle + (tickStep/2); i<= angle; i+= tickStep) {
+  
+  for (int i= mAnchorAngle; i<= angle; i+= tickStep) {
     tickIndex+= 1.0f / tickMarks;
-    if (i < angle) opacity = GlobSeqHelpers::lerp(0.05f, 0.9f , tickIndex ) ;
+    if (i < angle) opacity = GlobSeqHelpers::lerp(0.1f, 1.0f , tickIndex ) ;
     else opacity = 1;
-    g.DrawRadialLine( interpStage.WithContrast( outerRingVal ).WithOpacity(opacity) , cx, cy, i , radius + 10,  radius + 14 , &mBlend , tickIndex + outerRingVal/2 );
+  
+    g.DrawRadialLine( interpStage.WithContrast( innerRingVal ).WithOpacity(opacity) , cx, cy, i , radius + 10,  radius + 14 , &mBlend , tickIndex + innerRingVal);
   }
+  
   radius -= mTrackSize;
   g.DrawCircle(COLOR_GRAY, cx, cy, radius,nullptr, 0.5f);
   g.DrawArc(IColor::LinearInterpolateBetween(colourStop1, colourStop2, static_cast<float>(GetValue(1))),
@@ -179,4 +184,6 @@ void NEL_DualDial::setButtonStates(const ISVG& on, const ISVG& off){
   buttonStates.push_back(on);
   buttonStates.push_back(off);
 }
+
+
 

@@ -41,8 +41,8 @@
 #include <cstring>
 #include <iostream>
 
-#include "osc/OscOutboundPacketStream.h"
 
+#include "osc/OscOutboundPacketStream.h"
 #include "ip/UdpSocket.h"
 #include "ip/IpEndpointName.h"
 
@@ -62,35 +62,14 @@ namespace osc {
     
     UdpTransmitSocket transmitSocket;
     
+    
     int udpTargetPort;
     
-    void sendOSC(const std::string& msg , const float& arg)
-    {
-      char buffer[OUTPUT_BUFFER_SIZE];
-      osc::OutboundPacketStream p( buffer, OUTPUT_BUFFER_SIZE );
-      p << osc::BeginBundleImmediate << osc::BeginMessage( msg.c_str() ) << arg << osc::EndMessage << osc::EndBundle;
-      transmitSocket.Send( p.Data(), p.Size() );
-    }
+    void sendOSC(const std::string& msg , const float& arg);
+    void sendOSC(const std::string& msg , const std::vector<float>& args);
     
-    void sendOSC(const std::string& msg , const std::vector<float>& args)
-    {
-      char buffer[OUTPUT_BUFFER_SIZE];
-      osc::OutboundPacketStream p( buffer, OUTPUT_BUFFER_SIZE );
-      p << osc::BeginBundleImmediate << osc::BeginMessage( msg.c_str() );
-      
-      for (float f : args) {
-        p << f;
-      }
-      p << osc::EndMessage << osc::EndBundle;
-      transmitSocket.Send( p.Data(), p.Size() );
-    }
-    
-    void changeTargetHost( const char * hostname ) {
-      
-      transmitSocket.Connect ( IpEndpointName ( hostname , 8000 ) );
-    }
-    
-    
+    void changeTargetHost( const char * hostname );
+
   };
 
 }

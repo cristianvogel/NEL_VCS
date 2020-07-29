@@ -41,7 +41,6 @@ public:
   void OnMouseWheel(float x, float y, const IMouseMod& mod, float d) override;
   
   void setButtonStates( const ISVG& on , const ISVG& off);
-  
   int tickMarks {10};
   
 private:
@@ -60,5 +59,6 @@ private:
   iplug::igraphics::IColor colourStop3;
   float innerCircleFlashRate = 0.0f;
   std::vector<ISVG> buttonStates;
+  const ISVG tickMarkSVG;
 };
 

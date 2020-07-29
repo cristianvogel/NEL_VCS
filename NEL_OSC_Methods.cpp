@@ -89,12 +89,12 @@ std::string NEL_OSC::getBeSlimeName() {
   return n;
 }
 
-bool NEL_OSC::getBeSlimeResponse() {
-  return beSlimeResponse;
+void NEL_OSC::hardwareDisconnected() {
+  listener.hardwareConnected = false;
 }
 
-void NEL_OSC::resetBeSlimeResponse() {
-  beSlimeResponse = false;
+bool NEL_OSC::hardwareConnected() {
+  return listener.hardwareConnected;
 }
 
 

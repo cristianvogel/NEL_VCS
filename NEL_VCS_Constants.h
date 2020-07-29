@@ -54,8 +54,8 @@ static iplug::igraphics::IColor getSwatch(int gradient, int stop)
   }
 }
 
-static iplug::igraphics::IVStyle rescanButtonStyleDef() {
-  const iplug::igraphics::IVStyle rescanButtonStyleDef
+static iplug::igraphics::IVStyle rescanButtonStyle() {
+  const iplug::igraphics::IVStyle rescanButtonStyle
   {
     true, // Show label
     false, // Show value
@@ -81,7 +81,7 @@ static iplug::igraphics::IVStyle rescanButtonStyleDef() {
           iplug::igraphics::DEFAULT_TEXTENTRY_FGCOLOR
           ) // Label text
   };
-  return rescanButtonStyleDef;
+  return rescanButtonStyle;
 }
 
 

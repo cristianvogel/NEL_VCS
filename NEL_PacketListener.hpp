@@ -12,6 +12,7 @@
 #include "osc/OscPacketListener.h"
 #include "ip/UdpSocket.h"
 #include <vector>
+#include <tuple>
 
 class NEL_PacketListener : public osc::OscPacketListener {
   
@@ -25,6 +26,7 @@ public:
   std::unique_ptr<UdpListeningReceiveSocket> m_receiveSocket;
   
   std::atomic_bool messageReceived{false};
+  std::atomic_bool hardwareConnected{false};
   
   const std::string getMostRecentMessage( );
   const std::string getMostRecentAddress( );
@@ -34,7 +36,34 @@ public:
   void setMostRecentAddress( const std::string& );
   void setMostRecentFloatArgs( const std::vector<float>& );
   
+  
   std::mutex msgMutex;
+  
+  struct MessageLog {
+    MessageLog() { };
+    std::vector< std::pair < std::string ,  int  > >  m_log;
+    
+    // retrieve the number assoc with a message or return -1
+    int getNumberFor( std::string msg) {
+      for (std::pair< std::string ,  int > keyValue : m_log) {
+        if (keyValue.first == msg) { return keyValue.second; }
+      }
+      return -1;
+    }
+
+    // add  data to the log
+    void addMessageData( std::string msg, int nbr ) {
+      if ( !contains(msg) ) m_log.push_back( {msg, nbr } )   ;
+    }
+    
+    // returns false if the message has never been received
+    bool contains( std::string msg ) {
+      for (std::pair< std::string ,  int > keyValue : m_log) {
+        if (keyValue.first == msg) return true;
+      }
+    return false;
+    }
+  };
 
 protected:
   void ProcessMessage( const osc::ReceivedMessage& m,
@@ -42,6 +71,7 @@ protected:
   std::vector<float> m_floatArgs;
   std::string mostRecentMessage{""};
   std::string mostRecentAddr{""};
+  MessageLog log;
 };
 
 

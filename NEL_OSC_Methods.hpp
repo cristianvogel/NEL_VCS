@@ -46,9 +46,9 @@ public:
   
   std::string getLatestMessage();
   const std::vector<float> getLatestFloatArgs();
-  
+  bool hardwareConnected();
   bool getBeSlimeResponse();
-  void resetBeSlimeResponse();
+  void hardwareDisconnected();
   std::string getBeSlimeIP();
   std::string getBeSlimeName();
   
