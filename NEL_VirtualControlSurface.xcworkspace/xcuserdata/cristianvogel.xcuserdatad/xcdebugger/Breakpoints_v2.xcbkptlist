@@ -62,8 +62,8 @@
             filePath = "NEL_VirtualControlSurface.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
             landmarkName = "NEL_VirtualControlSurface::NEL_VirtualControlSurface(info)"
             landmarkType = "7">
          </BreakpointContent>
@@ -78,8 +78,8 @@
             filePath = "NEL_VirtualControlSurface.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
             landmarkName = "NEL_VirtualControlSurface::NEL_VirtualControlSurface(info)"
             landmarkType = "7">
          </BreakpointContent>
@@ -110,8 +110,8 @@
             filePath = "NEL_DualDial.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
             landmarkName = "NEL_DualDial::Draw(g)"
             landmarkType = "7">
          </BreakpointContent>
@@ -135,15 +135,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "00AC86E5-4A2A-4913-90FB-30C442FB39F7"
+            uuid = "E8110714-345C-4FF2-B6E9-071AF5CBECAC"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NEL_VirtualControlSurface.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
             landmarkName = "NEL_VirtualControlSurface::NEL_VirtualControlSurface(info)"
             landmarkType = "7">
          </BreakpointContent>

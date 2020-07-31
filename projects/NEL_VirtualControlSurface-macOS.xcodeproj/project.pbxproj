@@ -1158,6 +1158,7 @@
 				4FD290A8137C34D700CEBE7E /* NEL_VirtualControlSurface.icns */,
 			);
 			name = Resources;
+			path = ../resources;
 			sourceTree = "<group>";
 		};
 		19C28FB8FE9D52D311CA2CBB /* Products */ = {
@@ -3827,7 +3828,7 @@
 					"$(VST3_SDK)",
 				);
 				INFOPLIST_FILE = "../resources/NEL_VirtualControlSurface-VST3-Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.NeverEngineLabs.vst3.${BINARY_NAME}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.NeverEngineLabs.vst3.NELVirtualControlSurface;
 				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = vst3;
 			};
@@ -3849,7 +3850,7 @@
 					"$(VST3_SDK)",
 				);
 				INFOPLIST_FILE = "../resources/NEL_VirtualControlSurface-VST3-Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.NeverEngineLabs.vst3.${BINARY_NAME}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.NeverEngineLabs.vst3.NELVirtualControlSurface;
 				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = vst3;
 			};
@@ -3871,7 +3872,7 @@
 					"$(VST3_SDK)",
 				);
 				INFOPLIST_FILE = "../resources/NEL_VirtualControlSurface-VST3-Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.NeverEngineLabs.vst3.${BINARY_NAME}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.NeverEngineLabs.vst3.NELVirtualControlSurface;
 				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = vst3;
 			};

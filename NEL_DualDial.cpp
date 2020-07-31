@@ -39,9 +39,8 @@ NEL_DualDial::NEL_DualDial(
     {
       timerMillis = 0;
       togglePulse();
-      SetDirty(true);
+      SetDirty(false);
     }
-    SetDirty(false);
   };
   
   doubleDialPulseTimer->Create(timerFunc, 50.0f);
@@ -180,9 +179,14 @@ void NEL_DualDial::setFlashRate(float  rate)
 }
 
 
-void NEL_DualDial::setButtonStates(const ISVG& on, const ISVG& off){
+NEL_DualDial* NEL_DualDial::setupButtonStateSVG(const ISVG& on, const ISVG& off){
   buttonStates.push_back(on);
   buttonStates.push_back(off);
+  return this;
+}
+
+IRECT* NEL_DualDial::getDialBounds() {
+  return &mRECT;
 }
 
 

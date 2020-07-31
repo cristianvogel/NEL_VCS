@@ -40,8 +40,11 @@ public:
   void OnMouseDrag(float x, float y, float dX, float dY, const IMouseMod& mod) override;
   void OnMouseWheel(float x, float y, const IMouseMod& mod, float d) override;
   
-  void setButtonStates( const ISVG& on , const ISVG& off);
+  NEL_DualDial* setupButtonStateSVG( const ISVG& on , const ISVG& off);
   int tickMarks {10};
+  std::vector<ISVG> buttonStates;
+  
+  IRECT* getDialBounds();
   
 private:
   const float rateMillisFactor = 1000.f;
@@ -58,7 +61,6 @@ private:
   iplug::igraphics::IColor colourStop2;
   iplug::igraphics::IColor colourStop3;
   float innerCircleFlashRate = 0.0f;
-  std::vector<ISVG> buttonStates;
   const ISVG tickMarkSVG;
 };
 

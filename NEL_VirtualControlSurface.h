@@ -21,8 +21,11 @@ class NEL_VirtualControlSurface final : public iplug::Plugin
 public:
   NEL_VirtualControlSurface(const iplug::InstanceInfo& info);
   ~NEL_VirtualControlSurface();
+  
+  void OnIdle() override;
 
   NEL_OSC nelosc;
+  std::string prevMsg = "";
   std::string beSlimeName = "";
   std::vector<std::string> cnsl =
   {
@@ -39,13 +42,14 @@ public:
   
   IText consoleTextDef;
   IText numericDisplayTextDef;
+  IText ledOn;
+  IText ledOff;
   
-
   void defaultConsoleText();
-  void updateAllDialPulseFromOSC( IGraphics & );
+  void updateAllDialInfoFromOSC();
   std::unique_ptr<GlobSeqHelpers> gsh = std::make_unique<GlobSeqHelpers>();
   
 #if IPLUG_DSP // http://bit.ly/2S64BDd
- // void ProcessBlock(iplug::sample** inputs, iplug::sample** outputs, int nFrames) override;
+  void ProcessBlock(iplug::sample** inputs, iplug::sample** outputs, int nFrames) override;
 #endif
 };
