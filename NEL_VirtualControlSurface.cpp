@@ -39,6 +39,7 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
         // start layout lambda function
         // load some dependencies here
         pGraphics->AttachCornerResizer(EUIResizerMode::Scale, false);
+        pGraphics->EnableMouseOver(true);
         pGraphics->Resize(PLUG_WIDTH, PLUG_HEIGHT, 1.333f);
         pGraphics->AttachPanelBackground(NEL_TUNGSTEN);
         pGraphics->LoadFont("Roboto-Regular", ROBOTO_FN);
@@ -85,8 +86,8 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
         //▼ small network logging console outputs OSC messages and host
       
        consoleTextDef = IText ( 11.f, "Menlo").WithFGColor(NEL_TUNGSTEN_FGBlend);
-       ledOn = consoleTextDef.WithFGColor(NEL_TUNGSTEN_FGBlend);
-       ledOff = consoleTextDef.WithFGColor(NEL_TUNGSTEN_FGBlend);
+//       ledOn = consoleTextDef.WithFGColor(NEL_TUNGSTEN_FGBlend);
+//       ledOff = consoleTextDef.WithFGColor(NEL_TUNGSTEN_FGBlend);
       
         pGraphics->AttachControl(new ITextControl
                                 (consoleBounds,
@@ -157,7 +158,7 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
                                        editableTextBounds.SubRectVertical(4, 4).GetMidVPadded(10.f),
                                        nelosc.dialSendAddress.at(d).c_str(),
                                        consoleTextDef.WithFGColor(getSwatch( Memariani, 1))),
-             kCtrlTextInput + d, "textInputs")->SetActionFunction( setAddressStem );
+             kCtrlTextInput + d, "addressStems")->SetActionFunction( setAddressStem );
           
       
 #pragma mark numeric displays
@@ -202,6 +203,8 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
         [this] (IControl * pCaller)
         {
             
+            GetUI()->ForControlInGroup("addressStems", [this] (IControl& field) { field.Hide(!field.IsHidden()); });
+             
             pCaller->SetAnimation(
                 [this] (IControl * pCaller)
             {
@@ -218,7 +221,7 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
             , 1000  ); //click flash duration
   
               GetUI()->ForControlInGroup("dualDials", [pCaller] (IControl& pDial) { pDial.SetDirty(true); });
-      });
+        });
       };
       
     }; //end layout lambda function
@@ -263,6 +266,7 @@ NEL_VirtualControlSurface::~NEL_VirtualControlSurface()
 
 void NEL_VirtualControlSurface::OnIdle() {
 
+  
                 if ( (!nelosc.getBeSlimeIP().empty()) &&
                 !beSlimeConnected   ) { beSlimeIP =
                 nelosc.getBeSlimeIP(); beSlimeName =
@@ -286,12 +290,13 @@ void NEL_VirtualControlSurface::OnIdle() {
                 if (!msg.empty() && msg != prevMsg) {
                   cnslButton->SetDirty(false);
                   consoleText = msg;
-                  cnsl->SetText(ledOn); //declare text once as constants not in onIdle()
                   cnsl->SetStr(consoleText.c_str());
                   cnsl->SetDirty(false);
                   cnsl->SetAnimation( unGhostText , 500.0f);
                 } else {
-                  if (cnsl->GetAnimationProgress() > 0.99f)  cnsl->SetAnimation( ghostText , 500.0f);
+                  if (cnsl->GetAnimationProgress() > 0.99f) {
+                    cnsl->SetAnimation( ghostText , 500.0f);
+                  }
                 }
                 prevMsg = msg;
                 updateAllDialInfoFromOSC( );
