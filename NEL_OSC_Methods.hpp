@@ -9,7 +9,6 @@
 #include <string>
 #include <iostream>
 #include <vector>
-
 #include "mDNS_IPExtract.h"
 #include "NEL_PacketListener.hpp"
 #include "NEL_PacketSender.hpp"
@@ -52,6 +51,7 @@ public:
   std::string getBeSlimeIP();
   std::string getBeSlimeName();
   
+  std::vector <std::string> dialSendAddress;
   
 private:
   mDNS zeroConf;

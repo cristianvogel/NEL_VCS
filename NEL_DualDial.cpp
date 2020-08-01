@@ -82,7 +82,6 @@ void NEL_DualDial::Draw(IGraphics& g) {
   
   g.DrawSVG( buttonStates [ pulse ? 1 : 0 ], mRECT.GetCentredInside(fmin(mRECT.W(), 50.0f + (NBR_DUALDIALS * 1.618f))));
   
-  
 #pragma mark outer arc and ticks
   g.DrawCircle(COLOR_WHITE, cx, cy, radius,nullptr, 0.5f);
   

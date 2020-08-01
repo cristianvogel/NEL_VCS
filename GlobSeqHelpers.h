@@ -34,6 +34,13 @@ public:
      str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
      return str;
   }
+  /** remove spaces and a number **/
+  std::string chomp(std::string &str,  const int i)
+  {
+    str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
+    str.erase(std::remove(str.begin(), str.end(), (char) i ), str.end());
+    return str;
+  }
 };
 
 

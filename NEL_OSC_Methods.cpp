@@ -5,11 +5,13 @@
 //  Created by Cristian Andres Vogel on 12/07/2020.
 //
 
-#include "NEL_OSC_Methods.hpp"
+
 #include <iostream>
 #include <string>
 #include <vector>
 #include <thread>
+#include "NEL_VCS_Constants.h"
+#include "NEL_OSC_Methods.hpp"
 
 
 NEL_OSC::NEL_OSC( const char * host  , int port  ) :
@@ -21,6 +23,9 @@ NEL_OSC::NEL_OSC( const char * host  , int port  ) :
    messageLog = std::make_unique<std::vector<std::string>>(2);
    initOSCSender("localhost", 9090);
    
+   for (int i = 0; i<= NBR_DUALDIALS; i++) {
+     dialSendAddress.push_back( DEFAULT_DIAL_ADDRESS + std::to_string( i ) );
+   }
  };
  NEL_OSC::~NEL_OSC() {  }; // to-do: close ports
 
@@ -49,6 +54,7 @@ if (sender == nullptr) {
   sender = std::make_unique<osc::NEL_PacketSender>(IP, port);
   if ( getBeSlimeName() != "localhost") initKyma();
   }
+
 }
 
 void NEL_OSC::initKyma() {

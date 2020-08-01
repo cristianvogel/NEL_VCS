@@ -43,8 +43,9 @@ void NEL_PacketListener::ProcessMessage(const osc::ReceivedMessage& m, const IpE
         // example of parsing single messages. osc::OsckPacketListener
         // handles the bundle traversal.
         
-        log.addMessageData( addr, m.ArgumentCount() );
-      
+//        if (log.sizeOf() > 64) log.clear();
+//        log.addMessageData( addr, m.ArgumentCount() );
+        
         if( std::strcmp( addr, "/osc/response_from" ) == 0 ){
             // example #1 -- argument stream interface
             osc::ReceivedMessageArgumentStream args = m.ArgumentStream();

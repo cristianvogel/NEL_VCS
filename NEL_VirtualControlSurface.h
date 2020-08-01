@@ -33,17 +33,38 @@ public:
     "⚉ "
   };
  
-  std::string dialSendAddress = "/dualDial/";
-  
   std::string consoleText = "";
   
   std::string beSlimeIP = "";
   std::atomic_bool beSlimeConnected {false};
   
+  typedef std::string DialAddr;
+  
   IText consoleTextDef;
   IText numericDisplayTextDef;
   IText ledOn;
   IText ledOff;
+  
+  IAnimationFunction unGhostText =
+    [this] (IControl* pCaller) {
+     pCaller->SetDisabled(false);
+     auto progress = pCaller->GetAnimationProgress();
+      if(progress>1.0f) {
+        pCaller->SetDisabled(true);
+        pCaller->SetMouseOverWhenDisabled(true);
+        pCaller->OnEndAnimation(); return;
+      }
+    };
+  
+  IAnimationFunction ghostText =
+    [this] (IControl* pCaller) {
+     pCaller->SetDisabled(true);
+     auto progress = pCaller->GetAnimationProgress();
+      if(progress>1.0f) {
+        pCaller->SetDisabled(false);
+        pCaller->OnEndAnimation(); return;
+      }
+    };
   
   void defaultConsoleText();
   void updateAllDialInfoFromOSC();
@@ -53,3 +74,4 @@ public:
   void ProcessBlock(iplug::sample** inputs, iplug::sample** outputs, int nFrames) override;
 #endif
 };
+

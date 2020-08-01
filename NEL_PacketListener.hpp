@@ -40,8 +40,11 @@ public:
   std::mutex msgMutex;
   
   struct MessageLog {
-    MessageLog() { };
+    
     std::vector< std::pair < std::string ,  int  > >  m_log;
+    MessageLog() { };
+    ~MessageLog() { clear(); };
+    
     
     // retrieve the number assoc with a message or return -1
     int getNumberFor( std::string msg) {
@@ -62,6 +65,15 @@ public:
         if (keyValue.first == msg) return true;
       }
     return false;
+    }
+    
+    //clear log
+    void clear() {
+      m_log.clear();
+    }
+    
+    const int sizeOf() {
+     return m_log.size();
     }
   };
 

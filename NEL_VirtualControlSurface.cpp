@@ -21,7 +21,6 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
     , nelosc( "localhost", 8080)
 
 {
-    consoleText = cnsl[kMsgScanning]; // some kind of undefined behaviour happening here sometimes
     nelosc.launchNetworkingThread();
     
     InitParamRange(kDualDialInner, kDualDialInner + NBR_DUALDIALS - 1, 1, "Dual Dial %i", 0, 0., 1., 0, "%", 0, "Inner Value");
@@ -38,15 +37,15 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
     mLayoutFunc = [&](IGraphics * pGraphics)
     {
         // start layout lambda function
-        // load all dependencies once here
+        // load some dependencies here
         pGraphics->AttachCornerResizer(EUIResizerMode::Scale, false);
-        pGraphics->Resize(PLUG_WIDTH, PLUG_HEIGHT, 1.618f);
+        pGraphics->Resize(PLUG_WIDTH, PLUG_HEIGHT, 1.333f);
         pGraphics->AttachPanelBackground(NEL_TUNGSTEN);
         pGraphics->LoadFont("Roboto-Regular", ROBOTO_FN);
         pGraphics->LoadFont("Menlo", MENLO_FN);
         
-  
-            const IVStyle rescanButtonStyle
+        // define some styles
+        const IVStyle rescanButtonStyle
         {
             true, // Show label
             false, // Show value
@@ -74,51 +73,59 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
         };
 
 
-
 #pragma mark mainCanvas
-        // main app GUI IRECT
       
+      // main app GUI IRECT
       const IRECT b = pGraphics->GetBounds().GetScaledAboutCentre(0.95f).FracRectVertical(0.9f, true);
       const IRECT consoleBounds = pGraphics->GetBounds().GetFromBottom( 24.f ).GetGridCell(0, 1, 1);
       const IRECT plotBounds = pGraphics->GetBounds().GetFromTop( 24.f );
       
       
-
 #pragma mark console text
         //▼ small network logging console outputs OSC messages and host
       
-       consoleTextDef = IText ( 12.f, "Menlo").WithFGColor(NEL_TUNGSTEN_FGBlend);
-       ledOn = consoleTextDef.WithFGColor(NEL_LUNADA_stop3);
+       consoleTextDef = IText ( 11.f, "Menlo").WithFGColor(NEL_TUNGSTEN_FGBlend);
+       ledOn = consoleTextDef.WithFGColor(NEL_TUNGSTEN_FGBlend);
        ledOff = consoleTextDef.WithFGColor(NEL_TUNGSTEN_FGBlend);
       
         pGraphics->AttachControl(new ITextControl
-                                 (consoleBounds,
-                                  consoleText.c_str(),
-                                  consoleTextDef,
-                                  NEL_TUNGSTEN,
-                                  true
-                                  )
+                                (consoleBounds,
+                                consoleText.c_str(),
+                                consoleTextDef,
+                                NEL_TUNGSTEN,
+                                true
+                                )
                                  , kCtrlNetStatus);
       
-      pGraphics->AttachControl(new IVPlotControl(plotBounds, {{getSwatch(Memariani, 0),  [](double x){ return std::sin(x * 6.2);} },
-                                                              {getSwatch(Memariani, 1), [](double x){ return std::cos(x * 6.2);} },
-                                                              {getSwatch(Memariani, 2), [](double x){ return std::sin(x * 12.2);} }
+      
+      
+      
+#pragma mark decorative plot
+      pGraphics->AttachControl(new IVPlotControl(plotBounds, {{getSwatch(Memariani, 0).WithOpacity(0.5f),  [](double x){ return std::sin(x * 12);} },
+        {getSwatch(Memariani, 1).WithOpacity(0.35f), [](double x){ return std::cos(x * 12.5);} },
+        {getSwatch(Memariani, 2).WithOpacity(0.25f), [](double x){ return std::sin( x * 12 ) * std::cos( x* 12.5) ;} }
 
-      }, 32, "", DEFAULT_STYLE.WithColor(kBG, COLOR_TRANSPARENT)), kCtrlPlot, "plot") ;
+      }, 256, "", DEFAULT_STYLE.WithColor(kBG, COLOR_TRANSPARENT)), kCtrlPlot, "plot");
+    
       
 #pragma mark dual dials
         //▼ rows of dual concentric dials with two paramIdx
-      
-      IActionFunction swapSVG = [&, pGraphics] ( IControl* pCtrl) {
-        NEL_DualDial* pDial = pCtrl->As<NEL_DualDial>();
-        pGraphics->
-        DrawSVG(  pDial->buttonStates [ pDial->pulse ? 1 : 0 ],
-                  pDial->getDialBounds()->GetCentredInside(fmin(pDial->getDialBounds()->W(), 50.0f + (NBR_DUALDIALS * 1.618f))));
-        };
+            
         
         for (int d = 0; d < NBR_DUALDIALS; d++)
         {
           const IRECT dualDialBounds = b.GetGridCell( d , 2 , NBR_DUALDIALS/2 ).GetScaledAboutCentre(0.75f);
+          
+          IActionFunction sendOSCFromDials =
+            [&, pGraphics, d] ( IControl* pCaller) {
+                              DialAddr dialAddress = !nelosc.dialSendAddress.empty() ? nelosc.dialSendAddress.at(d) : DEFAULT_DIAL_ADDRESS + std::to_string(d);
+                              IControl *pDialLoop = pCaller->GetUI()->GetControlWithTag(kCtrlFluxDial + d);
+                              std::vector<float> floatArgs;
+                              floatArgs.push_back(pDialLoop->GetValue(0));
+                              floatArgs.push_back(pDialLoop->GetValue(1));
+                              nelosc.sender->sendOSC( dialAddress, floatArgs );
+                              pDialLoop->SetDirty(false);
+            };
           
             pGraphics->AttachControl
             (new NEL_DualDial(
@@ -127,23 +134,28 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
                  , getSwatch( Lunada, d % 3)
                  , getSwatch( Lunada, (d + 1) % 3)
                  , getSwatch( Lunada, (d + 2) % 3)
-             ), kCtrlFluxDial + d)
+             ), kCtrlFluxDial + d, "dualDials")
           ->As<NEL_DualDial>()
           ->setupButtonStateSVG(pGraphics->LoadSVG(NEL_BUTTON_ON), pGraphics->LoadSVG(NEL_BUTTON_OFF))
-          ->SetActionFunction( swapSVG );
+          ->SetActionFunction( sendOSCFromDials );
+         
           
-#pragma mark text input fields for changing send messages
+#pragma mark text input fields for changing send message stem
       
+           
            auto setAddressStem = [&, pGraphics, d] (IControl* pCaller) {
                     
-                      const char* newAddressStem = GetUI()->GetControlWithTag(kCtrlTextInput + d)->As<IEditableTextControl>()->GetStr();
-                      dialSendAddress = newAddressStem;
+              std::string newAddressStem = static_cast<std::string> ( pCaller->As<IEditableTextControl>()->GetStr() );
+              newAddressStem = gsh->chomp(newAddressStem, d);
+              nelosc.dialSendAddress.at(d) = newAddressStem;
+              pCaller->SetDirty(false);
                     };
           
             const IRECT& editableTextBounds = dualDialBounds;
+          
             pGraphics->AttachControl (new IEditableTextControl (
                                        editableTextBounds.SubRectVertical(4, 4).GetMidVPadded(10.f),
-                                       (dialSendAddress + std::to_string(d)).c_str(),
+                                       nelosc.dialSendAddress.at(d).c_str(),
                                        consoleTextDef.WithFGColor(getSwatch( Memariani, 1))),
              kCtrlTextInput + d, "textInputs")->SetActionFunction( setAddressStem );
           
@@ -174,13 +186,8 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
           kCtrlReadInnerRing + d, "readouts");
 
 }
-     
-      #pragma mark iLambda control moved to OnIdle()
-
-      
-      #pragma mark network button / OSC value output
-        //▼ Network button/status attaches OSC ActionFunction lambda to concentric dials
-      // needs to come after ILambda control
+           
+      #pragma mark network button
       
         pGraphics->AttachControl( new IVButtonControl(
                                       consoleBounds,
@@ -190,19 +197,18 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
                                       true,
                                       true,
                                       EVShape::Rectangle
-                                  )
-                                  , kCtrlReScan)
+                                  ), kCtrlReScan)
         -> SetActionFunction(
-            [this] (IControl * pCaller)
+        [this] (IControl * pCaller)
         {
+            
             pCaller->SetAnimation(
                 [this] (IControl * pCaller)
             {
                 auto progress = pCaller->GetAnimationProgress();
                 if (progress > 1.)
                 {
-                   // pCaller->OnEndAnimation();
-                    consoleText = cnsl[kMsgScanning]; //seems to crash here every now and then??
+                    pCaller->OnEndAnimation();
                     return;
                 }
                 dynamic_cast<IVectorBase *>(pCaller)->
@@ -210,56 +216,40 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
                 pCaller->SetDirty(false);
             }
             , 1000  ); //click flash duration
-            for (int i = 0; i < NBR_DUALDIALS; i++)
-            {
-                IControl *pDialLoop = pCaller->GetUI()->GetControlWithTag(kCtrlFluxDial + i);
-                pDialLoop->SetActionFunction ( [this, i] (IControl* pDialLambda)
-                {
-                    std::vector<float> floatArgs;
-                    floatArgs.push_back(pDialLambda->GetValue(0));
-                    floatArgs.push_back(pDialLambda->GetValue(1));
-                    nelosc.sender->sendOSC( dialSendAddress + std::to_string(i), floatArgs );
-                });
-                pDialLoop->SetDirty();
-            }
-        });
+  
+              GetUI()->ForControlInGroup("dualDials", [pCaller] (IControl& pDial) { pDial.SetDirty(true); });
+      });
+      };
       
     }; //end layout lambda function
+
+
+void NEL_VirtualControlSurface::defaultConsoleText() {
+  consoleText = cnsl[kMsgConnected];
 }
-
-
-void NEL_VirtualControlSurface::defaultConsoleText() { consoleText = cnsl[kMsgConnected]; }
-
-
 
 void NEL_VirtualControlSurface::updateAllDialInfoFromOSC() {
   std::string::size_type oscMsgEntry = nelosc.getLatestMessage().find("/dial/pulse");
   const std::vector<float>& floatArgs = nelosc.getLatestFloatArgs();
   
-  //only update the pulse if OSC messages are in
-  if (oscMsgEntry != std::string::npos)
-  {
-    for (int i = 0; i < NBR_DUALDIALS; i++)
-      {
-          IControl *pDialLoop = GetUI()->GetControlWithTag(kCtrlFluxDial + i);
-          pDialLoop->As<NEL_DualDial>()->setFlashRate( floatArgs.at( i % floatArgs.size() ) );
-          //pDialLoop->SetDirty(true);
+  
+  for (int i = 0; i < NBR_DUALDIALS; i++)
+    {
+      IControl *pDialLoop = GetUI()->GetControlWithTag(kCtrlFluxDial + i);
+      if (oscMsgEntry != std::string::npos) {  //only update the pulse if OSC messages are in
+        pDialLoop->As<NEL_DualDial>()->setFlashRate( floatArgs.at( i % floatArgs.size() ) );
       }
-  }
-  //always updates the readouts
-  //todo: change-driven draw optimisation
-    for (int i = 0; i < NBR_DUALDIALS; i++)
-      {
-        IControl *pDialLoop = GetUI()->GetControlWithTag(kCtrlFluxDial + i);
-        GetUI()->
-        GetControlWithTag(kCtrlReadOuterRing + i)->
+    
+      //always updates the readouts
+      //todo: change-driven draw optimisation
+      GetUI()->
+      GetControlWithTag(kCtrlReadOuterRing + i)-> As<IVLabelControl>()->
+          SetStrFmt(4, std::to_string( pDialLoop->GetValue(0) ).c_str() );
+      GetUI()->
+        GetControlWithTag(kCtrlReadInnerRing + i)->
           As<IVLabelControl>()->
-            SetStrFmt(4, std::to_string( pDialLoop->GetValue(0) ).c_str() );
-        GetUI()->
-          GetControlWithTag(kCtrlReadInnerRing + i)->
-            As<IVLabelControl>()->
-              SetStrFmt(4, std::to_string( pDialLoop->GetValue(1) ).c_str() );
-      }
+            SetStrFmt(4, std::to_string( pDialLoop->GetValue(1) ).c_str() );
+    }
 }
 
 #endif
@@ -278,7 +268,7 @@ void NEL_VirtualControlSurface::OnIdle() {
                 nelosc.getBeSlimeIP(); beSlimeName =
                 nelosc.getBeSlimeName();
 
-                if ( !beSlimeName.empty() ) {
+                if ( !beSlimeName.empty() && !beSlimeConnected ) {
                 nelosc.sender->changeTargetHost(beSlimeIP.c_str());
                 beSlimeConnected = true; }; consoleText =
                 cnsl[kMsgConnected] + beSlimeName; } else {
@@ -288,21 +278,25 @@ void NEL_VirtualControlSurface::OnIdle() {
                 // even without GUI
                 IGraphics* pGraphics = GetUI(); if(!pGraphics) return;
 
-                ITextControl* cnsl = pGraphics->GetControlWithTag(kCtrlNetStatus)->As<ITextControl>();
+                auto* cnsl = pGraphics->GetControlWithTag(kCtrlNetStatus)->As<ITextControl>();
+                IVButtonControl* cnslButton = pGraphics->GetControlWithTag(kCtrlReScan)->As<IVButtonControl>();
+
                 //update console when osc received
                 auto msg = nelosc.getLatestMessage();
                 if (!msg.empty() && msg != prevMsg) {
+                  cnslButton->SetDirty(false);
                   consoleText = msg;
                   cnsl->SetText(ledOn); //declare text once as constants not in onIdle()
                   cnsl->SetStr(consoleText.c_str());
                   cnsl->SetDirty(false);
+                  cnsl->SetAnimation( unGhostText , 500.0f);
                 } else {
-                  cnsl->SetText(ledOff);
-                  cnsl->SetDirty(false);
+                  if (cnsl->GetAnimationProgress() > 0.99f)  cnsl->SetAnimation( ghostText , 500.0f);
                 }
                 prevMsg = msg;
                 updateAllDialInfoFromOSC( );
-          };
+          }
+
 
 #if IPLUG_DSP
 // muted

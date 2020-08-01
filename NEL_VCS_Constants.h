@@ -5,10 +5,7 @@
 //  Created by Cristian Andres Vogel on 07/07/2020.
 //
 #pragma once
-
-#define NBR_DUALDIALS 8
-#define NEL_BUTTON_OFF "buttonPlainBlue.svg"
-#define NEL_BUTTON_ON "buttonPlainBlue_ON.svg"
+#include "IPlug_include_in_plug_hdr.h"
 
 #pragma mark NEL_Colours
 const iplug::igraphics::IColor NEL_TUNGSTEN(255, 27, 27, 30);
