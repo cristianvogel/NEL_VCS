@@ -78,8 +78,8 @@
             filePath = "NEL_DualDial.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
             landmarkName = "NEL_DualDial::Draw(g)"
             landmarkType = "7">
          </BreakpointContent>
@@ -142,8 +142,8 @@
             filePath = "NEL_VirtualControlSurface.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
             landmarkName = "NEL_VirtualControlSurface::NEL_VirtualControlSurface(info)"
             landmarkType = "7">
          </BreakpointContent>
@@ -158,8 +158,8 @@
             filePath = "NEL_VirtualControlSurface.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
             landmarkName = "NEL_VirtualControlSurface::NEL_VirtualControlSurface(info)"
             landmarkType = "7">
          </BreakpointContent>
@@ -174,8 +174,8 @@
             filePath = "NEL_VirtualControlSurface.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "295"
-            endingLineNumber = "295"
+            startingLineNumber = "293"
+            endingLineNumber = "293"
             landmarkName = "NEL_VirtualControlSurface::OnIdle()"
             landmarkType = "7">
          </BreakpointContent>
@@ -193,6 +193,38 @@
             startingLineNumber = "40"
             endingLineNumber = "40"
             landmarkName = "NEL_PacketListener::ProcessMessage(m, remoteEndpoint)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4F1A87D4-B3AB-4DED-9FFD-5C8279279BCD"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../IGraphics/IGraphics.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "275"
+            endingLineNumber = "275"
+            landmarkName = "IGraphics::AttachControl(pControl, ctrlTag, group)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7BEAEA22-CAAA-4630-9805-9829EB154F26"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NEL_VirtualControlSurface.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "202"
+            endingLineNumber = "202"
+            landmarkName = "NEL_VirtualControlSurface::NEL_VirtualControlSurface(info)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

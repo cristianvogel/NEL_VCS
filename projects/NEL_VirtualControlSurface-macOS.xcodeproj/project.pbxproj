@@ -135,6 +135,13 @@
 		3E77259724BB5C3B00DDE318 /* NEL_OSC_Methods.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E77259324BB5C3B00DDE318 /* NEL_OSC_Methods.cpp */; };
 		3E77259824BB5C3B00DDE318 /* NEL_OSC_Methods.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E77259324BB5C3B00DDE318 /* NEL_OSC_Methods.cpp */; };
 		3E77259924BB5C3B00DDE318 /* NEL_OSC_Methods.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E77259324BB5C3B00DDE318 /* NEL_OSC_Methods.cpp */; };
+		3E7900CE24D6B92D00B85368 /* fad-caret-right.svg in Resources */ = {isa = PBXBuildFile; fileRef = 3E7900CD24D6B92D00B85368 /* fad-caret-right.svg */; };
+		3E7900CF24D6B92D00B85368 /* fad-caret-right.svg in Resources */ = {isa = PBXBuildFile; fileRef = 3E7900CD24D6B92D00B85368 /* fad-caret-right.svg */; };
+		3E7900D024D6B92D00B85368 /* fad-caret-right.svg in Resources */ = {isa = PBXBuildFile; fileRef = 3E7900CD24D6B92D00B85368 /* fad-caret-right.svg */; };
+		3E7900D124D6B92D00B85368 /* fad-caret-right.svg in Resources */ = {isa = PBXBuildFile; fileRef = 3E7900CD24D6B92D00B85368 /* fad-caret-right.svg */; };
+		3E7900D224D6B92D00B85368 /* fad-caret-right.svg in Resources */ = {isa = PBXBuildFile; fileRef = 3E7900CD24D6B92D00B85368 /* fad-caret-right.svg */; };
+		3E7900D324D6B92D00B85368 /* fad-caret-right.svg in Resources */ = {isa = PBXBuildFile; fileRef = 3E7900CD24D6B92D00B85368 /* fad-caret-right.svg */; };
+		3E7900D424D6B92D00B85368 /* fad-caret-right.svg in Resources */ = {isa = PBXBuildFile; fileRef = 3E7900CD24D6B92D00B85368 /* fad-caret-right.svg */; };
 		3EA669E924B5A643006D193B /* IPlugOSC_msg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F5369C120C446430089212E /* IPlugOSC_msg.cpp */; };
 		3EA669EA24B5A644006D193B /* IPlugOSC_msg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F5369C120C446430089212E /* IPlugOSC_msg.cpp */; };
 		3EA669EC24B5A646006D193B /* IPlugOSC_msg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F5369C120C446430089212E /* IPlugOSC_msg.cpp */; };
@@ -631,6 +638,7 @@
 		3E61746224C1E6DE00762320 /* mDNS_IPExtract.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mDNS_IPExtract.h; sourceTree = "<group>"; };
 		3E77259324BB5C3B00DDE318 /* NEL_OSC_Methods.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = NEL_OSC_Methods.cpp; path = ../NEL_OSC_Methods.cpp; sourceTree = "<group>"; };
 		3E77259424BB5C3B00DDE318 /* NEL_OSC_Methods.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = NEL_OSC_Methods.hpp; path = ../NEL_OSC_Methods.hpp; sourceTree = "<group>"; };
+		3E7900CD24D6B92D00B85368 /* fad-caret-right.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "fad-caret-right.svg"; sourceTree = "<group>"; };
 		3EB033C924D06E3A00DD8B77 /* NEL_VCS_Enums.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = NEL_VCS_Enums.hpp; path = ../NEL_VCS_Enums.hpp; sourceTree = "<group>"; };
 		3EC56BC224B8905D002D64B0 /* process_unix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = process_unix.cpp; sourceTree = "<group>"; };
 		3EC56BC324B8905D002D64B0 /* process.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = process.cpp; sourceTree = "<group>"; };
@@ -1091,32 +1099,32 @@
 		089C166AFE841209C02AAC07 /* IPlugExample */ = {
 			isa = PBXGroup;
 			children = (
-				3EB033CB24D0D77200DD8B77 /* Images */,
-				3EB033C924D06E3A00DD8B77 /* NEL_VCS_Enums.hpp */,
-				3E42D72224C88B890078FDF2 /* NEL_PacketSender.cpp */,
-				3E42D72324C88B890078FDF2 /* NEL_PacketSender.hpp */,
-				3E42D72A24C8BEDD0078FDF2 /* jnetlib */,
-				3E42D71A24C885810078FDF2 /* NEL_PacketListener.cpp */,
-				3E42D71B24C885810078FDF2 /* NEL_PacketListener.hpp */,
-				3E42D6EF24C884050078FDF2 /* ip */,
-				3E42D6C624C881C90078FDF2 /* osc */,
-				3E61745C24C1E58F00762320 /* mDNS_IPExtract.cpp */,
-				3E61746224C1E6DE00762320 /* mDNS_IPExtract.h */,
-				3ED446C024BF1B4800D9ED3E /* NEL_VCS_Constants.h */,
-				3E77259324BB5C3B00DDE318 /* NEL_OSC_Methods.cpp */,
-				3E77259424BB5C3B00DDE318 /* NEL_OSC_Methods.hpp */,
-				3EC56BC124B8905D002D64B0 /* tiny-process */,
 				52FBBED30D0CF143001C8B8A /* config.h */,
 				089C1671FE841209C02AAC07 /* Frameworks */,
 				3E474FE024B634EA008DA40E /* GlobSeqHelpers.h */,
-				4F3862ED2014BBEC0009F402 /* NEL_VirtualControlSurface.cpp */,
-				4F3862EE2014BBEC0009F402 /* NEL_VirtualControlSurface.h */,
+				3EB033CB24D0D77200DD8B77 /* Images */,
+				3E42D6EF24C884050078FDF2 /* ip */,
+				3E42D72A24C8BEDD0078FDF2 /* jnetlib */,
+				3E61745C24C1E58F00762320 /* mDNS_IPExtract.cpp */,
+				3E61746224C1E6DE00762320 /* mDNS_IPExtract.h */,
 				3EE825F124B50BBD00A36392 /* NEL_DualDial.cpp */,
 				3E474FDE24B62EEA008DA40E /* NEL_DualDial.h */,
+				3E77259324BB5C3B00DDE318 /* NEL_OSC_Methods.cpp */,
+				3E77259424BB5C3B00DDE318 /* NEL_OSC_Methods.hpp */,
+				3E42D71A24C885810078FDF2 /* NEL_PacketListener.cpp */,
+				3E42D71B24C885810078FDF2 /* NEL_PacketListener.hpp */,
+				3E42D72224C88B890078FDF2 /* NEL_PacketSender.cpp */,
+				3E42D72324C88B890078FDF2 /* NEL_PacketSender.hpp */,
+				3ED446C024BF1B4800D9ED3E /* NEL_VCS_Constants.h */,
+				3EB033C924D06E3A00DD8B77 /* NEL_VCS_Enums.hpp */,
+				4F3862ED2014BBEC0009F402 /* NEL_VirtualControlSurface.cpp */,
+				4F3862EE2014BBEC0009F402 /* NEL_VirtualControlSurface.h */,
+				3E42D6C624C881C90078FDF2 /* osc */,
 				32C88E010371C26100C91783 /* Other Sources */,
 				19C28FB8FE9D52D311CA2CBB /* Products */,
 				4F9313232315CA1100DB2383 /* README.md */,
 				089C167CFE841241C02AAC07 /* Resources */,
+				3EC56BC124B8905D002D64B0 /* tiny-process */,
 			);
 			name = IPlugExample;
 			sourceTree = "<group>";
@@ -1134,6 +1142,7 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3E7900CD24D6B92D00B85368 /* fad-caret-right.svg */,
 				3E474FDD24B62C86008DA40E /* buttonPlainBlue_ON.svg */,
 				3E474FDB24B62ACE008DA40E /* buttonPlainBlue.svg */,
 				3E474FDA24B62A2F008DA40E /* buttonMotherOfPearl.svg */,
@@ -2372,6 +2381,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E7900CF24D6B92D00B85368 /* fad-caret-right.svg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2379,6 +2389,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E7900D124D6B92D00B85368 /* fad-caret-right.svg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2386,6 +2397,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E7900D224D6B92D00B85368 /* fad-caret-right.svg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2395,6 +2407,7 @@
 			files = (
 				4F3EE1BF231438D000004786 /* NEL_VirtualControlSurface.icns in Resources */,
 				4F3EE1C0231438D000004786 /* NEL_VirtualControlSurface-macOS-MainMenu.xib in Resources */,
+				3E7900D424D6B92D00B85368 /* fad-caret-right.svg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2403,6 +2416,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F78BE3C22E74CD000AD537E /* IPlugAUViewController.xib in Resources */,
+				3E7900D324D6B92D00B85368 /* fad-caret-right.svg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2410,6 +2424,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E7900D024D6B92D00B85368 /* fad-caret-right.svg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2426,6 +2441,7 @@
 			files = (
 				4F78D88613B6382B0032E0F3 /* NEL_VirtualControlSurface.icns in Resources */,
 				4F1B4AE42014D33600BC64D4 /* NEL_VirtualControlSurface-macOS-MainMenu.xib in Resources */,
+				3E7900CE24D6B92D00B85368 /* fad-caret-right.svg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

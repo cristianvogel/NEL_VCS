@@ -6,6 +6,7 @@
 #include "IPlug_include_in_plug_src.h"
 #include "IControls.h"
 #include "tiny-process/process.hpp"
+#include "IconsForkAwesome.h"
 #include <iostream>
 #include <string>
 #include <thread>
@@ -40,40 +41,20 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
         // load some dependencies here
         pGraphics->AttachCornerResizer(EUIResizerMode::Scale, false);
         pGraphics->EnableMouseOver(true);
+        pGraphics->EnableTooltips(true);
         pGraphics->Resize(PLUG_WIDTH, PLUG_HEIGHT, 1.333f);
         pGraphics->AttachPanelBackground(NEL_TUNGSTEN);
         pGraphics->LoadFont("Roboto-Regular", ROBOTO_FN);
         pGraphics->LoadFont("Menlo", MENLO_FN);
+        pGraphics->LoadFont("ForkAwesome", FORK_AWESOME_FN);
+        const IText forkAwesomeText {16.f, NEL_TUNGSTEN_FGBlend, "ForkAwesome"};
         
-        // define some styles
-        const IVStyle rescanButtonStyle
-        {
-            true, // Show label
-            false, // Show value
-            {
-                DEFAULT_SHCOLOR, // Background
-                COLOR_TRANSLUCENT, // Foreground
-                COLOR_LIGHT_GRAY, // Pressed
-                COLOR_TRANSPARENT, // Frame
-                DEFAULT_HLCOLOR, // Highlight
-                DEFAULT_SHCOLOR, // Shadow
-                COLOR_BLACK, // Extra 1
-                DEFAULT_X2COLOR, // Extra 2
-                DEFAULT_X3COLOR  // Extra 3
-            }, // Colors
-            IText(
-                12.f,
-                COLOR_LIGHT_GRAY,
-                "Menlo",
-                EAlign::Center,
-                EVAlign::Middle,
-                0.f,
-                DEFAULT_TEXTENTRY_BGCOLOR,
-                DEFAULT_TEXTENTRY_FGCOLOR
-            ) // Label text
-        };
-
-
+      auto showHideAddresses =
+      
+        [this] (IControl * pCaller) { GetUI()->ForControlInGroup( "addressStems",
+                                                                  [&] (IControl& field) { field.Hide(!field.IsHidden()); }
+                                                                 ); };
+     
 #pragma mark mainCanvas
       
       // main app GUI IRECT
@@ -107,8 +88,19 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
         {getSwatch(Memariani, 2).WithOpacity(0.25f), [](double x){ return std::sin( x * 12 ) * std::cos( x* 12.5) ;} }
 
       }, 256, "", DEFAULT_STYLE.WithColor(kBG, COLOR_TRANSPARENT)), kCtrlPlot, "plot");
-    
+
+#pragma mark settings
+         
+         pGraphics->AttachControl(new ITextToggleControl(
+                                                           plotBounds.FracRectHorizontal(0.125f),
+                                                           showHideAddresses,
+                                                           ICON_FK_SQUARE_O,
+                                                           ICON_FK_PLUS_SQUARE_O,
+                                                           forkAwesomeText
+                                                         )
+                                  , kCtrlShowInfo, "prefs");
       
+         
 #pragma mark dual dials
         //▼ rows of dual concentric dials with two paramIdx
             
@@ -138,10 +130,11 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
              ), kCtrlFluxDial + d, "dualDials")
           ->As<NEL_DualDial>()
           ->setupButtonStateSVG(pGraphics->LoadSVG(NEL_BUTTON_ON), pGraphics->LoadSVG(NEL_BUTTON_OFF))
+          ->setTickMarkSVG(pGraphics->LoadSVG(NEL_TICK_SVG)) 
           ->SetActionFunction( sendOSCFromDials );
          
           
-#pragma mark text input fields for changing send message stem
+#pragma mark text input address stems
       
            
            auto setAddressStem = [&, pGraphics, d] (IControl* pCaller) {
@@ -158,9 +151,10 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
                                        editableTextBounds.SubRectVertical(4, 4).GetMidVPadded(10.f),
                                        nelosc.dialSendAddress.at(d).c_str(),
                                        consoleTextDef.WithFGColor(getSwatch( Memariani, 1))),
-             kCtrlTextInput + d, "addressStems")->SetActionFunction( setAddressStem );
+             kCtrlTextInput + d, "addressStems")->SetActionFunction( setAddressStem )->Hide(true);
           
       
+
 #pragma mark numeric displays
 
           numericDisplayTextDef = IText ( 12.f, "Menlo").WithFGColor(NEL_TUNGSTEN_FGBlend);
@@ -169,7 +163,7 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
           (new IVLabelControl (
                              numericDisplayOuter.GetMidVPadded(10.f),
                                "…",
-                               rescanButtonStyle
+                               rescanButtonStyle()
                                .WithDrawShadows(false)
                                .WithColor(kBG, COLOR_TRANSPARENT)
                                .WithValueText ( consoleTextDef.WithSize(12.f).WithFGColor(  COLOR_WHITE  ) ) ),
@@ -180,7 +174,7 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
           (new IVLabelControl (
                             numericDisplayInner.GetMidVPadded(10.f),
                               " ",
-                              rescanButtonStyle
+                              rescanButtonStyle()
                               .WithDrawShadows(false)
                               .WithColor(kBG, COLOR_TRANSPARENT)
                               .WithValueText ( consoleTextDef.WithSize(12.f).WithFGColor(  COLOR_WHITE  ) ) ),
@@ -194,38 +188,42 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
                                       consoleBounds,
                                       nullptr,
                                       "",
-                                      rescanButtonStyle.WithEmboss(false).WithDrawShadows(false),
+                                      rescanButtonStyle().WithEmboss(false).WithDrawShadows(false),
                                       true,
                                       true,
                                       EVShape::Rectangle
                                   ), kCtrlReScan)
         -> SetActionFunction(
-        [this] (IControl * pCaller)
-        {
-            
-            GetUI()->ForControlInGroup("addressStems", [this] (IControl& field) { field.Hide(!field.IsHidden()); });
-             
-            pCaller->SetAnimation(
-                [this] (IControl * pCaller)
-            {
-                auto progress = pCaller->GetAnimationProgress();
-                if (progress > 1.)
-                {
-                    pCaller->OnEndAnimation();
-                    return;
-                }
-                dynamic_cast<IVectorBase *>(pCaller)->
-                SetColor(kPR, IColor::LinearInterpolateBetween(NEL_LUNADA_stop2, kPR, static_cast<float>(progress)));
-                pCaller->SetDirty(false);
-            }
-            , 1000  ); //click flash duration
+        [this] (IControl * pCaller) {
+          
+              auto showInfoButton = GetUI()->GetControlWithTag(kCtrlShowInfo)->As<ITextToggleControl>();
+              showInfoButton->SetValue( showInfoButton->GetValue() >0.5f ? 0.f : 1.0f  );
+              showInfoButton->SetDirty(true);
+               
+              pCaller->SetAnimation(
+                  [this] (IControl * pCaller)
+              {
+                  auto progress = pCaller->GetAnimationProgress();
+                  if (progress > 1.)
+                  {
+                      pCaller->OnEndAnimation();
+                      return;
+                  }
+                  dynamic_cast<IVectorBase *>(pCaller)->
+                  SetColor(kPR, IColor::LinearInterpolateBetween(NEL_LUNADA_stop2, kPR, static_cast<float>(progress)));
+                  pCaller->SetDirty(false);
+              }
+              , 1000  ); //click flash duration
+    
+                //redraw dials and sendOSC from attached action
+                GetUI()->ForControlInGroup("dualDials", [pCaller] (IControl& pDial) {
+                  pDial.SetDirty(true);
+                });
+          });
+      }; //end of mLayoutFunc lambda
   
-              GetUI()->ForControlInGroup("dualDials", [pCaller] (IControl& pDial) { pDial.SetDirty(true); });
-        });
-      };
-      
-    }; //end layout lambda function
-
+  
+}; //end main layout
 
 void NEL_VirtualControlSurface::defaultConsoleText() {
   consoleText = cnsl[kMsgConnected];

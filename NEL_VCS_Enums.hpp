@@ -57,6 +57,7 @@ enum EDisplays
 {
   kCtrlTagDisplay = 500,
   kCtrlPlot,
+  kCtrlShowInfo,
   kNumDisplays
 };
 

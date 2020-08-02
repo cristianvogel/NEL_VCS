@@ -41,8 +41,10 @@ public:
   void OnMouseWheel(float x, float y, const IMouseMod& mod, float d) override;
   
   NEL_DualDial* setupButtonStateSVG( const ISVG& on , const ISVG& off);
+  NEL_DualDial* setTickMarkSVG( const ISVG& tickMark  );
   int tickMarks {10};
   std::vector<ISVG> buttonStates;
+  
   
   IRECT* getDialBounds();
   
@@ -61,6 +63,7 @@ private:
   iplug::igraphics::IColor colourStop2;
   iplug::igraphics::IColor colourStop3;
   float innerCircleFlashRate = 0.0f;
-  const ISVG tickMarkSVG;
+  
+  ISVG tickMarkSVG;
 };
 
