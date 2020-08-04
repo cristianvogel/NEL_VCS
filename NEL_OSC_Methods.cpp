@@ -36,17 +36,22 @@ NEL_OSC::NEL_OSC( const char * host  , int port  ) :
 */
 void NEL_OSC::launchNetworkingThread(){
   std::thread slimeThread( [this] () { zeroConf.init(); } );
-  std::thread listener ( [this] () { initOSCListener(  8080  ); } );
+  std::thread listener ( [this] () { runOSCListener(  8080  ); } );
   slimeThread.detach();
   listener.detach();
 }
 
-void NEL_OSC::initOSCListener ( int port ) {
+void NEL_OSC::runOSCListener ( int port ) {
 
   listener.m_receiveSocket->Run();
 
 }
 
+bool NEL_OSC::tryToOpenListener() {
+  listener.openListenerSocket( listener );
+  if (listener.m_receiveSocket != nullptr) {launchNetworkingThread(); }
+  return (listener.m_receiveSocket != nullptr);
+}
 
 void NEL_OSC::initOSCSender( const char* IP, int port ) {
 

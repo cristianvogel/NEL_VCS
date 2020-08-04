@@ -125,6 +125,14 @@
 		3E42D76724C8BEDE0078FDF2 /* connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E42D73A24C8BEDE0078FDF2 /* connection.cpp */; };
 		3E42D76824C8BEDE0078FDF2 /* irc_util.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E42D73B24C8BEDE0078FDF2 /* irc_util.h */; };
 		3E50A5C024C8CA5400025F2F /* NEL_PacketSender.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3E42D72324C88B890078FDF2 /* NEL_PacketSender.hpp */; };
+		3E53D2AF24DA0C5300ED03A9 /* NEL_GlyphButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E53D2AD24DA0C5300ED03A9 /* NEL_GlyphButton.cpp */; };
+		3E53D2B024DA0C5300ED03A9 /* NEL_GlyphButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E53D2AD24DA0C5300ED03A9 /* NEL_GlyphButton.cpp */; };
+		3E53D2B124DA0C5300ED03A9 /* NEL_GlyphButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E53D2AD24DA0C5300ED03A9 /* NEL_GlyphButton.cpp */; };
+		3E53D2B224DA0C5300ED03A9 /* NEL_GlyphButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E53D2AD24DA0C5300ED03A9 /* NEL_GlyphButton.cpp */; };
+		3E53D2B324DA0C5300ED03A9 /* NEL_GlyphButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E53D2AD24DA0C5300ED03A9 /* NEL_GlyphButton.cpp */; };
+		3E53D2B424DA0C5300ED03A9 /* NEL_GlyphButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E53D2AD24DA0C5300ED03A9 /* NEL_GlyphButton.cpp */; };
+		3E53D2B524DA0C5300ED03A9 /* NEL_GlyphButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E53D2AD24DA0C5300ED03A9 /* NEL_GlyphButton.cpp */; };
+		3E53D2B724DA161B00ED03A9 /* NEL_GlyphButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E53D2AD24DA0C5300ED03A9 /* NEL_GlyphButton.cpp */; };
 		3E61745D24C1E58F00762320 /* mDNS_IPExtract.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E61745C24C1E58F00762320 /* mDNS_IPExtract.cpp */; };
 		3E61745E24C1E58F00762320 /* mDNS_IPExtract.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E61745C24C1E58F00762320 /* mDNS_IPExtract.cpp */; };
 		3E61745F24C1E58F00762320 /* mDNS_IPExtract.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E61745C24C1E58F00762320 /* mDNS_IPExtract.cpp */; };
@@ -634,6 +642,9 @@
 		3E474FDD24B62C86008DA40E /* buttonPlainBlue_ON.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = buttonPlainBlue_ON.svg; path = ../resources/img/buttonPlainBlue_ON.svg; sourceTree = "<group>"; };
 		3E474FDE24B62EEA008DA40E /* NEL_DualDial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NEL_DualDial.h; path = ../NEL_DualDial.h; sourceTree = "<group>"; };
 		3E474FE024B634EA008DA40E /* GlobSeqHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GlobSeqHelpers.h; path = ../GlobSeqHelpers.h; sourceTree = "<group>"; };
+		3E53D2AD24DA0C5300ED03A9 /* NEL_GlyphButton.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = NEL_GlyphButton.cpp; path = ../NEL_GlyphButton.cpp; sourceTree = "<group>"; };
+		3E53D2AE24DA0C5300ED03A9 /* NEL_GlyphButton.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = NEL_GlyphButton.hpp; path = ../NEL_GlyphButton.hpp; sourceTree = "<group>"; };
+		3E53D2B624DA0DA500ED03A9 /* IconsForkAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IconsForkAwesome.h; path = ../IconsForkAwesome.h; sourceTree = "<group>"; };
 		3E61745C24C1E58F00762320 /* mDNS_IPExtract.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = mDNS_IPExtract.cpp; path = ../mDNS_IPExtract.cpp; sourceTree = "<group>"; };
 		3E61746224C1E6DE00762320 /* mDNS_IPExtract.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mDNS_IPExtract.h; sourceTree = "<group>"; };
 		3E77259324BB5C3B00DDE318 /* NEL_OSC_Methods.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = NEL_OSC_Methods.cpp; path = ../NEL_OSC_Methods.cpp; sourceTree = "<group>"; };
@@ -1099,6 +1110,9 @@
 		089C166AFE841209C02AAC07 /* IPlugExample */ = {
 			isa = PBXGroup;
 			children = (
+				3E53D2B624DA0DA500ED03A9 /* IconsForkAwesome.h */,
+				3E53D2AD24DA0C5300ED03A9 /* NEL_GlyphButton.cpp */,
+				3E53D2AE24DA0C5300ED03A9 /* NEL_GlyphButton.hpp */,
 				52FBBED30D0CF143001C8B8A /* config.h */,
 				089C1671FE841209C02AAC07 /* Frameworks */,
 				3E474FE024B634EA008DA40E /* GlobSeqHelpers.h */,
@@ -2651,6 +2665,7 @@
 				4F8C10E120BA2796006320CD /* IGraphicsEditorDelegate.cpp in Sources */,
 				4F6369DE20A464BB0022C370 /* IGraphicsNanoVG_src.m in Sources */,
 				4F8D9707209EF5AC006E2A11 /* NEL_VirtualControlSurface.cpp in Sources */,
+				3E53D2B024DA0C5300ED03A9 /* NEL_GlyphButton.cpp in Sources */,
 				3EA669ED24B5A647006D193B /* IPlugOSC_msg.cpp in Sources */,
 				4F78D9BB13B63BA50032E0F3 /* IPlugAPIBase.cpp in Sources */,
 				3E42D6FD24C884050078FDF2 /* NetworkingUtils.cpp in Sources */,
@@ -2675,6 +2690,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E53D2B424DA0C5300ED03A9 /* NEL_GlyphButton.cpp in Sources */,
 				3EC56BCC24B89071002D64B0 /* process.cpp in Sources */,
 				3E77259924BB5C3B00DDE318 /* NEL_OSC_Methods.cpp in Sources */,
 				3ECD47C624BFA30F006821B5 /* IPlugOSC.cpp in Sources */,
@@ -2705,6 +2721,7 @@
 				4FA9F80721F760C1004E6FE2 /* IGraphicsLice_src.mm in Sources */,
 				4FA9F81021F76177004E6FE2 /* IGraphicsAGG_src.mm in Sources */,
 				3E42D74624C8BEDE0078FDF2 /* httpserv.cpp in Sources */,
+				3E53D2B224DA0C5300ED03A9 /* NEL_GlyphButton.cpp in Sources */,
 				3ECD47C524BFA30D006821B5 /* IPlugOSC.cpp in Sources */,
 				4F993F7423055C96000313AF /* IPlugProcessor.cpp in Sources */,
 				4F8C10E320BA2796006320CD /* IGraphicsEditorDelegate.cpp in Sources */,
@@ -2740,6 +2757,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F3EE1C2231438D000004786 /* IPlugProcessor.cpp in Sources */,
+				3E53D2B524DA0C5300ED03A9 /* NEL_GlyphButton.cpp in Sources */,
 				4F3EE1C3231438D000004786 /* RtMidi.cpp in Sources */,
 				4F3EE1C4231438D000004786 /* IGraphicsLice_src.mm in Sources */,
 				4F3EE1C5231438D000004786 /* IGraphicsNanoVG_src.m in Sources */,
@@ -2801,6 +2819,7 @@
 				3E42D70524C884050078FDF2 /* UdpSocket.cpp in Sources */,
 				4F78BE1922E7406D00AD537E /* ITextEntryControl.cpp in Sources */,
 				4F78BE1A22E7406D00AD537E /* IPopupMenuControl.cpp in Sources */,
+				3E53D2B724DA161B00ED03A9 /* NEL_GlyphButton.cpp in Sources */,
 				4F78BE1B22E7406D00AD537E /* IControls.cpp in Sources */,
 				4F78BE1C22E7406D00AD537E /* IGraphicsLice_src.mm in Sources */,
 				4F78BE1D22E7406D00AD537E /* IGraphicsAGG_src.mm in Sources */,
@@ -2885,6 +2904,7 @@
 				4F722020225C1EB100FF0E7C /* commoniids.cpp in Sources */,
 				4FB1F59220E4B012004157C8 /* IGraphicsMac_view.mm in Sources */,
 				4F81598D205D51F000393585 /* vstaudioeffect.cpp in Sources */,
+				3E53D2B124DA0C5300ED03A9 /* NEL_GlyphButton.cpp in Sources */,
 				4F81598C205D51CF00393585 /* vstsinglecomponenteffect.cpp in Sources */,
 				4F815984205D50EB00393585 /* updatehandler.cpp in Sources */,
 				3E42D6E524C881CA0078FDF2 /* OscReceivedElements.cpp in Sources */,
@@ -2930,6 +2950,7 @@
 				4F3862F32014BBEC0009F402 /* NEL_VirtualControlSurface.cpp in Sources */,
 				4FCE29DB21D6ED70004BCBA1 /* ITextEntryControl.cpp in Sources */,
 				4FB600231567CB0A0020189A /* IPlugParameter.cpp in Sources */,
+				3E53D2B324DA0C5300ED03A9 /* NEL_GlyphButton.cpp in Sources */,
 				4FB600261567CB0A0020189A /* AAX_Exports.cpp in Sources */,
 				4FA9F81121F76177004E6FE2 /* IGraphicsAGG_src.mm in Sources */,
 				4F6FD2B522675B6300FC59E6 /* IGraphicsCoreText.mm in Sources */,
@@ -3020,6 +3041,7 @@
 				3E42D70124C884050078FDF2 /* UdpSocket.cpp in Sources */,
 				4F9A82F7213DE80400BE63A4 /* IPopupMenuControl.cpp in Sources */,
 				4F78D90B13B63BA50032E0F3 /* IPlugAPIBase.cpp in Sources */,
+				3E53D2AF24DA0C5300ED03A9 /* NEL_GlyphButton.cpp in Sources */,
 				4F35DEAD207E5C5A00867D8F /* IPlugPluginBase.cpp in Sources */,
 				4F8C10E020BA2796006320CD /* IGraphicsEditorDelegate.cpp in Sources */,
 				4FF0A83221BE708700B2C9D1 /* swell-gdi.mm in Sources */,

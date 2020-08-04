@@ -35,7 +35,7 @@ public:
   
   void launchNetworkingThread();
   void initOSCSender( const char* IP ,  int port );
-  void initOSCListener ( int port);
+  void runOSCListener ( int port);
   void initKyma(); 
   bool oscSendActive {true}; //todo: make UI button to disable OSC activity
   
@@ -52,6 +52,8 @@ public:
   std::string getBeSlimeName();
   
   std::vector <std::string> dialSendAddress;
+  
+  bool tryToOpenListener();
   
 private:
   mDNS zeroConf;

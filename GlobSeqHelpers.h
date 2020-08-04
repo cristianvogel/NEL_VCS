@@ -6,6 +6,7 @@
 //
 #pragma once
 
+#include <string>
 
 class GlobSeqHelpers
 {
@@ -41,6 +42,17 @@ public:
     str.erase(std::remove(str.begin(), str.end(), (char) i ), str.end());
     return str;
   }
+  
+  
+  /** true of contains a string
+   */
+  bool stringContains(const std::string &stringToScan, const std::string &stringToScanFor)
+  {
+    return ( stringToScan.find( stringToScanFor ) != std::string::npos );
+  }
+  
 };
+
+
 
 

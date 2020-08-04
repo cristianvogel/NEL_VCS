@@ -111,4 +111,7 @@ static iplug::igraphics::IVStyle prefsButtonStyle() {
   return prefsButtonStyle;
 }
 
+  const iplug::igraphics::IText GLYPH {16.f, NEL_TUNGSTEN_FGBlend, "ForkAwesome"};
+
+
 

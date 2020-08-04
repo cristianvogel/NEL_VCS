@@ -14,24 +14,28 @@
 
 NEL_PacketListener::NEL_PacketListener(  int port , PacketListener& listener) : m_destinationPort(port) {
  
-  
-  try {
-         m_receiveSocket = std::make_unique<UdpListeningReceiveSocket>(
-                IpEndpointName( IpEndpointName::ANY_ADDRESS, m_destinationPort ),
-                &listener );
-    
-       std::cout << "\n  ▶︎ listener socket created on port  " << m_destinationPort << "  \n";
-    } catch (std::runtime_error e) {
-
-      // catch UDP error
-      // todo: do something about it
-      std::cout << "\n  ▶︎ error creating socket!  " << e.what() << "  \n";
-    }
+  openListenerSocket( listener ) ;
   
 };
 
 NEL_PacketListener::~NEL_PacketListener() {
+  //m_receiveSocket->Break();
   m_receiveSocket.release();
+}
+
+void NEL_PacketListener::openListenerSocket ( PacketListener& listener ) {
+  try {
+          m_receiveSocket = std::make_unique<UdpListeningReceiveSocket>(
+                 IpEndpointName( IpEndpointName::ANY_ADDRESS, m_destinationPort ),
+                 &listener );
+          setMostRecentMessage( u8"\u25B6 listener port " + std::to_string(m_destinationPort)+ u8" \u25B6 sender port 9090");
+
+    
+     } catch (std::runtime_error e) {
+
+       setMostRecentMessage( u8"\u26A0 Error creating OSC socket");
+       m_receiveSocket = nullptr;
+     }
 }
 
 void NEL_PacketListener::ProcessMessage(const osc::ReceivedMessage& m, const IpEndpointName& remoteEndpoint)  {

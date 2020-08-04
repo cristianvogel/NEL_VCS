@@ -59,6 +59,6 @@
 #define NBR_DUALDIALS 8
 #define NEL_BUTTON_OFF "buttonPlainBlue.svg"
 #define NEL_BUTTON_ON "buttonPlainBlue_ON.svg"
-#define NEL_TICK_SVG "fad-caret-right.svg"
 #define DEFAULT_DIAL_ADDRESS "/dualDial/"
+
 

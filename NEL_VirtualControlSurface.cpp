@@ -7,6 +7,7 @@
 #include "IControls.h"
 #include "tiny-process/process.hpp"
 #include "IconsForkAwesome.h"
+
 #include <iostream>
 #include <string>
 #include <thread>
@@ -22,7 +23,11 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
     , nelosc( "localhost", 8080)
 
 {
+  if (nelosc.listener.m_receiveSocket != nullptr) {
     nelosc.launchNetworkingThread();
+  } else {
+    m_noNetwork = true;
+  }
     
     InitParamRange(kDualDialInner, kDualDialInner + NBR_DUALDIALS - 1, 1, "Dual Dial %i", 0, 0., 1., 0, "%", 0, "Inner Value");
     InitParamRange(kDualDialOuter, kDualDialOuter + NBR_DUALDIALS - 1, 1, "Dual Dial %i", 0, 0., 1., 0, "%", 0, "Outer Value");
@@ -47,7 +52,7 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
         pGraphics->LoadFont("Roboto-Regular", ROBOTO_FN);
         pGraphics->LoadFont("Menlo", MENLO_FN);
         pGraphics->LoadFont("ForkAwesome", FORK_AWESOME_FN);
-        const IText forkAwesomeText {16.f, NEL_TUNGSTEN_FGBlend, "ForkAwesome"};
+        
         
       auto showHideAddresses =
       
@@ -89,17 +94,37 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
 
       }, 256, "", DEFAULT_STYLE.WithColor(kBG, COLOR_TRANSPARENT)), kCtrlPlot, "plot");
 
-#pragma mark settings
+#pragma mark preference widgets
          
-         pGraphics->AttachControl(new ITextToggleControl(
-                                                           plotBounds.FracRectHorizontal(0.125f),
+      IRECT settingWidgetBounds = plotBounds.GetGridCell(1, 11, 3, 12).GetScaledAboutCentre(1.5f).GetHPadded(-15.f);
+      
+         pGraphics->AttachControl(new NEL_GlyphButton(
+                                                           settingWidgetBounds.GetGridCell(0, 0, 1, 3),
                                                            showHideAddresses,
-                                                           ICON_FK_SQUARE_O,
-                                                           ICON_FK_PLUS_SQUARE_O,
-                                                           forkAwesomeText
+                                                           m_noNetwork ? ICON_FK_CIRCLE_O : ICON_FK_SQUARE_O,
+                                                           m_noNetwork ? ICON_FK_QUESTION_CIRCLE_O : ICON_FK_PLUS_SQUARE_O,
+                                                           GLYPH
                                                          )
                                   , kCtrlShowInfo, "prefs");
       
+        pGraphics->AttachControl(new NEL_GlyphButton(
+                                                        settingWidgetBounds.GetGridCell(0, 1, 1, 3),
+                                                        showHideAddresses,
+                                                        m_noNetwork ? ICON_FK_CIRCLE_O : ICON_FK_SQUARE_O,
+                                                        m_noNetwork ? ICON_FK_QUESTION_CIRCLE_O : ICON_FK_PLUS_SQUARE_O,
+                                                        GLYPH
+                                                      )
+                               , kCtrlShowInfo+1, "prefs");
+      
+        pGraphics->AttachControl(new NEL_GlyphButton(
+                                                        settingWidgetBounds.GetGridCell(0, 2, 1, 3),
+                                                        showHideAddresses,
+                                                        m_noNetwork ? ICON_FK_CIRCLE_O : ICON_FK_SQUARE_O,
+                                                        m_noNetwork ? ICON_FK_QUESTION_CIRCLE_O : ICON_FK_PLUS_SQUARE_O,
+                                                        GLYPH
+                                                      )
+                               , kCtrlShowInfo+2, "prefs");
+ 
          
 #pragma mark dual dials
         //▼ rows of dual concentric dials with two paramIdx
@@ -130,7 +155,6 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
              ), kCtrlFluxDial + d, "dualDials")
           ->As<NEL_DualDial>()
           ->setupButtonStateSVG(pGraphics->LoadSVG(NEL_BUTTON_ON), pGraphics->LoadSVG(NEL_BUTTON_OFF))
-          ->setTickMarkSVG(pGraphics->LoadSVG(NEL_TICK_SVG)) 
           ->SetActionFunction( sendOSCFromDials );
          
           
@@ -199,6 +223,12 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
               auto showInfoButton = GetUI()->GetControlWithTag(kCtrlShowInfo)->As<ITextToggleControl>();
               showInfoButton->SetValue( showInfoButton->GetValue() >0.5f ? 0.f : 1.0f  );
               showInfoButton->SetDirty(true);
+          
+          if ( m_noNetwork )
+          {
+            m_noNetwork = nelosc.tryToOpenListener();
+            
+          }
                
               pCaller->SetAnimation(
                   [this] (IControl * pCaller)
@@ -219,7 +249,9 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
                 GetUI()->ForControlInGroup("dualDials", [pCaller] (IControl& pDial) {
                   pDial.SetDirty(true);
                 });
-          });
+          })
+      
+      ;
       }; //end of mLayoutFunc lambda
   
   
@@ -262,26 +294,37 @@ NEL_VirtualControlSurface::~NEL_VirtualControlSurface()
     // may need some kind of attempt to kill all detached threads from launchNetworkingThreads()
 }
 
+
+#pragma mark On Idle
+
 void NEL_VirtualControlSurface::OnIdle() {
 
   
-                if ( (!nelosc.getBeSlimeIP().empty()) &&
-                !beSlimeConnected   ) { beSlimeIP =
-                nelosc.getBeSlimeIP(); beSlimeName =
-                nelosc.getBeSlimeName();
+                if ( (!nelosc.getBeSlimeIP().empty()) && !beSlimeConnected  ) {
+                  beSlimeIP = nelosc.getBeSlimeIP();
+                  beSlimeName = nelosc.getBeSlimeName();
 
-                if ( !beSlimeName.empty() && !beSlimeConnected ) {
-                nelosc.sender->changeTargetHost(beSlimeIP.c_str());
-                beSlimeConnected = true; }; consoleText =
-                cnsl[kMsgConnected] + beSlimeName; } else {
-                consoleText =  "localhost"; }
+                  if ( gsh->stringContains( beSlimeName, "beslime" ) ) {
+                    nelosc.sender->changeTargetHost(beSlimeIP.c_str());
+                    beSlimeConnected = true;
+                  }
+                  
+                  consoleText = cnsl[kMsgConnected] + beSlimeName; }
+                else {
+                  consoleText =  "localhost"; }
+
 
                 // check to see if GUI closed because OnIdle() continues
                 // even without GUI
                 IGraphics* pGraphics = GetUI(); if(!pGraphics) return;
-
+  
                 auto* cnsl = pGraphics->GetControlWithTag(kCtrlNetStatus)->As<ITextControl>();
                 IVButtonControl* cnslButton = pGraphics->GetControlWithTag(kCtrlReScan)->As<IVButtonControl>();
+  
+                if ( cnslButton->GetMouseIsOver() ) {
+                  cnsl->SetAnimation( unGhostText , 500.0f);
+                  pGraphics->SetMouseCursor(ECursor::HELP);
+                } else { pGraphics->SetMouseCursor(ECursor::ARROW); }
 
                 //update console when osc received
                 auto msg = nelosc.getLatestMessage();

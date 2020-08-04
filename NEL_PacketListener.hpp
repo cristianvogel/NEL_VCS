@@ -20,6 +20,7 @@ public:
   
   NEL_PacketListener(  int , PacketListener& );
   ~NEL_PacketListener();
+  friend class NEL_OSC;
   
   const char * m_destinationHost;
   int m_destinationPort;
@@ -73,13 +74,16 @@ public:
     }
     
     const int sizeOf() {
-     return m_log.size();
+     return static_cast<int>(m_log.size());
     }
   };
 
 protected:
   void ProcessMessage( const osc::ReceivedMessage& m,
                                 const IpEndpointName& remoteEndpoint ) ;
+  
+  void openListenerSocket ( PacketListener& listener );
+  
   std::vector<float> m_floatArgs;
   std::string mostRecentMessage{""};
   std::string mostRecentAddr{""};
