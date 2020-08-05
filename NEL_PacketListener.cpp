@@ -28,7 +28,6 @@ void NEL_PacketListener::openListenerSocket ( PacketListener& listener ) {
           m_receiveSocket = std::make_unique<UdpListeningReceiveSocket>(
                  IpEndpointName( IpEndpointName::ANY_ADDRESS, m_listenerPort ),
                  &listener );
-         // setMostRecentMessage( u8"\u25B6 listener port " + std::to_string(m_listenerPort));
 
     
      } catch (std::runtime_error e) {
@@ -36,6 +35,14 @@ void NEL_PacketListener::openListenerSocket ( PacketListener& listener ) {
        setMostRecentMessage( u8"\u26A0 listener port "+ std::to_string(m_listenerPort)+" is occupied");
        m_receiveSocket = nullptr;
      }
+}
+
+void NEL_PacketListener::changeListenPort ( int newPort ) {
+  m_listenerPort = newPort;
+  if (m_receiveSocket != nullptr) {
+      // m_receiveSocket->Break();
+      //openListenerSocket( &listener );
+  }
 }
 
 void NEL_PacketListener::ProcessMessage(const osc::ReceivedMessage& m, const IpEndpointName& remoteEndpoint)  {
@@ -47,8 +54,8 @@ void NEL_PacketListener::ProcessMessage(const osc::ReceivedMessage& m, const IpE
         // example of parsing single messages. osc::OsckPacketListener
         // handles the bundle traversal.
         
-//        if (log.sizeOf() > 64) log.clear();
-//        log.addMessageData( addr, m.ArgumentCount() );
+       
+        log.addMessageData( addr, m.ArgumentCount() );
         
         if( std::strcmp( addr, "/osc/response_from" ) == 0 ){
             // example #1 -- argument stream interface

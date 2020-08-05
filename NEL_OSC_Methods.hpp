@@ -25,10 +25,11 @@ public:
     
   const char * m_targetHost;
   int m_listenerPort;
+  int m_targetPort;
   std::unique_ptr<std::vector<std::string>> messageLog;
   
-  NEL_PacketListener listener;
-  std::unique_ptr<osc::NEL_PacketSender> sender;
+  NEL_PacketListener udpListener;
+  std::unique_ptr<osc::NEL_PacketSender> udpSender;
   
   void launchNetworkingThread();
   void initOSCSender( const char* IP ,  int port );
@@ -48,6 +49,9 @@ public:
   std::vector <std::string> dialSendAddress;
   
   bool tryToOpenListener();
+  
+  std::string remoteAddressToString( const char *  );
+  
   
 private:
   mDNS zeroConf;

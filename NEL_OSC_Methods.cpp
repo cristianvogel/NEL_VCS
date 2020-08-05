@@ -15,13 +15,14 @@
 
 
 NEL_OSC::NEL_OSC( const char * host  , int port  ) :
-   listener (8080, listener) //default listener
+   udpListener (8080, udpListener) //default listener
   
  {
    m_targetHost = host ;
-   m_listenerPort = port;
+   m_listenerPort = DEFAULT_LISTENER_PORT;
+   m_targetPort = DEFAULT_TARGET_PORT;
    messageLog = std::make_unique<std::vector<std::string>>(2);
-   initOSCSender("localhost", 9090); //default sender
+   initOSCSender("localhost", m_targetPort); //default sender
    
    for (int i = 0; i<= NBR_DUALDIALS; i++) {
      dialSendAddress.push_back( DEFAULT_DIAL_ADDRESS + std::to_string( i ) );
@@ -43,44 +44,50 @@ void NEL_OSC::launchNetworkingThread(){
 
 void NEL_OSC::runOSCListener ( int port ) {
 
-  listener.m_receiveSocket->Run();
+  udpListener.m_receiveSocket->Run();
 
 }
 
 bool NEL_OSC::tryToOpenListener() {
-  listener.openListenerSocket( listener );
-  if (listener.m_receiveSocket != nullptr) { launchNetworkingThread(); }
-  return (listener.m_receiveSocket != nullptr);
+  udpListener.openListenerSocket( udpListener );
+  if (udpListener.m_receiveSocket != nullptr) { launchNetworkingThread(); }
+  return (udpListener.m_receiveSocket != nullptr);
 }
 
 void NEL_OSC::initOSCSender( const char* IP, int port = 8000 ) {
 
-if (sender == nullptr) {
-  sender = std::make_unique<osc::NEL_PacketSender>(IP, port);
+if (udpSender == nullptr) {
+  udpSender = std::make_unique<osc::NEL_PacketSender>(IP, port);
   }
 
 }
 
 void NEL_OSC::initKyma() {
-//  if (!sender) initOSCSender( getBeSlimeIP().c_str() );
-//  else {
-//    sender->changeTargetHost(getBeSlimeName().c_str());
-//  }
-  sender->sendOSC("/osc/respond_to", m_listenerPort); //hardware handshake should receive /osc/response_from
+  
+  udpSender->setTargetPortForKyma();
+  udpSender->changeTargetHost( getBeSlimeName().c_str() );
+  udpSender->sendOSC("/osc/respond_to", m_listenerPort); //hardware handshake should receive /osc/response_from
 }
 
  
 #pragma mark getters
 
+std::string NEL_OSC::remoteAddressToString( const char * remoteAddress ) {
+  char *addy = nullptr;
+  udpSender->transmitSocket.LocalEndpointFor(remoteAddress).AddressAsString(addy);
+  return static_cast<std::string>(addy);
+}
+
+
 std::string NEL_OSC::getLatestMessage() {
   
-  if ( listener.messageReceived && !(listener.getMostRecentMessage().empty()) )  return listener.getMostRecentMessage();
+  if ( udpListener.messageReceived && !(udpListener.getMostRecentMessage().empty()) )  return udpListener.getMostRecentMessage();
   else return "";
 }
 
 const std::vector<float> NEL_OSC::getLatestFloatArgs() {
   
-  return listener.getMostRecentFloatArgs();
+  return udpListener.getMostRecentFloatArgs();
 }
 
 std::string NEL_OSC::getBeSlimeIP() {
@@ -100,11 +107,11 @@ std::string NEL_OSC::getBeSlimeName() {
 }
 
 void NEL_OSC::disconnectHardware() {
-  listener.hardwareConnected = false;
+  udpListener.hardwareConnected = false;
 }
 
 bool NEL_OSC::getHardwareStatus() {
-  return listener.hardwareConnected;
+  return udpListener.hardwareConnected;
 }
 
 

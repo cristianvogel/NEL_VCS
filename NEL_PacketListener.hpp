@@ -37,8 +37,14 @@ public:
   void setMostRecentAddress( const std::string& );
   void setMostRecentFloatArgs( const std::vector<float>& );
   
+  void changeListenPort( int );
   
   std::mutex msgMutex;
+  
+  /*
+      Messages recevied log, for debugging purposes or whatever.
+      Only collects messages with address stems we haven't seen before
+  */
   
   struct MessageLog {
     
@@ -55,8 +61,9 @@ public:
       return -1;
     }
 
-    // add  data to the log
+    // add  data to the log don't let grow too big
     void addMessageData( std::string msg, int nbr ) {
+      if (m_log.size() > 256) m_log.clear();
       if ( !contains(msg) ) m_log.push_back( {msg, nbr } )   ;
     }
     
@@ -73,9 +80,6 @@ public:
       m_log.clear();
     }
     
-    const int sizeOf() {
-     return static_cast<int>(m_log.size());
-    }
   };
 
 protected:

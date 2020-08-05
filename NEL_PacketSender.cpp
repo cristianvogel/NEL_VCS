@@ -80,9 +80,8 @@ void osc::NEL_PacketSender::changeTargetHost( const char * hostname ) {
 
 
 void osc::NEL_PacketSender::changeTargetPort( int newPort ) {
-  
   m_targetPort = newPort;
-  transmitSocket.Connect ( IpEndpointName ( m_hostname, m_targetPort ) );
+  transmitSocket.Connect( IpEndpointName ( m_hostname , m_targetPort ) );
 }
 
 

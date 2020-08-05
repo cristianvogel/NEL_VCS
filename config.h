@@ -61,4 +61,8 @@
 #define NEL_BUTTON_ON "buttonPlainBlue_ON.svg"
 #define DEFAULT_DIAL_ADDRESS "/dualDial/"
 
+#define DEFAULT_TARGET_PORT  9090
+#define DEFAULT_LISTENER_PORT  8080
+
+
 

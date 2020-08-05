@@ -60,6 +60,8 @@ enum EDisplays
 {
   kCtrlTagDisplay = 500,
   kCtrlPlot,
+  kTargetPort,
+  kTargetHost,
   kNumDisplays
 };
 

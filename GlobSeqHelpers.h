@@ -7,6 +7,9 @@
 #pragma once
 
 #include <string>
+#include <cstdio>
+#include <cstring>
+
 
 class GlobSeqHelpers
 {
@@ -35,7 +38,9 @@ public:
      str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
      return str;
   }
-  /** remove spaces and a number **/
+  /**
+   remove spaces and a number
+   */
   std::string chomp(std::string &str,  const int i)
   {
     str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
@@ -44,11 +49,28 @@ public:
   }
   
   
-  /** true of contains a string
+  /**
+   true if a string contains a substring
    */
   bool stringContains(const std::string &stringToScan, const std::string &stringToScanFor)
   {
     return ( stringToScan.find( stringToScanFor ) != std::string::npos );
+  }
+  
+  /**
+   convert C strings to unsigned ints
+   https://stackoverflow.com/questions/4024806/how-to-convert-from-const-char-to-unsigned-int-c#4024839
+   */
+  
+  unsigned long cstring_to_ul(const char* str, char** end = nullptr, int base = 10)
+  {
+      errno = 0; // Used to see if there was success or failure
+      auto ul = strtoul(str, end, base);
+      if(errno != ERANGE)
+      {
+         return ul;
+      }
+      return ULONG_MAX;
   }
   
 };

@@ -23,7 +23,7 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
     , nelosc( "localhost", 8080)
 
 {
-  if (nelosc.listener.m_receiveSocket != nullptr) {
+  if (nelosc.udpListener.m_receiveSocket != nullptr) {
     nelosc.launchNetworkingThread();
   } else {
     m_noNetwork = true;
@@ -39,7 +39,7 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
     };
   
   
-#pragma mark Layout lambda function initialiser
+#pragma mark Layout lambda init
     mLayoutFunc = [&](IGraphics * pGraphics)
     {
         // start layout lambda function
@@ -53,18 +53,68 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
         pGraphics->LoadFont("Menlo", MENLO_FN);
         pGraphics->LoadFont("ForkAwesome", FORK_AWESOME_FN);
         
-        //widget functions
+#pragma mark my lambdas
+      /*
+       flip the visibility of the OSC addresses
+      */
       auto showHideAddresses =
-        [this] (IControl * pCaller) { GetUI()->ForControlInGroup( "addressStems",
-                                                                  [&] (IControl& field)
-                                                                  { field.Hide(!field.IsHidden()); }
-                                                                );
-        };
-     
-      auto changePorts =
         [this] (IControl * pCaller) {
-          if (!beSlimeConnected) nelosc.sender->changeTargetPort(9191);
+          GetUI()->ForControlInGroup( "addressStems",
+                                      [&] (IControl& field)
+                                      { field.Hide(!field.IsHidden()); }
+                                    );
         };
+     /*
+       if valid port number, make new connection
+      */
+      auto changeTargetPort =
+        [this] (IControl * pCaller) {
+          if (!beSlimeConnected) {
+            
+            auto targetPortDisplay = GetUI()->GetControlWithTag(kTargetPort)->As<ITextControl>();
+            auto inputtedPortNumber = gsh->cstring_to_ul(targetPortDisplay->GetStr() );
+              
+            if ( ((inputtedPortNumber > 0) && (inputtedPortNumber < ULONG_MAX)) && (nelosc.m_targetPort != inputtedPortNumber) ) {
+                      targetPortDisplay->SetStr( std::to_string(inputtedPortNumber).c_str() );
+                      nelosc.udpSender->changeTargetPort(static_cast<int> (inputtedPortNumber) );
+                      errno = 0;  //best practice, reset errno variable after check
+                   } else if ( (inputtedPortNumber == 0) | (inputtedPortNumber == ULONG_MAX) ) {
+                      targetPortDisplay->SetStr( std::to_string(nelosc.m_targetPort).c_str() );
+                      errno = 0; }
+          }
+        };
+      
+      /*
+        if valid port number, make new connection
+       */
+  
+      auto changeListenerPort =
+      [this] (IControl * pCaller) {
+        if (!beSlimeConnected) {
+          
+          auto targetPortDisplay = GetUI()->GetControlWithTag(kListenPort)->As<ITextControl>();
+          auto inputtedPortNumber = gsh->cstring_to_ul(targetPortDisplay->GetStr() );
+            
+          if ( ((inputtedPortNumber > 0) && (inputtedPortNumber < ULONG_MAX)) && (nelosc.m_listenerPort != inputtedPortNumber) ) {
+                    targetPortDisplay->SetStr( std::to_string(inputtedPortNumber).c_str() );
+            //TODO
+                    //nelosc.udpListener.changeListenPort(static_cast<int> (inputtedPortNumber) );
+                    errno = 0;  //best practice, reset errno variable after check
+                 } else if ( (inputtedPortNumber == 0) | (inputtedPortNumber == ULONG_MAX) ) {
+                    targetPortDisplay->SetStr( std::to_string(nelosc.m_listenerPort).c_str() );
+                    errno = 0; }
+        }
+      };
+      
+      // this function is incomplete, work in progress
+      // idea would be to check if a user given host is on the network
+      // via UDP browse
+      auto changeHost =
+      [this] (IControl * pCaller) {
+        auto targetHostDisplay = GetUI()->GetControlWithTag(kTargetPort)->As<ITextControl>();
+        auto inputtedHostname = targetHostDisplay->GetStr();
+        std::cout << nelosc.remoteAddressToString(inputtedHostname) << std::endl;
+      };
       
 #pragma mark mainCanvas
       
@@ -75,12 +125,9 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
       
       
 #pragma mark console text
-        //▼ small network logging console outputs OSC messages and host
+        //▼ network logging console outputs OSC messages and stuff
       
-       consoleTextDef = IText ( 11.f, "Menlo").WithFGColor(NEL_TUNGSTEN_FGBlend);
-//       ledOn = consoleTextDef.WithFGColor(NEL_TUNGSTEN_FGBlend);
-//       ledOff = consoleTextDef.WithFGColor(NEL_TUNGSTEN_FGBlend);
-      
+        consoleTextDef = IText ( 11.f, "Menlo").WithFGColor(NEL_TUNGSTEN_FGBlend);
         pGraphics->AttachControl(new ITextControl
                                 (consoleBounds,
                                 consoleText.c_str(),
@@ -101,7 +148,7 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
 #pragma mark preference widgets
          
       IRECT settingWidgetBounds = plotBounds.GetGridCell(1, 11, 3, 12).GetScaledAboutCentre(1.5f).GetHPadded(-15.f);
-      std::vector<IActionFunction> actions { showHideAddresses, changePorts, showHideAddresses};
+      std::vector<IActionFunction> actions { showHideAddresses, showHideAddresses, showHideAddresses};
       
       for (int i=0; i<NBR_WIDGETS; i++)
       {
@@ -118,24 +165,33 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
                                    );
       }
       
-#pragma mark config port
+#pragma mark net configs
       
-      //  IEditableTextControl(const IRECT& bounds, const char* str, const IText& text = DEFAULT_TEXT)
-     //  : ITextControl(bounds, str, text)
+       IRECT configBounds = plotBounds.GetGridCell(1, 1, 3, 6);
+    
+
+      pGraphics->AttachControl(new IEditableTextControl(
+                                                        configBounds,
+                                                        (std::to_string(nelosc.m_targetPort)).c_str(),
+                                                        consoleTextDef.WithSize(12.0f)
+                               ), kTargetPort)->SetActionFunction( changeTargetPort );
       
-     // IRECT changePortTextBounds = settingWidgetBounds.GetTranslated( -150.f, settingWidgetBounds.H() * 1.618f);
-       IRECT changePortTextBounds = plotBounds.GetGridCell(1, 1, 3, 6);
+        configBounds = plotBounds.GetGridCell(1, 2, 3, 6);
+      
+
+        pGraphics->AttachControl(new IEditableTextControl(
+                                                          configBounds,
+                                                          (std::to_string(nelosc.m_listenerPort)).c_str(),
+                                                          consoleTextDef.WithSize(12.0f)
+                                 ), kListenPort)->SetActionFunction( changeListenerPort );
+      
+      configBounds = plotBounds.GetGridCell(1, 0, 3, 6);
       pGraphics->AttachControl(new IEditableTextControl(
-                                                        changePortTextBounds,
-                                                        (std::to_string(nelosc.m_listenerPort)).c_str() ,
+                                                        configBounds,
+                                                        nelosc.m_targetHost ,
                                                         consoleTextDef.WithSize(12.0f)
-                               ));
-      changePortTextBounds = plotBounds.GetGridCell(1, 1, 3, 6);
-      pGraphics->AttachControl(new IEditableTextControl(
-                                                        changePortTextBounds,
-                                                        (std::to_string(nelosc.m_listenerPort)).c_str() ,
-                                                        consoleTextDef.WithSize(12.0f)
-                               ));
+                               ), kTargetHost)->SetActionFunction( changeHost );
+
       
          
 #pragma mark dual dials replicated attach
@@ -153,7 +209,7 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
                               std::vector<float> floatArgs;
                               floatArgs.push_back(pDialLoop->GetValue(0));
                               floatArgs.push_back(pDialLoop->GetValue(1));
-                              nelosc.sender->sendOSC( dialAddress, floatArgs );
+                              nelosc.udpSender->sendOSC( dialAddress, floatArgs );
                               pDialLoop->SetDirty(false);
             };
           
@@ -317,6 +373,8 @@ NEL_VirtualControlSurface::~NEL_VirtualControlSurface()
 
 #pragma mark On Idle
 
+// most of the action going on here
+
 void NEL_VirtualControlSurface::OnIdle() {
 
   
@@ -325,42 +383,44 @@ void NEL_VirtualControlSurface::OnIdle() {
                   beSlimeName = nelosc.getBeSlimeName();
 
                   if ( gsh->stringContains( beSlimeName, "beslime" ) ) {
-                    nelosc.sender->setTargetPortForKyma();
-                    nelosc.sender->changeTargetHost(beSlimeIP.c_str());
+              
                     nelosc.initKyma();
                     consoleText = beSlimeName;
                     beSlimeConnected = true;
                     }
                   }
                   
-                // check to see if GUI closed because OnIdle() continues
-                // even without GUI
-                IGraphics* pGraphics = GetUI(); if(!pGraphics) return;
-  
-                auto* cnsl = pGraphics->GetControlWithTag(kCtrlNetStatus)->As<ITextControl>();
-                IVButtonControl* cnslButton = pGraphics->GetControlWithTag(kCtrlReScan)->As<IVButtonControl>();
-  
-                if ( cnslButton->GetMouseIsOver() ) {
-                  cnsl->SetAnimation( unGhostText , 500.0f);
-                  pGraphics->SetMouseCursor(ECursor::HELP);
-                } else { pGraphics->SetMouseCursor(ECursor::ARROW); }
+        // check to see if GUI closed because OnIdle() continues
+        // even without GUI
+        IGraphics* pGraphics = GetUI(); if(!pGraphics) return;
 
-                //update console when osc received
-                auto msg = nelosc.getLatestMessage();
-                if (!msg.empty() && msg != prevMsg) {
-                  cnslButton->SetDirty(false);
-                  consoleText = msg;
-                  cnsl->SetStr(consoleText.c_str());
-                  cnsl->SetDirty(false);
-                  cnsl->SetAnimation( unGhostText , 500.0f);
-                } else {
-                  if (cnsl->GetAnimationProgress() > 0.99f) {
-                    cnsl->SetAnimation( ghostText , 500.0f);
-                  }
-                }
-                prevMsg = msg;
-                updateAllDialInfoFromOSC( );
+        auto* cnsl = pGraphics->GetControlWithTag(kCtrlNetStatus)->As<ITextControl>();
+        IVButtonControl* cnslButton = pGraphics->GetControlWithTag(kCtrlReScan)->As<IVButtonControl>();
+
+        if ( cnslButton->GetMouseIsOver() ) {
+          cnsl->SetAnimation( unGhostText , 500.0f);
+          pGraphics->SetMouseCursor(ECursor::HELP);
+        } else { pGraphics->SetMouseCursor(ECursor::ARROW); }
+
+        //update console when osc received
+        auto msg = nelosc.getLatestMessage();
+        if (!msg.empty() && msg != prevMsg) {
+          cnslButton->SetDirty(false);
+          consoleText = msg;
+          cnsl->SetStr(consoleText.c_str());
+          cnsl->SetDirty(false);
+          cnsl->SetAnimation( unGhostText , 500.0f);
+          updateAllDialInfoFromOSC( ); //do something with incoming OSC for example
+        } else {
+          if (cnsl->GetAnimationProgress() > 0.99f) {
+            cnsl->SetAnimation( ghostText , 500.0f);
           }
+        }
+        prevMsg = msg;
+        //keep host info display syncd to actual host connection
+         auto targetHostDisplay = pGraphics->GetControlWithTag(kTargetHost)->As<ITextControl>();
+         if ( nelosc.m_targetHost != targetHostDisplay->GetStr()  ) { targetHostDisplay->SetStr(nelosc.m_targetHost) ; }
+ }
 
 
 #if IPLUG_DSP

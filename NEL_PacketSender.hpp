@@ -75,6 +75,8 @@ namespace osc {
     void setTargetPortForKyma() { m_targetPort = 8000; }
     void setTargetPort(int newPort) { m_targetPort = newPort; }
     
+
+    
   protected:
     int m_targetPort;
     const char * m_hostname;
