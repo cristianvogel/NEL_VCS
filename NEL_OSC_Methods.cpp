@@ -15,13 +15,13 @@
 
 
 NEL_OSC::NEL_OSC( const char * host  , int port  ) :
-   listener (8080, listener)
+   listener (8080, listener) //default listener
   
  {
-   _host = host ;
-   _port = port;
+   m_targetHost = host ;
+   m_listenerPort = port;
    messageLog = std::make_unique<std::vector<std::string>>(2);
-   initOSCSender("localhost", 9090);
+   initOSCSender("localhost", 9090); //default sender
    
    for (int i = 0; i<= NBR_DUALDIALS; i++) {
      dialSendAddress.push_back( DEFAULT_DIAL_ADDRESS + std::to_string( i ) );
@@ -36,7 +36,7 @@ NEL_OSC::NEL_OSC( const char * host  , int port  ) :
 */
 void NEL_OSC::launchNetworkingThread(){
   std::thread slimeThread( [this] () { zeroConf.init(); } );
-  std::thread listener ( [this] () { runOSCListener(  8080  ); } );
+  std::thread listener ( [this] () { runOSCListener(  m_listenerPort  ); } );
   slimeThread.detach();
   listener.detach();
 }
@@ -49,25 +49,24 @@ void NEL_OSC::runOSCListener ( int port ) {
 
 bool NEL_OSC::tryToOpenListener() {
   listener.openListenerSocket( listener );
-  if (listener.m_receiveSocket != nullptr) {launchNetworkingThread(); }
+  if (listener.m_receiveSocket != nullptr) { launchNetworkingThread(); }
   return (listener.m_receiveSocket != nullptr);
 }
 
-void NEL_OSC::initOSCSender( const char* IP, int port ) {
+void NEL_OSC::initOSCSender( const char* IP, int port = 8000 ) {
 
 if (sender == nullptr) {
   sender = std::make_unique<osc::NEL_PacketSender>(IP, port);
-  if ( getBeSlimeName() != "localhost") initKyma();
   }
 
 }
 
 void NEL_OSC::initKyma() {
-  if (!sender) initOSCSender( getBeSlimeIP().c_str(), 8000 );
-  else {
-    sender->changeTargetHost(getBeSlimeName().c_str());
-  }
-  sender->sendOSC("/osc/respond_to", _port); //hardware handshake should receive /osc/response_from
+//  if (!sender) initOSCSender( getBeSlimeIP().c_str() );
+//  else {
+//    sender->changeTargetHost(getBeSlimeName().c_str());
+//  }
+  sender->sendOSC("/osc/respond_to", m_listenerPort); //hardware handshake should receive /osc/response_from
 }
 
  
@@ -100,11 +99,11 @@ std::string NEL_OSC::getBeSlimeName() {
   return n;
 }
 
-void NEL_OSC::hardwareDisconnected() {
+void NEL_OSC::disconnectHardware() {
   listener.hardwareConnected = false;
 }
 
-bool NEL_OSC::hardwareConnected() {
+bool NEL_OSC::getHardwareStatus() {
   return listener.hardwareConnected;
 }
 

@@ -12,7 +12,7 @@
 #define LOCALHOST "127.0.0.1"
 
 
-NEL_PacketListener::NEL_PacketListener(  int port , PacketListener& listener) : m_destinationPort(port) {
+NEL_PacketListener::NEL_PacketListener(  int port , PacketListener& listener) : m_listenerPort(port) {
  
   openListenerSocket( listener ) ;
   
@@ -26,14 +26,14 @@ NEL_PacketListener::~NEL_PacketListener() {
 void NEL_PacketListener::openListenerSocket ( PacketListener& listener ) {
   try {
           m_receiveSocket = std::make_unique<UdpListeningReceiveSocket>(
-                 IpEndpointName( IpEndpointName::ANY_ADDRESS, m_destinationPort ),
+                 IpEndpointName( IpEndpointName::ANY_ADDRESS, m_listenerPort ),
                  &listener );
-          setMostRecentMessage( u8"\u25B6 listener port " + std::to_string(m_destinationPort)+ u8" \u25B6 sender port 9090");
+         // setMostRecentMessage( u8"\u25B6 listener port " + std::to_string(m_listenerPort));
 
     
      } catch (std::runtime_error e) {
 
-       setMostRecentMessage( u8"\u26A0 Error creating OSC socket");
+       setMostRecentMessage( u8"\u26A0 listener port "+ std::to_string(m_listenerPort)+" is occupied");
        m_receiveSocket = nullptr;
      }
 }
@@ -56,8 +56,7 @@ void NEL_PacketListener::ProcessMessage(const osc::ReceivedMessage& m, const IpE
             osc::int32 a1;
             args >> a1 >> osc::EndMessage;
             
-            std::cout << "received '/osc/response_from' message with arguments: "
-                << a1 << "\n";
+            setMostRecentMessage( u8"\u25B6Paca(rana) connected" );
             hardwareConnected = true;
             
         } else {
@@ -89,7 +88,7 @@ void NEL_PacketListener::ProcessMessage(const osc::ReceivedMessage& m, const IpE
             // missing arguments get thrown as exceptions.
             std::cout << "error while parsing message: " << m.AddressPattern() << ": " << e.what() << "\n";
             messageReceived = false;
-            setMostRecentMessage( "⚠︎ parsing error" );
+            setMostRecentMessage( u8"\u26A0 message error" );
     }
 }
 

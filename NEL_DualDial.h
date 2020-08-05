@@ -22,9 +22,9 @@ public:
   NEL_DualDial(
                 const IRECT& bounds
                 , const std::initializer_list< int >& params
-                , const iplug::igraphics::IColor& stop1 = getSwatch( Lunada, 0)
-                , const iplug::igraphics::IColor& stop2 = getSwatch( Lunada, 1)
-                , const iplug::igraphics::IColor& stop3 = getSwatch( Lunada, 2)
+                , const IColor& stop1 = getSwatch( Lunada, 0)
+                , const IColor& stop2 = getSwatch( Lunada, 1)
+                , const IColor& stop3 = getSwatch( Lunada, 2)
                 , float flashRate = 0.0f
                 , float a1 = -135.f, float a2 = 135.f, float aAnchor = -135.f
                 );
@@ -59,11 +59,10 @@ private:
   float mTrackSize = static_cast<float> ( fmax( 4, 20 - NBR_DUALDIALS) );
   float mAnchorAngle; // for bipolar arc
   
-  iplug::igraphics::IColor colourStop1;
-  iplug::igraphics::IColor colourStop2;
-  iplug::igraphics::IColor colourStop3;
+  IColor colourStop1;
+  IColor colourStop2;
+  IColor colourStop3;
   float innerCircleFlashRate = 0.0f;
   
-  ISVG tickMarkSVG;
 };
 

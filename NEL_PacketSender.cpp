@@ -72,5 +72,18 @@ void osc::NEL_PacketSender::sendOSC(const std::string& msg , const std::vector<f
 
 void osc::NEL_PacketSender::changeTargetHost( const char * hostname ) {
   
-  transmitSocket.Connect ( IpEndpointName ( hostname , 8000 ) );
+  if ( hostname != nullptr) {
+    m_hostname = hostname;
+    transmitSocket.Connect ( IpEndpointName ( m_hostname , m_targetPort ) );
+  }
 }
+
+
+void osc::NEL_PacketSender::changeTargetPort( int newPort ) {
+  
+  m_targetPort = newPort;
+  transmitSocket.Connect ( IpEndpointName ( m_hostname, m_targetPort ) );
+}
+
+
+

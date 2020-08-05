@@ -20,10 +20,10 @@ public:
   
   NEL_PacketListener(  int , PacketListener& );
   ~NEL_PacketListener();
-  friend class NEL_OSC;
+  
   
   const char * m_destinationHost;
-  int m_destinationPort;
+  int m_listenerPort;
   std::unique_ptr<UdpListeningReceiveSocket> m_receiveSocket;
   
   std::atomic_bool messageReceived{false};
@@ -83,7 +83,7 @@ protected:
                                 const IpEndpointName& remoteEndpoint ) ;
   
   void openListenerSocket ( PacketListener& listener );
-  
+  friend class NEL_OSC;
   std::vector<float> m_floatArgs;
   std::string mostRecentMessage{""};
   std::string mostRecentAddr{""};

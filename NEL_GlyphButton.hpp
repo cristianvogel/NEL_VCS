@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include "IControl.h"
 #include "NEL_VCS_Constants.h"
+#include "NEL_VCS_Enums.hpp"
 
 
 //using namespace iplug;
@@ -22,15 +23,16 @@ class NEL_GlyphButton : public ITextControl
 {
 public:
  
-  NEL_GlyphButton(const IRECT& bounds, int paramIdx = iplug::kNoParameter, const char* offText = "OFF", const char* onText = "ON", const IText& text = GLYPH, const IColor& BGColor = COLOR_TRANSPARENT);
-  
-  NEL_GlyphButton(const IRECT& bounds, IActionFunction aF = nullptr, const char* offText = "OFF", const char* onText = "ON", const IText& text = GLYPH, const IColor& BGColor = COLOR_TRANSPARENT);
- 
+  NEL_GlyphButton(const IRECT& bounds, IActionFunction aF = nullptr, const char* offText = "OFF", const char* onText = "ON", const IText& text = GLYPH, const char * = "config", const IColor& BGColor = COLOR_TRANSPARENT);
+
   void OnMouseDown(float x, float y, const IMouseMod& mod) override;
   void SetDirty(bool push, int valIdx = 0) override;
   void OnMouseOver(float x, float y, const IMouseMod& mod) override;
   void OnMouseOut() override;
 
+  NEL_GlyphButton* SetOnText( const char* onText  );
+  NEL_GlyphButton* SetOffText( const char* offText );
+  
 protected:
   WDL_String mOffText;
   WDL_String mOnText;

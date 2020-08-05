@@ -53,13 +53,19 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
         pGraphics->LoadFont("Menlo", MENLO_FN);
         pGraphics->LoadFont("ForkAwesome", FORK_AWESOME_FN);
         
-        
+        //widget functions
       auto showHideAddresses =
-      
         [this] (IControl * pCaller) { GetUI()->ForControlInGroup( "addressStems",
-                                                                  [&] (IControl& field) { field.Hide(!field.IsHidden()); }
-                                                                 ); };
+                                                                  [&] (IControl& field)
+                                                                  { field.Hide(!field.IsHidden()); }
+                                                                );
+        };
      
+      auto changePorts =
+        [this] (IControl * pCaller) {
+          if (!beSlimeConnected) nelosc.sender->changeTargetPort(9191);
+        };
+      
 #pragma mark mainCanvas
       
       // main app GUI IRECT
@@ -85,8 +91,6 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
                                  , kCtrlNetStatus);
       
       
-      
-      
 #pragma mark decorative plot
       pGraphics->AttachControl(new IVPlotControl(plotBounds, {{getSwatch(Memariani, 0).WithOpacity(0.5f),  [](double x){ return std::sin(x * 12);} },
         {getSwatch(Memariani, 1).WithOpacity(0.35f), [](double x){ return std::cos(x * 12.5);} },
@@ -97,39 +101,47 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
 #pragma mark preference widgets
          
       IRECT settingWidgetBounds = plotBounds.GetGridCell(1, 11, 3, 12).GetScaledAboutCentre(1.5f).GetHPadded(-15.f);
+      std::vector<IActionFunction> actions { showHideAddresses, changePorts, showHideAddresses};
       
-         pGraphics->AttachControl(new NEL_GlyphButton(
-                                                           settingWidgetBounds.GetGridCell(0, 0, 1, 3),
-                                                           showHideAddresses,
-                                                           m_noNetwork ? ICON_FK_CIRCLE_O : ICON_FK_SQUARE_O,
-                                                           m_noNetwork ? ICON_FK_QUESTION_CIRCLE_O : ICON_FK_PLUS_SQUARE_O,
-                                                           GLYPH
-                                                         )
-                                  , kCtrlShowInfo, "prefs");
+      for (int i=0; i<NBR_WIDGETS; i++)
+      {
+          pGraphics->AttachControl(
+                 new NEL_GlyphButton(
+                                     settingWidgetBounds.GetGridCell(0, i, 1, 3),
+                                     actions.at(i),
+                                     m_noNetwork ? ICON_FK_CIRCLE_O : ICON_FK_SQUARE_O,
+                                     m_noNetwork ? ICON_FK_MINUS_CIRCLE : ICON_FK_MINUS_SQUARE,
+                                     GLYPH,
+                                     toolTips[ kNoWidgets + ( i + 1 ) ] // toolTip text
+                                    )
+                                   , kNoWidgets + ( i + 1 ) , "prefs"
+                                   );
+      }
       
-        pGraphics->AttachControl(new NEL_GlyphButton(
-                                                        settingWidgetBounds.GetGridCell(0, 1, 1, 3),
-                                                        showHideAddresses,
-                                                        m_noNetwork ? ICON_FK_CIRCLE_O : ICON_FK_SQUARE_O,
-                                                        m_noNetwork ? ICON_FK_QUESTION_CIRCLE_O : ICON_FK_PLUS_SQUARE_O,
-                                                        GLYPH
-                                                      )
-                               , kCtrlShowInfo+1, "prefs");
+#pragma mark config port
       
-        pGraphics->AttachControl(new NEL_GlyphButton(
-                                                        settingWidgetBounds.GetGridCell(0, 2, 1, 3),
-                                                        showHideAddresses,
-                                                        m_noNetwork ? ICON_FK_CIRCLE_O : ICON_FK_SQUARE_O,
-                                                        m_noNetwork ? ICON_FK_QUESTION_CIRCLE_O : ICON_FK_PLUS_SQUARE_O,
-                                                        GLYPH
-                                                      )
-                               , kCtrlShowInfo+2, "prefs");
- 
+      //  IEditableTextControl(const IRECT& bounds, const char* str, const IText& text = DEFAULT_TEXT)
+     //  : ITextControl(bounds, str, text)
+      
+     // IRECT changePortTextBounds = settingWidgetBounds.GetTranslated( -150.f, settingWidgetBounds.H() * 1.618f);
+       IRECT changePortTextBounds = plotBounds.GetGridCell(1, 1, 3, 6);
+      pGraphics->AttachControl(new IEditableTextControl(
+                                                        changePortTextBounds,
+                                                        (std::to_string(nelosc.m_listenerPort)).c_str() ,
+                                                        consoleTextDef.WithSize(12.0f)
+                               ));
+      changePortTextBounds = plotBounds.GetGridCell(1, 1, 3, 6);
+      pGraphics->AttachControl(new IEditableTextControl(
+                                                        changePortTextBounds,
+                                                        (std::to_string(nelosc.m_listenerPort)).c_str() ,
+                                                        consoleTextDef.WithSize(12.0f)
+                               ));
+      
          
-#pragma mark dual dials
+#pragma mark dual dials replicated attach
+      
         //▼ rows of dual concentric dials with two paramIdx
             
-        
         for (int d = 0; d < NBR_DUALDIALS; d++)
         {
           const IRECT dualDialBounds = b.GetGridCell( d , 2 , NBR_DUALDIALS/2 ).GetScaledAboutCentre(0.75f);
@@ -176,8 +188,7 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
                                        nelosc.dialSendAddress.at(d).c_str(),
                                        consoleTextDef.WithFGColor(getSwatch( Memariani, 1))),
              kCtrlTextInput + d, "addressStems")->SetActionFunction( setAddressStem )->Hide(true);
-          
-      
+                    
 
 #pragma mark numeric displays
 
@@ -220,14 +231,22 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
         -> SetActionFunction(
         [this] (IControl * pCaller) {
           
-              auto showInfoButton = GetUI()->GetControlWithTag(kCtrlShowInfo)->As<ITextToggleControl>();
+          // simulate press of the Address reveal widget
+          auto showInfoButton = GetUI()->GetControlWithTag(kAddressWidget)->As<NEL_GlyphButton>();
               showInfoButton->SetValue( showInfoButton->GetValue() >0.5f ? 0.f : 1.0f  );
               showInfoButton->SetDirty(true);
           
+          //try to re-open listener port if it was blocked at initialisation
           if ( m_noNetwork )
           {
             m_noNetwork = nelosc.tryToOpenListener();
-            
+            if (m_noNetwork) { GetUI()->
+                ForControlInGroup("prefs", [pCaller] (IControl& prefButton) {
+                  prefButton.As<NEL_GlyphButton>()->SetOnText(ICON_FK_PLUS_SQUARE_O)->SetOffText(ICON_FK_SQUARE_O);
+                  prefButton.SetDirty(true);
+                });
+              
+            }
           }
                
               pCaller->SetAnimation(
@@ -250,6 +269,7 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
                   pDial.SetDirty(true);
                 });
           })
+      -> SetTooltip("Network Refresh");
       
       ;
       }; //end of mLayoutFunc lambda
@@ -300,20 +320,19 @@ NEL_VirtualControlSurface::~NEL_VirtualControlSurface()
 void NEL_VirtualControlSurface::OnIdle() {
 
   
-                if ( (!nelosc.getBeSlimeIP().empty()) && !beSlimeConnected  ) {
+  if ( (!nelosc.getBeSlimeIP().empty()) && !beSlimeConnected ) {
                   beSlimeIP = nelosc.getBeSlimeIP();
                   beSlimeName = nelosc.getBeSlimeName();
 
                   if ( gsh->stringContains( beSlimeName, "beslime" ) ) {
+                    nelosc.sender->setTargetPortForKyma();
                     nelosc.sender->changeTargetHost(beSlimeIP.c_str());
+                    nelosc.initKyma();
+                    consoleText = beSlimeName;
                     beSlimeConnected = true;
+                    }
                   }
                   
-                  consoleText = cnsl[kMsgConnected] + beSlimeName; }
-                else {
-                  consoleText =  "localhost"; }
-
-
                 // check to see if GUI closed because OnIdle() continues
                 // even without GUI
                 IGraphics* pGraphics = GetUI(); if(!pGraphics) return;

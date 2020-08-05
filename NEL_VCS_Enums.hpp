@@ -9,12 +9,15 @@
 #ifndef NEL_VCS_Enums_hpp
 #define NEL_VCS_Enums_hpp
 
+#include "NEL_VCS_Constants.h"
 
 enum EParams
 {
   kNetstatus = 0,
   kReScan,
-  kDualDialInner,
+  kSendPort = 9090,
+  kListenPort = 8080,
+  kDualDialInner = 4,
   kDualDialOuter = kDualDialInner + NBR_DUALDIALS,
   kNumParams = kDualDialOuter + NBR_DUALDIALS
 };
@@ -46,20 +49,36 @@ enum EControlTextInputTags
   kNumCtrlTextInputs = kCtrlTextInput + NBR_DUALDIALS
 };
 
-enum EStatusMessages
+enum EStatusMisc
 {
   kMsgScanning = 400,
   kMsgConnected,
-  kNumStatusMessages
+  kNumStatusMisc
 };
 
 enum EDisplays
 {
   kCtrlTagDisplay = 500,
   kCtrlPlot,
-  kCtrlShowInfo,
   kNumDisplays
 };
+
+enum EWidgets 
+{
+  kNoWidgets = 600,
+  kAddressWidget,
+  kPortWidget,
+  kPresetsWidget,
+  kNumWidgets = kNoWidgets + NBR_WIDGETS
+};
+
+static std::map<int, const char * > toolTips = {
+  { kAddressWidget, "Message Config"},
+  { kPortWidget, "Port Config"},
+  { kPresetsWidget, "Presets" }
+};
+
+
 
 
 #endif /* NEL_VCS_Enums_hpp */

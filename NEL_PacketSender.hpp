@@ -56,20 +56,29 @@ namespace osc {
   {
   public:
     NEL_PacketSender(  const char * host, int port) :
-      transmitSocket( IpEndpointName( host, port ) )  , udpTargetPort( port ) { }
+      transmitSocket( IpEndpointName( host, port ) )
+    , m_targetPort( port )
+    , m_hostname ( host )
+    { }
     
     ~NEL_PacketSender() { }
+  
+    friend class NEL_OSC;
     
     UdpTransmitSocket transmitSocket;
-    
-    
-    int udpTargetPort;
     
     void sendOSC(const std::string& msg , const float& arg);
     void sendOSC(const std::string& msg , const std::vector<float>& args);
     
     void changeTargetHost( const char * hostname );
-
+    void changeTargetPort( int newPort );
+    void setTargetPortForKyma() { m_targetPort = 8000; }
+    void setTargetPort(int newPort) { m_targetPort = newPort; }
+    
+  protected:
+    int m_targetPort;
+    const char * m_hostname;
+    
   };
 
 }

@@ -5,17 +5,21 @@
 //  Created by Cristian Andres Vogel on 07/07/2020.
 //
 #pragma once
+#include <map>
 #include "IPlug_include_in_plug_hdr.h"
 
+using namespace iplug::igraphics;
+
+
 #pragma mark NEL_Colours
-const iplug::igraphics::IColor NEL_TUNGSTEN(255, 27, 27, 30);
-const iplug::igraphics::IColor NEL_TUNGSTEN_FGBlend( 255, 230,  87,  74  );
-const iplug::igraphics::IColor NEL_MEMARIANI_stop1(255, 78, 141, 153);
-const iplug::igraphics::IColor NEL_MEMARIANI_stop2(255, 107, 107, 131);
-const iplug::igraphics::IColor NEL_MEMARIANI_stop3(255, 170, 75, 107);
-const iplug::igraphics::IColor NEL_LUNADA_stop1(255, 84, 51, 255);
-const iplug::igraphics::IColor NEL_LUNADA_stop2(255, 32, 189, 255);
-const iplug::igraphics::IColor NEL_LUNADA_stop3(255, 165, 254, 203);
+const IColor NEL_TUNGSTEN(255, 27, 27, 30);
+const IColor NEL_TUNGSTEN_FGBlend( 255, 230,  87,  74  );
+const IColor NEL_MEMARIANI_stop1(255, 78, 141, 153);
+const IColor NEL_MEMARIANI_stop2(255, 107, 107, 131);
+const IColor NEL_MEMARIANI_stop3(255, 170, 75, 107);
+const IColor NEL_LUNADA_stop1(255, 84, 51, 255);
+const IColor NEL_LUNADA_stop2(255, 32, 189, 255);
+const IColor NEL_LUNADA_stop3(255, 165, 254, 203);
 
 enum Swatches {
   Memariani = 0,
@@ -24,7 +28,7 @@ enum Swatches {
   Swatches_size
 };
 
-static iplug::igraphics::IColor getSwatch(int gradient, int stop)
+static IColor getSwatch(int gradient, int stop)
 {
   switch (gradient) {
     case Memariani:
@@ -51,67 +55,67 @@ static iplug::igraphics::IColor getSwatch(int gradient, int stop)
   }
 }
 
-static iplug::igraphics::IVStyle rescanButtonStyle() {
-  const iplug::igraphics::IVStyle rescanButtonStyle
+static IVStyle rescanButtonStyle() {
+  const IVStyle rescanButtonStyle
   {
     true, // Show label
     false, // Show value
     {
-      iplug::igraphics::DEFAULT_SHCOLOR, // Background
-      iplug::igraphics::COLOR_TRANSLUCENT, // Foreground
-      iplug::igraphics::COLOR_LIGHT_GRAY, // Pressed
-      iplug::igraphics::COLOR_TRANSPARENT, // Frame
-      iplug::igraphics::DEFAULT_HLCOLOR, // Highlight
-      iplug::igraphics::DEFAULT_SHCOLOR, // Shadow
-      iplug::igraphics::COLOR_BLACK, // Extra 1
-      iplug::igraphics::DEFAULT_X2COLOR, // Extra 2
-      iplug::igraphics::DEFAULT_X3COLOR  // Extra 3
+      DEFAULT_SHCOLOR, // Background
+      COLOR_TRANSLUCENT, // Foreground
+      COLOR_LIGHT_GRAY, // Pressed
+      COLOR_TRANSPARENT, // Frame
+      DEFAULT_HLCOLOR, // Highlight
+      DEFAULT_SHCOLOR, // Shadow
+      COLOR_BLACK, // Extra 1
+      DEFAULT_X2COLOR, // Extra 2
+      DEFAULT_X3COLOR  // Extra 3
     }, // Colors
-    iplug::igraphics::IText(
+    IText(
           12.f,
-          iplug::igraphics::COLOR_LIGHT_GRAY,
+          COLOR_LIGHT_GRAY,
           "Menlo",
-          iplug::igraphics::EAlign::Center,
-          iplug::igraphics::EVAlign::Middle,
+          EAlign::Center,
+          EVAlign::Middle,
           0.f,
-          iplug::igraphics::DEFAULT_TEXTENTRY_BGCOLOR,
-          iplug::igraphics::DEFAULT_TEXTENTRY_FGCOLOR
+          DEFAULT_TEXTENTRY_BGCOLOR,
+          DEFAULT_TEXTENTRY_FGCOLOR
           ) // Label text
   };
   return rescanButtonStyle;
 }
 
-static iplug::igraphics::IVStyle prefsButtonStyle() {
-  const iplug::igraphics::IVStyle prefsButtonStyle
+static IVStyle prefsButtonStyle() {
+  const IVStyle prefsButtonStyle
   {
     true, // Show label
     false, // Show value
     {
-      iplug::igraphics::COLOR_TRANSPARENT, // Background
-      iplug::igraphics::COLOR_TRANSLUCENT, // Foreground
-      iplug::igraphics::COLOR_LIGHT_GRAY, // Pressed
-      iplug::igraphics::COLOR_LIGHT_GRAY, // Frame
-      iplug::igraphics::DEFAULT_HLCOLOR, // Highlight
-      iplug::igraphics::DEFAULT_SHCOLOR, // Shadow
-      iplug::igraphics::COLOR_BLACK, // Extra 1
-      iplug::igraphics::DEFAULT_X2COLOR, // Extra 2
-      iplug::igraphics::DEFAULT_X3COLOR  // Extra 3
+      COLOR_TRANSPARENT, // Background
+      COLOR_TRANSLUCENT, // Foreground
+      COLOR_LIGHT_GRAY, // Pressed
+      COLOR_LIGHT_GRAY, // Frame
+      DEFAULT_HLCOLOR, // Highlight
+      DEFAULT_SHCOLOR, // Shadow
+      COLOR_BLACK, // Extra 1
+      DEFAULT_X2COLOR, // Extra 2
+      DEFAULT_X3COLOR  // Extra 3
     }, // Colors
-    iplug::igraphics::IText(
+    IText(
           12.f,
-          iplug::igraphics::COLOR_LIGHT_GRAY,
+          COLOR_LIGHT_GRAY,
           "Menlo",
-          iplug::igraphics::EAlign::Center,
-          iplug::igraphics::EVAlign::Middle,
+          EAlign::Center,
+          EVAlign::Middle,
           0.f,
-          iplug::igraphics::COLOR_TRANSPARENT,
-          iplug::igraphics::COLOR_TRANSPARENT
+          COLOR_TRANSPARENT,
+          COLOR_TRANSPARENT
           ) // Label text
   };
   return prefsButtonStyle;
 }
 
-  const iplug::igraphics::IText GLYPH {16.f, NEL_TUNGSTEN_FGBlend, "ForkAwesome"};
+  const IText GLYPH {16.f, NEL_TUNGSTEN_FGBlend, "ForkAwesome"};
 
 
 

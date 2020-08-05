@@ -8,7 +8,6 @@
 #define PLUG_EMAIL_STR "spam@me.com"
 #define PLUG_COPYRIGHT_STR "Copyright 2020 Cristian Vogel"
 #define PLUG_CLASS_NAME NEL_VirtualControlSurface
-//#define PLUG_CLASS_NAME GlobSeqPlugIn
 
 #define BUNDLE_NAME "NEL_VirtualControlSurface"
 #define BUNDLE_MFR "NeverEngineLabs"
@@ -57,6 +56,7 @@
 #define FORK_AWESOME_FN "forkawesome-webfont.ttf"
 
 #define NBR_DUALDIALS 8
+#define NBR_WIDGETS 3
 #define NEL_BUTTON_OFF "buttonPlainBlue.svg"
 #define NEL_BUTTON_ON "buttonPlainBlue_ON.svg"
 #define DEFAULT_DIAL_ADDRESS "/dualDial/"

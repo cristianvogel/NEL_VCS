@@ -17,17 +17,14 @@
 
 #include <mutex>
 
-
-static bool beSlimeResponse = false;
-
 class NEL_OSC
 {
 public:
   NEL_OSC( const char * host , int port );
   ~NEL_OSC();
     
-  const char * _host;
-  int _port;
+  const char * m_targetHost;
+  int m_listenerPort;
   std::unique_ptr<std::vector<std::string>> messageLog;
   
   NEL_PacketListener listener;
@@ -39,15 +36,12 @@ public:
   void initKyma(); 
   bool oscSendActive {true}; //todo: make UI button to disable OSC activity
   
- // void changeDestination( const std::string &, int );
-  
   std::mutex mtx; // mutex for critical section in network thread
   
   std::string getLatestMessage();
   const std::vector<float> getLatestFloatArgs();
-  bool hardwareConnected();
-  bool getBeSlimeResponse();
-  void hardwareDisconnected();
+  bool getHardwareStatus();
+  void disconnectHardware();
   std::string getBeSlimeIP();
   std::string getBeSlimeName();
   

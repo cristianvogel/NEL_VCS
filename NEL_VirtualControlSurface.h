@@ -35,7 +35,7 @@ public:
     "⚉ "
   };
  
-  std::string consoleText = "";
+  std::string consoleText = "locahost";
   
   std::string beSlimeIP = "";
   std::atomic_bool beSlimeConnected {false};

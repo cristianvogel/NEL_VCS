@@ -27,7 +27,7 @@ NEL_DualDial::NEL_DualDial(
 , colourStop1( stop1 )
 , colourStop2( stop2 )
 , colourStop3( stop3 )
-, tickMarkSVG( nullptr )
+
 
 {//constructor body
  
@@ -191,10 +191,6 @@ NEL_DualDial* NEL_DualDial::setupButtonStateSVG(const ISVG& on, const ISVG& off)
   return this;
 }
 
-NEL_DualDial* NEL_DualDial::setTickMarkSVG( const ISVG& tickMark  ){
-  tickMarkSVG = tickMark;
-  return this;
-}
 
 IRECT* NEL_DualDial::getDialBounds() {
   return &mRECT;
