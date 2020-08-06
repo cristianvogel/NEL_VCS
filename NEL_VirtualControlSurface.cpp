@@ -53,24 +53,35 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
         pGraphics->LoadFont("Menlo", MENLO_FN);
         pGraphics->LoadFont("ForkAwesome", FORK_AWESOME_FN);
         
-#pragma mark my lambdas
+#pragma mark some lambdas used in main layout lambda
       /*
        flip the visibility of the OSC addresses
       */
-      auto showHideAddresses =
+      auto showHideControlInfo =
         [this] (IControl * pCaller) {
-          GetUI()->ForControlInGroup( "addressStems",
-                                      [&] (IControl& field)
-                                      { field.Hide(!field.IsHidden()); }
-                                    );
-        };
+          hideReadouts = !hideReadouts;
+          GetUI()->ForControlInGroup(
+                                     "addressStems",
+                                     [&] (IControl& field) {
+                                                            field.IsHidden() ? field.Hide(false) : field.Hide(true);
+          }); };
+      
+      
+      auto showHideNetInfo =
+        [this] (IControl * pCaller) {
+     
+        GetUI()->ForControlInGroup(
+                                  "netInfo",
+                                  [ &pCaller ] (IControl& field) {
+                                  pCaller->GetMouseIsOver() ? field.Hide(false) : field.Hide(true) ;
+          
+        });  };
      /*
        if valid port number, make new connection
       */
       auto changeTargetPort =
         [this] (IControl * pCaller) {
           if (!beSlimeConnected) {
-            
             auto targetPortDisplay = GetUI()->GetControlWithTag(kTargetPort)->As<ITextControl>();
             auto inputtedPortNumber = gsh->cstring_to_ul(targetPortDisplay->GetStr() );
               
@@ -81,6 +92,8 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
                    } else if ( (inputtedPortNumber == 0) | (inputtedPortNumber == ULONG_MAX) ) {
                       targetPortDisplay->SetStr( std::to_string(nelosc.m_targetPort).c_str() );
                       errno = 0; }
+          } else {
+            nelosc.udpSender->setTargetPortForKyma();
           }
         };
       
@@ -115,6 +128,7 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
         auto inputtedHostname = targetHostDisplay->GetStr();
         std::cout << nelosc.remoteAddressToString(inputtedHostname) << std::endl;
       };
+
       
 #pragma mark mainCanvas
       
@@ -127,28 +141,30 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
 #pragma mark console text
         //▼ network logging console outputs OSC messages and stuff
       
-        consoleTextDef = IText ( 11.f, "Menlo").WithFGColor(NEL_TUNGSTEN_FGBlend);
         pGraphics->AttachControl(new ITextControl
                                 (consoleBounds,
                                 consoleText.c_str(),
-                                consoleTextDef,
+                                DEFAULT_CONSOLE_TEXT,
                                 NEL_TUNGSTEN,
                                 true
                                 )
                                  , kCtrlNetStatus);
       
       
-#pragma mark decorative plot
+#pragma mark decorative plot with reveal
+      
       pGraphics->AttachControl(new IVPlotControl(plotBounds, {{getSwatch(Memariani, 0).WithOpacity(0.5f),  [](double x){ return std::sin(x * 12);} },
         {getSwatch(Memariani, 1).WithOpacity(0.35f), [](double x){ return std::cos(x * 12.5);} },
         {getSwatch(Memariani, 2).WithOpacity(0.25f), [](double x){ return std::sin( x * 12 ) * std::cos( x* 12.5) ;} }
 
-      }, 256, "", DEFAULT_STYLE.WithColor(kBG, COLOR_TRANSPARENT)), kCtrlPlot, "plot");
+      }, 256, "", DEFAULT_STYLE.WithColor(kBG, COLOR_TRANSPARENT)), kCtrlPlot, "plot")->SetAnimationEndActionFunction(showHideNetInfo);
+      
+     
 
 #pragma mark preference widgets
          
       IRECT settingWidgetBounds = plotBounds.GetGridCell(1, 11, 3, 12).GetScaledAboutCentre(1.5f).GetHPadded(-15.f);
-      std::vector<IActionFunction> actions { showHideAddresses, showHideAddresses, showHideAddresses};
+      std::vector<IActionFunction> actions { showHideControlInfo, showHideNetInfo, showHideControlInfo};
       
       for (int i=0; i<NBR_WIDGETS; i++)
       {
@@ -156,8 +172,8 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
                  new NEL_GlyphButton(
                                      settingWidgetBounds.GetGridCell(0, i, 1, 3),
                                      actions.at(i),
-                                     m_noNetwork ? ICON_FK_CIRCLE_O : ICON_FK_SQUARE_O,
-                                     m_noNetwork ? ICON_FK_MINUS_CIRCLE : ICON_FK_MINUS_SQUARE,
+                                     m_noNetwork ? WIDGET_OFF_NO_NET : WIDGET_OFF,
+                                     m_noNetwork ? WIDGET_ON_NO_NET : WIDGET_ON,
                                      GLYPH,
                                      toolTips[ kNoWidgets + ( i + 1 ) ] // toolTip text
                                     )
@@ -167,30 +183,35 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
       
 #pragma mark net configs
       
-       IRECT configBounds = plotBounds.GetGridCell(1, 1, 3, 6);
+       IRECT widgetCell = plotBounds.GetGridCell(1, 4, 3, 7);
+      
+      pGraphics->AttachControl(new NEL_TextField(
+                                                 widgetCell,
+                                                 changeTargetPort,
+                                                 (std::to_string(nelosc.m_targetPort)).c_str(),
+                                                 DEFAULT_CONSOLE_TEXT,
+                                                 "Send Port"
+                               ), kTargetPort, "netInfo" )->Hide(true);
+      
+      widgetCell = plotBounds.GetGridCell(1, 3, 3, 7);
     
-
-      pGraphics->AttachControl(new IEditableTextControl(
-                                                        configBounds,
-                                                        (std::to_string(nelosc.m_targetPort)).c_str(),
-                                                        consoleTextDef.WithSize(12.0f)
-                               ), kTargetPort)->SetActionFunction( changeTargetPort );
-      
-        configBounds = plotBounds.GetGridCell(1, 2, 3, 6);
-      
-
-        pGraphics->AttachControl(new IEditableTextControl(
-                                                          configBounds,
-                                                          (std::to_string(nelosc.m_listenerPort)).c_str(),
-                                                          consoleTextDef.WithSize(12.0f)
-                                 ), kListenPort)->SetActionFunction( changeListenerPort );
-      
-      configBounds = plotBounds.GetGridCell(1, 0, 3, 6);
-      pGraphics->AttachControl(new IEditableTextControl(
-                                                        configBounds,
-                                                        nelosc.m_targetHost ,
-                                                        consoleTextDef.WithSize(12.0f)
-                               ), kTargetHost)->SetActionFunction( changeHost );
+      pGraphics->AttachControl(new NEL_TextField(
+                                                 widgetCell,
+                                                 changeListenerPort,
+                                                 (std::to_string(nelosc.m_listenerPort)).c_str(),
+                                                 DEFAULT_CONSOLE_TEXT,
+                                                 "Listen Port"
+                               ), kListenPort, "netInfo")->Hide(true);
+    
+    widgetCell = plotBounds.GetGridCell(1, 2, 3, 7);
+    
+    pGraphics->AttachControl(new NEL_TextField(
+                                               widgetCell,
+                                               changeHost,
+                                               nelosc.m_targetHost ,
+                                               DEFAULT_CONSOLE_TEXT,
+                                               "Hostname"
+                             ), kTargetHost , "netInfo")->Hide(true);
 
       
          
@@ -242,7 +263,7 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
             pGraphics->AttachControl (new IEditableTextControl (
                                        editableTextBounds.SubRectVertical(4, 4).GetMidVPadded(10.f),
                                        nelosc.dialSendAddress.at(d).c_str(),
-                                       consoleTextDef.WithFGColor(getSwatch( Memariani, 1))),
+                                       DEFAULT_CONSOLE_TEXT.WithFGColor(getSwatch( Memariani, 1))),
              kCtrlTextInput + d, "addressStems")->SetActionFunction( setAddressStem )->Hide(true);
                     
 
@@ -257,7 +278,7 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
                                rescanButtonStyle()
                                .WithDrawShadows(false)
                                .WithColor(kBG, COLOR_TRANSPARENT)
-                               .WithValueText ( consoleTextDef.WithSize(12.f).WithFGColor(  COLOR_WHITE  ) ) ),
+                               .WithValueText ( DEFAULT_CONSOLE_TEXT.WithSize(12.f).WithFGColor(  COLOR_WHITE  ) ) ),
            kCtrlReadOuterRing + d, "readouts");
           
           const IRECT& numericDisplayInner = dualDialBounds.GetCentredInside(dualDialBounds).GetGridCell(3, 1, 6, 3).GetVShifted(-6.0f);
@@ -268,7 +289,7 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
                               rescanButtonStyle()
                               .WithDrawShadows(false)
                               .WithColor(kBG, COLOR_TRANSPARENT)
-                              .WithValueText ( consoleTextDef.WithSize(12.f).WithFGColor(  COLOR_WHITE  ) ) ),
+                              .WithValueText ( DEFAULT_CONSOLE_TEXT.WithSize(12.f).WithFGColor(  COLOR_WHITE  ) ) ),
           kCtrlReadInnerRing + d, "readouts");
 
 }
@@ -333,33 +354,72 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
   
 }; //end main layout
 
+
+
 void NEL_VirtualControlSurface::defaultConsoleText() {
   consoleText = cnsl[kMsgConnected];
 }
 
-void NEL_VirtualControlSurface::updateAllDialInfoFromOSC() {
-  std::string::size_type oscMsgEntry = nelosc.getLatestMessage().find("/dial/pulse");
-  const std::vector<float>& floatArgs = nelosc.getLatestFloatArgs();
+
+//TODO
+//Implement bidrectional protocol
+
+void NEL_VirtualControlSurface::updatesFromIncomingOSC() {
   
+  int dualDialIndex = 0;
+  std::string oscMsg = nelosc.getLatestMessage();
+
   
-  for (int i = 0; i < NBR_DUALDIALS; i++)
-    {
-      IControl *pDialLoop = GetUI()->GetControlWithTag(kCtrlFluxDial + i);
-      if (oscMsgEntry != std::string::npos) {  //only update the pulse if OSC messages are in
-        pDialLoop->As<NEL_DualDial>()->setFlashRate( floatArgs.at( i % floatArgs.size() ) );
-      }
-    
-      //always updates the readouts
-      //todo: change-driven draw optimisation
-      GetUI()->
-      GetControlWithTag(kCtrlReadOuterRing + i)-> As<IVLabelControl>()->
-          SetStrFmt(4, std::to_string( pDialLoop->GetValue(0) ).c_str() );
-      GetUI()->
-        GetControlWithTag(kCtrlReadInnerRing + i)->
-          As<IVLabelControl>()->
-            SetStrFmt(4, std::to_string( pDialLoop->GetValue(1) ).c_str() );
-    }
+      auto setValueFromIncomingOSC = [ this, &oscMsg, &dualDialIndex ] ( IControl & pCaller ) {
+          std::string::size_type oscMsgEntry = oscMsg.find("/dualDial/" + std::to_string( dualDialIndex ) );
+          if (oscMsgEntry != std::string::npos) { // get a match
+            const std::vector<float>& floatArgs = nelosc.getLatestFloatArgs();
+            pCaller.As<NEL_DualDial>()->SetValue( floatArgs.at(0), 0 );
+            pCaller.As<NEL_DualDial>()->SetValue( floatArgs.at(1), 1 );
+            pCaller.As<NEL_DualDial>()->setFlashRate( std::min(floatArgs.at(0), floatArgs.at(1) ) );
+            pCaller.SetDirty(false);
+          }
+      dualDialIndex++;
+    };
+  
+  GetUI()->ForControlInGroup("dualDials", setValueFromIncomingOSC );
 }
+
+void NEL_VirtualControlSurface::pulseDialsFromOSC() {
+
+    std::string::size_type oscMsgEntry = nelosc.getLatestMessage().find("/dial/pulse");
+    const std::vector<float>& floatArgs = nelosc.getLatestFloatArgs();
+  
+    for (int i = 0; i < NBR_DUALDIALS; i++)
+      {
+        IControl *pDialLoop = GetUI()->GetControlWithTag(kCtrlFluxDial + i);
+        if (oscMsgEntry != std::string::npos) {
+          
+          pDialLoop->As<NEL_DualDial>()->setFlashRate( floatArgs.at( i % floatArgs.size() ) );
+        }
+      }
+}
+ 
+void NEL_VirtualControlSurface::updateNumericDisplays( ) {
+  
+  
+  //hide and don't update values
+    GetUI()->ForControlInGroup("readouts", [ & ]( IControl& rd ){
+    rd.Hide(hideReadouts);
+    });
+  
+    //show  and update values on numeric displays
+    for (int i = 0; i < NBR_DUALDIALS; i++)
+      {
+        IControl *pDialLoop = GetUI()->GetControlWithTag(kCtrlFluxDial + i)->As<NEL_DualDial>();
+        auto* readout = GetUI()->GetControlWithTag(kCtrlReadOuterRing + i)-> As<IVLabelControl>();
+        readout -> SetStrFmt(4, std::to_string( pDialLoop->GetValue(0) ).c_str() );
+        readout = GetUI()-> GetControlWithTag(kCtrlReadInnerRing + i)-> As<IVLabelControl>();
+        readout -> SetStrFmt(4, std::to_string( pDialLoop->GetValue(1) ).c_str() ) ;
+      }
+  
+}
+
 
 #endif
 
@@ -387,6 +447,7 @@ void NEL_VirtualControlSurface::OnIdle() {
                     nelosc.initKyma();
                     consoleText = beSlimeName;
                     beSlimeConnected = true;
+                    nelosc.m_targetHost = beSlimeName.c_str();
                     }
                   }
                   
@@ -394,13 +455,20 @@ void NEL_VirtualControlSurface::OnIdle() {
         // even without GUI
         IGraphics* pGraphics = GetUI(); if(!pGraphics) return;
 
-        auto* cnsl = pGraphics->GetControlWithTag(kCtrlNetStatus)->As<ITextControl>();
+        ITextControl* cnsl = pGraphics->GetControlWithTag(kCtrlNetStatus)->As<ITextControl>();
         IVButtonControl* cnslButton = pGraphics->GetControlWithTag(kCtrlReScan)->As<IVButtonControl>();
+        auto* topPanel = pGraphics->GetControlWithTag(kCtrlPlot);
 
         if ( cnslButton->GetMouseIsOver() ) {
           cnsl->SetAnimation( unGhostText , 500.0f);
           pGraphics->SetMouseCursor(ECursor::HELP);
-        } else { pGraphics->SetMouseCursor(ECursor::ARROW); }
+        } else { pGraphics->SetMouseCursor(ECursor::ARROW);}
+  
+        if ( topPanel->GetMouseIsOver() ) {
+          topPanel->SetAnimation(DefaultAnimationFunc);
+          topPanel->StartAnimation( 0.5f);
+        }
+        
 
         //update console when osc received
         auto msg = nelosc.getLatestMessage();
@@ -410,16 +478,24 @@ void NEL_VirtualControlSurface::OnIdle() {
           cnsl->SetStr(consoleText.c_str());
           cnsl->SetDirty(false);
           cnsl->SetAnimation( unGhostText , 500.0f);
-          updateAllDialInfoFromOSC( ); //do something with incoming OSC for example
+          
+          updatesFromIncomingOSC(); //do something with incoming OSC for example
+          
         } else {
           if (cnsl->GetAnimationProgress() > 0.99f) {
             cnsl->SetAnimation( ghostText , 500.0f);
           }
         }
         prevMsg = msg;
-        //keep host info display syncd to actual host connection
+        
+        
+         //keep host info display syncd to actual host connection
          auto targetHostDisplay = pGraphics->GetControlWithTag(kTargetHost)->As<ITextControl>();
-         if ( nelosc.m_targetHost != targetHostDisplay->GetStr()  ) { targetHostDisplay->SetStr(nelosc.m_targetHost) ; }
+         if (!targetHostDisplay->IsHidden()) {
+            if ( nelosc.m_targetHost != targetHostDisplay->GetStr()  ) { targetHostDisplay->SetStr(nelosc.m_targetHost) ; }
+          }
+  
+        updateNumericDisplays();
  }
 
 

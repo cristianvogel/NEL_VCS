@@ -147,7 +147,7 @@ public:
 		SockaddrFromIpEndpointName( connectSockAddr, remoteEndpoint );
        
         if (connect(socket_, (struct sockaddr *)&connectSockAddr, sizeof(connectSockAddr)) < 0) {
-            throw std::runtime_error("unable to connect udp socket\n");
+            throw std::runtime_error("unable to connect udp socket LocalEndpointFor()\n");
         }
 
         // get the address
@@ -163,7 +163,7 @@ public:
 			// reconnect to the connected address
 			
 			if (connect(socket_, (struct sockaddr *)&connectedAddr_, sizeof(connectedAddr_)) < 0) {
-				throw std::runtime_error("unable to connect udp socket\n");
+				throw std::runtime_error("unable to connect udp socket LocalEndpointFor::isConnected_()\n");
 			}
 
 		}else{
@@ -174,7 +174,7 @@ public:
 
 			if( connect(socket_, (struct sockaddr *)&unconnectSockAddr, sizeof(unconnectSockAddr)) < 0 
 					&& WSAGetLastError() != WSAEADDRNOTAVAIL ){
-				throw std::runtime_error("unable to un-connect udp socket\n");
+				throw std::runtime_error("unable to un-connect udp socket LocalEndpointFor::unconnectSock\n");
 			}
 		}
 

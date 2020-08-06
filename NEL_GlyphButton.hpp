@@ -16,7 +16,6 @@
 #include "NEL_VCS_Enums.hpp"
 
 
-//using namespace iplug;
 using namespace iplug::igraphics;
 
 class NEL_GlyphButton : public ITextControl

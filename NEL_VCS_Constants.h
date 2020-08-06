@@ -115,7 +115,9 @@ static IVStyle prefsButtonStyle() {
   return prefsButtonStyle;
 }
 
-  const IText GLYPH {16.f, NEL_TUNGSTEN_FGBlend, "ForkAwesome"};
+const IText GLYPH
+      {16.f, NEL_TUNGSTEN_FGBlend, "ForkAwesome"};
 
-
+const IText DEFAULT_CONSOLE_TEXT
+      { 11.f, NEL_TUNGSTEN_FGBlend, "Menlo" };
 

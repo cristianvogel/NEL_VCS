@@ -76,7 +76,7 @@ enum EWidgets
 
 static std::map<int, const char * > toolTips = {
   { kAddressWidget, "Message Config"},
-  { kPortWidget, "Port Config"},
+  { kPortWidget, "Net Config"},
   { kPresetsWidget, "Presets" }
 };
 

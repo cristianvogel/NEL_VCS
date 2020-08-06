@@ -197,7 +197,7 @@ void mDNS::mdns_thread_func() {
                                                  0,                // no flags
                                                  0,                // all network interfaces
                                                  "_ssh._tcp",     // service type for BeSlime
-                                                 "local.",         // default domains
+                                                 "local.",         // default domains , was "local.",
                                                  browse_callback,  // callback function
                                                  NULL);            // no context
     

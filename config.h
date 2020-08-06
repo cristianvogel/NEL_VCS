@@ -56,7 +56,13 @@
 #define FORK_AWESOME_FN "forkawesome-webfont.ttf"
 
 #define NBR_DUALDIALS 8
-#define NBR_WIDGETS 3
+#define NBR_WIDGETS 1
+
+#define WIDGET_OFF ICON_FK_SQUARE_O
+#define WIDGET_ON ICON_FK_MINUS_SQUARE
+#define WIDGET_OFF_NO_NET ICON_FK_CIRCLE_O
+#define WIDGET_ON_NO_NET ICON_FK_MINUS_CIRCLE
+
 #define NEL_BUTTON_OFF "buttonPlainBlue.svg"
 #define NEL_BUTTON_ON "buttonPlainBlue_ON.svg"
 #define DEFAULT_DIAL_ADDRESS "/dualDial/"

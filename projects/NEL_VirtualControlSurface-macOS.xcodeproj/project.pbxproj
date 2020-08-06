@@ -133,6 +133,15 @@
 		3E53D2B424DA0C5300ED03A9 /* NEL_GlyphButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E53D2AD24DA0C5300ED03A9 /* NEL_GlyphButton.cpp */; };
 		3E53D2B524DA0C5300ED03A9 /* NEL_GlyphButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E53D2AD24DA0C5300ED03A9 /* NEL_GlyphButton.cpp */; };
 		3E53D2B724DA161B00ED03A9 /* NEL_GlyphButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E53D2AD24DA0C5300ED03A9 /* NEL_GlyphButton.cpp */; };
+		3E5E9D0224DC688300B1FBC3 /* NEL_EditableText.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E5E9D0024DC688300B1FBC3 /* NEL_EditableText.cpp */; };
+		3E5E9D0324DC688300B1FBC3 /* NEL_EditableText.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E5E9D0024DC688300B1FBC3 /* NEL_EditableText.cpp */; };
+		3E5E9D0424DC688300B1FBC3 /* NEL_EditableText.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E5E9D0024DC688300B1FBC3 /* NEL_EditableText.cpp */; };
+		3E5E9D0524DC688300B1FBC3 /* NEL_EditableText.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E5E9D0024DC688300B1FBC3 /* NEL_EditableText.cpp */; };
+		3E5E9D0624DC688300B1FBC3 /* NEL_EditableText.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E5E9D0024DC688300B1FBC3 /* NEL_EditableText.cpp */; };
+		3E5E9D0724DC688300B1FBC3 /* NEL_EditableText.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E5E9D0024DC688300B1FBC3 /* NEL_EditableText.cpp */; };
+		3E5E9D0824DC688300B1FBC3 /* NEL_EditableText.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E5E9D0024DC688300B1FBC3 /* NEL_EditableText.cpp */; };
+		3E5E9D0924DC688300B1FBC3 /* NEL_EditableText.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E5E9D0024DC688300B1FBC3 /* NEL_EditableText.cpp */; };
+		3E5E9D0A24DC688300B1FBC3 /* NEL_EditableText.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3E5E9D0124DC688300B1FBC3 /* NEL_EditableText.hpp */; };
 		3E61745D24C1E58F00762320 /* mDNS_IPExtract.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E61745C24C1E58F00762320 /* mDNS_IPExtract.cpp */; };
 		3E61745E24C1E58F00762320 /* mDNS_IPExtract.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E61745C24C1E58F00762320 /* mDNS_IPExtract.cpp */; };
 		3E61745F24C1E58F00762320 /* mDNS_IPExtract.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E61745C24C1E58F00762320 /* mDNS_IPExtract.cpp */; };
@@ -645,6 +654,8 @@
 		3E53D2AD24DA0C5300ED03A9 /* NEL_GlyphButton.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = NEL_GlyphButton.cpp; path = ../NEL_GlyphButton.cpp; sourceTree = "<group>"; };
 		3E53D2AE24DA0C5300ED03A9 /* NEL_GlyphButton.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = NEL_GlyphButton.hpp; path = ../NEL_GlyphButton.hpp; sourceTree = "<group>"; };
 		3E53D2B624DA0DA500ED03A9 /* IconsForkAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IconsForkAwesome.h; path = ../IconsForkAwesome.h; sourceTree = "<group>"; };
+		3E5E9D0024DC688300B1FBC3 /* NEL_EditableText.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = NEL_EditableText.cpp; path = ../NEL_EditableText.cpp; sourceTree = "<group>"; };
+		3E5E9D0124DC688300B1FBC3 /* NEL_EditableText.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = NEL_EditableText.hpp; path = ../NEL_EditableText.hpp; sourceTree = "<group>"; };
 		3E61745C24C1E58F00762320 /* mDNS_IPExtract.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = mDNS_IPExtract.cpp; path = ../mDNS_IPExtract.cpp; sourceTree = "<group>"; };
 		3E61746224C1E6DE00762320 /* mDNS_IPExtract.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mDNS_IPExtract.h; sourceTree = "<group>"; };
 		3E77259324BB5C3B00DDE318 /* NEL_OSC_Methods.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = NEL_OSC_Methods.cpp; path = ../NEL_OSC_Methods.cpp; sourceTree = "<group>"; };
@@ -1113,6 +1124,8 @@
 				3E53D2B624DA0DA500ED03A9 /* IconsForkAwesome.h */,
 				3E53D2AD24DA0C5300ED03A9 /* NEL_GlyphButton.cpp */,
 				3E53D2AE24DA0C5300ED03A9 /* NEL_GlyphButton.hpp */,
+				3E5E9D0024DC688300B1FBC3 /* NEL_EditableText.cpp */,
+				3E5E9D0124DC688300B1FBC3 /* NEL_EditableText.hpp */,
 				52FBBED30D0CF143001C8B8A /* config.h */,
 				089C1671FE841209C02AAC07 /* Frameworks */,
 				3E474FE024B634EA008DA40E /* GlobSeqHelpers.h */,
@@ -2036,6 +2049,7 @@
 				3E42D75824C8BEDE0078FDF2 /* httpget.h in Headers */,
 				3E42D73D24C8BEDE0078FDF2 /* jnetlib.h in Headers */,
 				3E42D6EE24C881CA0078FDF2 /* OscTypes.h in Headers */,
+				3E5E9D0A24DC688300B1FBC3 /* NEL_EditableText.hpp in Headers */,
 				3E42D75C24C8BEDE0078FDF2 /* listen.h in Headers */,
 				3E42D74824C8BEDE0078FDF2 /* webserver.h in Headers */,
 				3E42D6DE24C881CA0078FDF2 /* OscPrintReceivedElements.h in Headers */,
@@ -2681,6 +2695,7 @@
 				3E42D6E924C881CA0078FDF2 /* OscPrintReceivedElements.cpp in Sources */,
 				4F6FD2B222675B6300FC59E6 /* IGraphicsCoreText.mm in Sources */,
 				3E42D70B24C884050078FDF2 /* IpEndpointName.cpp in Sources */,
+				3E5E9D0324DC688300B1FBC3 /* NEL_EditableText.cpp in Sources */,
 				4F78D9C813B63BA50032E0F3 /* IPlugParameter.cpp in Sources */,
 				3E42D74A24C8BEDE0078FDF2 /* webserver.cpp in Sources */,
 			);
@@ -2695,6 +2710,7 @@
 				3E77259924BB5C3B00DDE318 /* NEL_OSC_Methods.cpp in Sources */,
 				3ECD47C624BFA30F006821B5 /* IPlugOSC.cpp in Sources */,
 				4F78BE3222E7429B00AD537E /* IPlugAUv3Appex.m in Sources */,
+				3E5E9D0724DC688300B1FBC3 /* NEL_EditableText.cpp in Sources */,
 				3EA669EE24B5A649006D193B /* IPlugOSC_msg.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2723,6 +2739,7 @@
 				3E42D74624C8BEDE0078FDF2 /* httpserv.cpp in Sources */,
 				3E53D2B224DA0C5300ED03A9 /* NEL_GlyphButton.cpp in Sources */,
 				3ECD47C524BFA30D006821B5 /* IPlugOSC.cpp in Sources */,
+				3E5E9D0524DC688300B1FBC3 /* NEL_EditableText.cpp in Sources */,
 				4F993F7423055C96000313AF /* IPlugProcessor.cpp in Sources */,
 				4F8C10E320BA2796006320CD /* IGraphicsEditorDelegate.cpp in Sources */,
 				4F6FD2B422675B6300FC59E6 /* IGraphicsCoreText.mm in Sources */,
@@ -2796,6 +2813,7 @@
 				4F3EE1E2231438D000004786 /* IGraphicsEditorDelegate.cpp in Sources */,
 				4F3EE1E3231438D000004786 /* swell-gdi.mm in Sources */,
 				4F3EE1E4231438D000004786 /* IPlugParameter.cpp in Sources */,
+				3E5E9D0924DC688300B1FBC3 /* NEL_EditableText.cpp in Sources */,
 				4F3EE1E5231438D000004786 /* IPlugTimer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2830,6 +2848,7 @@
 				4F78BE2122E7406D00AD537E /* IControl.cpp in Sources */,
 				4F78BE2222E7406D00AD537E /* IPlugAUAudioUnit.mm in Sources */,
 				4F78BE2322E7406D00AD537E /* IPlugAUv3.mm in Sources */,
+				3E5E9D0824DC688300B1FBC3 /* NEL_EditableText.cpp in Sources */,
 				4F78BE2422E7406D00AD537E /* IPlugAUViewController.mm in Sources */,
 				4F78BE2522E7406D00AD537E /* IPlugPluginBase.cpp in Sources */,
 				4F78BE2622E7406D00AD537E /* IPlugAPIBase.cpp in Sources */,
@@ -2904,6 +2923,7 @@
 				4F722020225C1EB100FF0E7C /* commoniids.cpp in Sources */,
 				4FB1F59220E4B012004157C8 /* IGraphicsMac_view.mm in Sources */,
 				4F81598D205D51F000393585 /* vstaudioeffect.cpp in Sources */,
+				3E5E9D0424DC688300B1FBC3 /* NEL_EditableText.cpp in Sources */,
 				3E53D2B124DA0C5300ED03A9 /* NEL_GlyphButton.cpp in Sources */,
 				4F81598C205D51CF00393585 /* vstsinglecomponenteffect.cpp in Sources */,
 				4F815984205D50EB00393585 /* updatehandler.cpp in Sources */,
@@ -2943,6 +2963,7 @@
 				4F6369EF20A466470022C370 /* IControl.cpp in Sources */,
 				4F03A5B020A4621100EBDFFB /* IGraphics.cpp in Sources */,
 				4F35DEB1207E5C5A00867D8F /* IPlugPluginBase.cpp in Sources */,
+				3E5E9D0624DC688300B1FBC3 /* NEL_EditableText.cpp in Sources */,
 				4F5F344520C0226200487201 /* IPlugPaths.mm in Sources */,
 				4F1A5285205D914A00CF2908 /* IPlugAAX.cpp in Sources */,
 				4F0848292015129A00F9E881 /* IPlugAAX_Parameters.cpp in Sources */,
@@ -2992,6 +3013,7 @@
 				3E77259524BB5C3B00DDE318 /* NEL_OSC_Methods.cpp in Sources */,
 				3EC56BC824B8906B002D64B0 /* process.cpp in Sources */,
 				4FA9F80421F760C1004E6FE2 /* IGraphicsLice_src.mm in Sources */,
+				3E5E9D0224DC688300B1FBC3 /* NEL_EditableText.cpp in Sources */,
 				4F6369DD20A464BB0022C370 /* IGraphicsNanoVG_src.m in Sources */,
 				4F6369EB20A466470022C370 /* IControl.cpp in Sources */,
 				4FD16D0513B634AA001D0217 /* swell-dlg.mm in Sources */,

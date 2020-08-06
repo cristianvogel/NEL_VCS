@@ -34,10 +34,15 @@ void NEL_GlyphButton::OnMouseOut()
 
 void NEL_GlyphButton::OnMouseDown(float x, float y, const IMouseMod& mod)
 {
-  if(GetValue() < 0.5)
+  if (GetValue() < 0.5) {
     SetValue(1.);
-  else
+    SetBlend(BLEND_25);
+    
+  }
+  else {
     SetValue(0.);
+    SetBlend(EBlend::Default);
+  }
   
   SetDirty(true);
 }

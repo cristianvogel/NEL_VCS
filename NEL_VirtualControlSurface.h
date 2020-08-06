@@ -9,6 +9,7 @@
 #include "NEL_VCS_Enums.hpp"
 #include "NEL_DualDial.h"
 #include "NEL_GlyphButton.hpp"
+#include "NEL_EditableText.hpp"
 #include <atomic>
 
 const int kNumPresets = 1;
@@ -24,7 +25,7 @@ public:
   ~NEL_VirtualControlSurface();
   
   void OnIdle() override;
-
+  
   NEL_OSC nelosc;
   
   std::string prevMsg = "";
@@ -42,7 +43,8 @@ public:
   
   typedef std::string DialAddr;
   
-  IText consoleTextDef;
+  bool hideReadouts { true } ;
+  
   IText numericDisplayTextDef;
   IText ledOn;
   IText ledOff;
@@ -69,8 +71,13 @@ public:
     };
   
   void defaultConsoleText();
-  void updateAllDialInfoFromOSC();
+  void updatesFromIncomingOSC();
+  void pulseDialsFromOSC();
+  void updateNumericDisplays( );
+  void hideNumericDisplays( const bool );
   std::unique_ptr<GlobSeqHelpers> gsh = std::make_unique<GlobSeqHelpers>();
+
+  
   
   private:
   bool m_noNetwork = false;

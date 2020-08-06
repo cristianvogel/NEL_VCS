@@ -60,6 +60,7 @@
 #include "ip/PacketListener.h"
 #include "ip/TimerListener.h"
 
+#include <iostream>
 
 #if defined(__APPLE__) && !defined(_SOCKLEN_T)
 // pre system 10.3 didn't have socklen_t
@@ -155,9 +156,13 @@ public:
         struct sockaddr_in connectSockAddr;
 		SockaddrFromIpEndpointName( connectSockAddr, remoteEndpoint );
        
+    try {
         if (connect(socket_, (struct sockaddr *)&connectSockAddr, sizeof(connectSockAddr)) < 0) {
-            throw std::runtime_error("unable to connect udp socket\n");
+          throw std::runtime_error("unable to connect udp socket SockaddrFromIpEndpointName()\n");
         }
+     } catch ( ... ) {
+          std::cout << "unable to connect udp socket SockaddrFromIpEndpointName()\n";
+}
 
         // get the address
 
@@ -165,14 +170,14 @@ public:
         std::memset( (char *)&sockAddr, 0, sizeof(sockAddr ) );
         socklen_t length = sizeof(sockAddr);
         if (getsockname(socket_, (struct sockaddr *)&sockAddr, &length) < 0) {
-            throw std::runtime_error("unable to getsockname\n");
+            throw std::runtime_error("unable to getsockname()\n");
         }
         
 		if( isConnected_ ){
 			// reconnect to the connected address
 			
 			if (connect(socket_, (struct sockaddr *)&connectedAddr_, sizeof(connectedAddr_)) < 0) {
-				throw std::runtime_error("unable to connect udp socket\n");
+				throw std::runtime_error("unable to connect udp socket isConnected_() \n");
 			}
 
 		}else{
@@ -184,7 +189,7 @@ public:
 			// address fields are zero
 			int connectResult = connect(socket_, (struct sockaddr *)&unconnectSockAddr, sizeof(unconnectSockAddr));
 			if ( connectResult < 0 && errno != EAFNOSUPPORT ) {
-				throw std::runtime_error("unable to un-connect udp socket\n");
+				throw std::runtime_error("unable to un-connect udp socket()\n");
 			}
 		}
 
@@ -194,10 +199,13 @@ public:
 	void Connect( const IpEndpointName& remoteEndpoint )
 	{
 		SockaddrFromIpEndpointName( connectedAddr_, remoteEndpoint );
-       
+    try {
         if (connect(socket_, (struct sockaddr *)&connectedAddr_, sizeof(connectedAddr_)) < 0) {
-            throw std::runtime_error("unable to connect udp socket\n");
+            throw std::runtime_error("unable to connect udp socket Connect()\n");
         }
+    } catch ( ... ) {
+      std::cout <<"unable to connect udp socket Connect()\n";
+    }
 
 		isConnected_ = true;
 	}
