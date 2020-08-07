@@ -1,3 +1,5 @@
+#pragma once
+
 #define PLUG_NAME "NEL_VirtualControlSurface"
 #define PLUG_MFR "NeverEngineLabs"
 #define PLUG_VERSION_HEX 0x00010000
@@ -56,7 +58,7 @@
 #define FORK_AWESOME_FN "forkawesome-webfont.ttf"
 
 #define NBR_DUALDIALS 8
-#define NBR_WIDGETS 1
+#define NBR_WIDGETS 3
 
 #define WIDGET_OFF ICON_FK_SQUARE_O
 #define WIDGET_ON ICON_FK_MINUS_SQUARE
@@ -69,6 +71,7 @@
 
 #define DEFAULT_TARGET_PORT  9090
 #define DEFAULT_LISTENER_PORT  8080
+
 
 
 

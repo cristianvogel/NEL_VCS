@@ -17,12 +17,14 @@ NEL_TextField::NEL_TextField(
                              const char * entry,
                              const IText& text,
                              const char * kToolTip,
-                             const IColor& bgColor)
+                             const bool isEditable,
+                             const IColor& bgColor
+                             )
 : IEditableTextControl(bounds, entry, text)
 {
   SetTooltip(kToolTip);
   SetActionFunction(aF);
-  
+  m_isEditable = isEditable;
 }
 
 void NEL_TextField::OnInit() { SetBoundsBasedOnStr(); }
@@ -38,14 +40,16 @@ void NEL_TextField::OnMouseOut()
 }
 
 void NEL_TextField::OnMouseDown(float x, float y, const IMouseMod& mod) {
-  IText t = DEFAULT_CONSOLE_TEXT.WithTEColors(COLOR_TRANSPARENT, COLOR_WHITE);
-  GetUI()->CreateTextEntry(*this, t, mRECT, GetStr());
+  
+  if (m_isEditable) {
+    IText t = DEFAULT_CONSOLE_TEXT.WithTEColors(COLOR_TRANSPARENT, COLOR_WHITE);
+    GetUI()->CreateTextEntry(*this, t, mRECT, GetStr());
+  }
 }
 
 void NEL_TextField::OnTextEntryCompletion(const char * str, int valIdx){
   {
     SetStr(str);
     SetDirty(true);
-    
   }
 }

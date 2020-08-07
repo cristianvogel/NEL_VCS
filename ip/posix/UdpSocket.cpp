@@ -149,7 +149,7 @@ public:
     
     //@CV: I took this out was always throwing exception.
     
-      //assert( isBound_ );
+    //  assert( isBound_ );
 
 		// first connect the socket to the remote server
         

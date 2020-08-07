@@ -41,12 +41,12 @@
 #include <cstring>
 #include <iostream>
 
-
 #include "osc/OscOutboundPacketStream.h"
 #include "ip/UdpSocket.h"
 #include "ip/IpEndpointName.h"
 
 #define OUTPUT_BUFFER_SIZE 1536
+#define KYMA_RCV_PORT 8000
 
 namespace osc {
 
@@ -72,7 +72,7 @@ namespace osc {
     
     void changeTargetHost( const char * hostname );
     void changeTargetPort( int newPort );
-    void setTargetPortForKyma() { m_targetPort = 8000; }
+    void setTargetPortForKyma();
     void setTargetPort(int newPort) { m_targetPort = newPort; }
     
 

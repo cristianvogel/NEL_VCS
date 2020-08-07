@@ -41,7 +41,6 @@
 #include <iostream>
 #include <vector>
 #include "osc/OscOutboundPacketStream.h"
-
 #include "ip/UdpSocket.h"
 #include "ip/IpEndpointName.h"
 
@@ -82,6 +81,10 @@ void osc::NEL_PacketSender::changeTargetHost( const char * hostname ) {
 void osc::NEL_PacketSender::changeTargetPort( int newPort ) {
   m_targetPort = newPort;
   transmitSocket.Connect( IpEndpointName ( m_hostname , m_targetPort ) );
+}
+
+void osc::NEL_PacketSender::setTargetPortForKyma() {
+  m_targetPort = KYMA_RCV_PORT;
 }
 
 

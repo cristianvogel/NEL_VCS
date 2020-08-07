@@ -58,7 +58,7 @@ void NEL_PacketListener::ProcessMessage(const osc::ReceivedMessage& m, const IpE
         log.addMessageData( addr, m.ArgumentCount() );
         
         if( std::strcmp( addr, "/osc/response_from" ) == 0 ){
-            // example #1 -- argument stream interface
+            // kyma protocol handshake, go bidi
             osc::ReceivedMessageArgumentStream args = m.ArgumentStream();
             osc::int32 a1;
             args >> a1 >> osc::EndMessage;

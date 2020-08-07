@@ -11,6 +11,7 @@
 #include "IControl.h"
 #include "IPlugTimer.h"
 #include "NEL_VCS_Constants.h"
+#include <atomic>
 
 
 //using namespace iplug;
@@ -29,12 +30,13 @@ public:
                 , float a1 = -135.f, float a2 = 135.f, float aAnchor = -135.f
                 );
    
-  float timerMillis { 0 };
+  float timerMillis;
   void setFlashRate(float);
   iplug::Timer* doubleDialPulseTimer;
-  std::function<void( iplug::Timer & )> timerFunc = nullptr;
-  const bool& togglePulse();
-  bool pulse { false };
+  std::function<void( iplug::Timer & )> pulseTimerFunc = nullptr;
+  const bool togglePulse( bool );
+  
+  bool pulse [2] = { false, false };
   
   void Draw(IGraphics& p) override;
   void OnMouseDrag(float x, float y, float dX, float dY, const IMouseMod& mod) override;

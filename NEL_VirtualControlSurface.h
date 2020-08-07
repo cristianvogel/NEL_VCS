@@ -2,8 +2,8 @@
 
 
 #include "IPlug_include_in_plug_hdr.h"
-#include "IconsForkAwesome.h"
 #include "NEL_VCS_Constants.h"
+#include "IconsForkAwesome.h"
 #include "NEL_OSC_Methods.hpp"
 #include "GlobSeqHelpers.h"
 #include "NEL_VCS_Enums.hpp"
@@ -30,13 +30,8 @@ public:
   
   std::string prevMsg = "";
   std::string beSlimeName = "";
-  std::vector<std::string> cnsl =
-  {
-    "⚇ localhost",
-    "⚉ "
-  };
  
-  std::string consoleText = "locahost";
+  std::string consoleText = "NEL VCS v1.0";
   
   std::string beSlimeIP = "";
   std::atomic_bool beSlimeConnected {false};
@@ -72,8 +67,7 @@ public:
   
   void defaultConsoleText();
   void updatesFromIncomingOSC();
-  void pulseDialsFromOSC();
-  void updateNumericDisplays( );
+  void updateNumericDisplays();
   void hideNumericDisplays( const bool );
   std::unique_ptr<GlobSeqHelpers> gsh = std::make_unique<GlobSeqHelpers>();
 

@@ -62,20 +62,16 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
           hideReadouts = !hideReadouts;
           GetUI()->ForControlInGroup(
                                      "addressStems",
-                                     [&] (IControl& field) {
-                                                            field.IsHidden() ? field.Hide(false) : field.Hide(true);
-          }); };
-      
+                                      [ ] (IControl& field) { field.Hide(!field.IsHidden()); });
+                                    };
       
       auto showHideNetInfo =
         [this] (IControl * pCaller) {
      
         GetUI()->ForControlInGroup(
                                   "netInfo",
-                                  [ &pCaller ] (IControl& field) {
-                                  pCaller->GetMouseIsOver() ? field.Hide(false) : field.Hide(true) ;
-          
-        });  };
+                                  [ ] (IControl& field) { field.Hide(!field.IsHidden()); });
+        };
      /*
        if valid port number, make new connection
       */
@@ -119,15 +115,24 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
         }
       };
       
+      auto showHideMsgConsole =
+      [this] (IControl * pCaller) {
+        auto messageConsol = GetUI()->GetControlWithTag(kCtrlNetStatus);
+        messageConsol->Hide(!messageConsol->IsHidden());
+        messageConsol->SetDirty();
+      };
+      
+      
       // this function is incomplete, work in progress
       // idea would be to check if a user given host is on the network
       // via UDP browse
-      auto changeHost =
-      [this] (IControl * pCaller) {
-        auto targetHostDisplay = GetUI()->GetControlWithTag(kTargetPort)->As<ITextControl>();
-        auto inputtedHostname = targetHostDisplay->GetStr();
-        std::cout << nelosc.remoteAddressToString(inputtedHostname) << std::endl;
-      };
+      
+//      auto changeHost =
+//      [this] (IControl * pCaller) {
+//        auto targetHostDisplay = GetUI()->GetControlWithTag(kTargetPort)->As<ITextControl>();
+//        auto inputtedHostname = targetHostDisplay->GetStr();
+//        std::cout << nelosc.remoteAddressToString(inputtedHostname) << std::endl;
+//      };
 
       
 #pragma mark mainCanvas
@@ -148,7 +153,7 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
                                 NEL_TUNGSTEN,
                                 true
                                 )
-                                 , kCtrlNetStatus);
+                                 , kCtrlNetStatus)->Hide(true);
       
       
 #pragma mark decorative plot with reveal
@@ -164,7 +169,7 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
 #pragma mark preference widgets
          
       IRECT settingWidgetBounds = plotBounds.GetGridCell(1, 11, 3, 12).GetScaledAboutCentre(1.5f).GetHPadded(-15.f);
-      std::vector<IActionFunction> actions { showHideControlInfo, showHideNetInfo, showHideControlInfo};
+      std::vector<IActionFunction> actions { showHideControlInfo, showHideNetInfo, showHideMsgConsole};
       
       for (int i=0; i<NBR_WIDGETS; i++)
       {
@@ -180,6 +185,8 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
                                    , kNoWidgets + ( i + 1 ) , "prefs"
                                    );
       }
+      
+
       
 #pragma mark net configs
       
@@ -205,14 +212,16 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
     
     widgetCell = plotBounds.GetGridCell(1, 2, 3, 7);
     
-    pGraphics->AttachControl(new NEL_TextField(
+    auto* hostnameReadOnly = new NEL_TextField(
                                                widgetCell,
-                                               changeHost,
+                                               nullptr,
                                                nelosc.m_targetHost ,
                                                DEFAULT_CONSOLE_TEXT,
-                                               "Hostname"
-                             ), kTargetHost , "netInfo")->Hide(true);
-
+                                               "Hostname",
+                                               false
+                                               );
+      pGraphics->AttachControl(hostnameReadOnly, kTargetHost , "netInfo")->Hide(true);
+      
       
          
 #pragma mark dual dials replicated attach
@@ -237,7 +246,7 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
             pGraphics->AttachControl
             (new NEL_DualDial(
                  dualDialBounds
-                 , {kDualDialInner + d, kDualDialOuter + d}
+                 , {kDualDialInner + d, kDualDialOuter + d, kDualDialPulse + d}
                  , getSwatch( Lunada, d % 3)
                  , getSwatch( Lunada, (d + 1) % 3)
                  , getSwatch( Lunada, (d + 2) % 3)
@@ -319,10 +328,9 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
             m_noNetwork = nelosc.tryToOpenListener();
             if (m_noNetwork) { GetUI()->
                 ForControlInGroup("prefs", [pCaller] (IControl& prefButton) {
-                  prefButton.As<NEL_GlyphButton>()->SetOnText(ICON_FK_PLUS_SQUARE_O)->SetOffText(ICON_FK_SQUARE_O);
+                  prefButton.As<NEL_GlyphButton>()->SetOnText(WIDGET_ON_NO_NET)->SetOffText(WIDGET_OFF_NO_NET);
                   prefButton.SetDirty(true);
                 });
-              
             }
           }
                
@@ -345,24 +353,19 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
                 GetUI()->ForControlInGroup("dualDials", [pCaller] (IControl& pDial) {
                   pDial.SetDirty(true);
                 });
+          
+          if (nelosc.udpListener.hardwareConnected) { try {nelosc.initKyma();} catch (...) { std::cout << " tried to reinitialise Kyma, fail \n"; }; }
           })
       -> SetTooltip("Network Refresh");
       
       ;
-      }; //end of mLayoutFunc lambda
+      };
   
   
 }; //end main layout
 
-
-
-void NEL_VirtualControlSurface::defaultConsoleText() {
-  consoleText = cnsl[kMsgConnected];
-}
-
-
 //TODO
-//Implement bidrectional protocol
+//beta test bidrectional protocol
 
 void NEL_VirtualControlSurface::updatesFromIncomingOSC() {
   
@@ -374,10 +377,15 @@ void NEL_VirtualControlSurface::updatesFromIncomingOSC() {
           std::string::size_type oscMsgEntry = oscMsg.find("/dualDial/" + std::to_string( dualDialIndex ) );
           if (oscMsgEntry != std::string::npos) { // get a match
             const std::vector<float>& floatArgs = nelosc.getLatestFloatArgs();
-            pCaller.As<NEL_DualDial>()->SetValue( floatArgs.at(0), 0 );
-            pCaller.As<NEL_DualDial>()->SetValue( floatArgs.at(1), 1 );
-            pCaller.As<NEL_DualDial>()->setFlashRate( std::min(floatArgs.at(0), floatArgs.at(1) ) );
-            pCaller.SetDirty(false);
+            if (!floatArgs.empty()) {
+              int paramIndex = 0; float sum = 0;
+              for(const auto& value: floatArgs) {
+              pCaller.As<NEL_DualDial>()->SetValue( value, paramIndex );
+              ++paramIndex; sum+=value;
+              }
+              pCaller.As<NEL_DualDial>()->setFlashRate( sum / floatArgs.size() ); //average
+              pCaller.SetDirty(false);
+            }
           }
       dualDialIndex++;
     };
@@ -385,20 +393,6 @@ void NEL_VirtualControlSurface::updatesFromIncomingOSC() {
   GetUI()->ForControlInGroup("dualDials", setValueFromIncomingOSC );
 }
 
-void NEL_VirtualControlSurface::pulseDialsFromOSC() {
-
-    std::string::size_type oscMsgEntry = nelosc.getLatestMessage().find("/dial/pulse");
-    const std::vector<float>& floatArgs = nelosc.getLatestFloatArgs();
-  
-    for (int i = 0; i < NBR_DUALDIALS; i++)
-      {
-        IControl *pDialLoop = GetUI()->GetControlWithTag(kCtrlFluxDial + i);
-        if (oscMsgEntry != std::string::npos) {
-          
-          pDialLoop->As<NEL_DualDial>()->setFlashRate( floatArgs.at( i % floatArgs.size() ) );
-        }
-      }
-}
  
 void NEL_VirtualControlSurface::updateNumericDisplays( ) {
   
@@ -457,20 +451,15 @@ void NEL_VirtualControlSurface::OnIdle() {
 
         ITextControl* cnsl = pGraphics->GetControlWithTag(kCtrlNetStatus)->As<ITextControl>();
         IVButtonControl* cnslButton = pGraphics->GetControlWithTag(kCtrlReScan)->As<IVButtonControl>();
-        auto* topPanel = pGraphics->GetControlWithTag(kCtrlPlot);
-
+        
+        //update console when osc received
+        
+  if ( !cnsl->IsHidden() ){
         if ( cnslButton->GetMouseIsOver() ) {
           cnsl->SetAnimation( unGhostText , 500.0f);
           pGraphics->SetMouseCursor(ECursor::HELP);
         } else { pGraphics->SetMouseCursor(ECursor::ARROW);}
-  
-        if ( topPanel->GetMouseIsOver() ) {
-          topPanel->SetAnimation(DefaultAnimationFunc);
-          topPanel->StartAnimation( 0.5f);
-        }
-        
-
-        //update console when osc received
+          
         auto msg = nelosc.getLatestMessage();
         if (!msg.empty() && msg != prevMsg) {
           cnslButton->SetDirty(false);
@@ -479,24 +468,25 @@ void NEL_VirtualControlSurface::OnIdle() {
           cnsl->SetDirty(false);
           cnsl->SetAnimation( unGhostText , 500.0f);
           
-          updatesFromIncomingOSC(); //do something with incoming OSC for example
-          
         } else {
           if (cnsl->GetAnimationProgress() > 0.99f) {
             cnsl->SetAnimation( ghostText , 500.0f);
           }
         }
         prevMsg = msg;
-        
-        
-         //keep host info display syncd to actual host connection
-         auto targetHostDisplay = pGraphics->GetControlWithTag(kTargetHost)->As<ITextControl>();
-         if (!targetHostDisplay->IsHidden()) {
-            if ( nelosc.m_targetHost != targetHostDisplay->GetStr()  ) { targetHostDisplay->SetStr(nelosc.m_targetHost) ; }
-          }
+  }
   
-        updateNumericDisplays();
- }
+  updatesFromIncomingOSC(); //do something with incoming OSC
+  updateNumericDisplays();
+        
+   //keep host info display syncd to actual host connection
+  auto targetHostDisplay = pGraphics->GetControlWithTag(kTargetHost)->As<ITextControl>();
+  if (!targetHostDisplay->IsHidden()) {
+    targetHostDisplay->SetStr( nelosc.m_targetHost );
+    GetUI()->GetControlWithTag(kTargetPort)->SetValue( nelosc.m_targetPort );
+    GetUI()->GetControlWithTag(kListenPort)->SetValue( nelosc.m_listenerPort );
+  }
+}
 
 
 #if IPLUG_DSP

@@ -19,7 +19,8 @@ enum EParams
   kListenPort = 8080,
   kDualDialInner = 4,
   kDualDialOuter = kDualDialInner + NBR_DUALDIALS,
-  kNumParams = kDualDialOuter + NBR_DUALDIALS
+  kDualDialPulse = kDualDialInner + NBR_DUALDIALS + 1,
+  kNumParams = kDualDialPulse + NBR_DUALDIALS
 };
 
 enum EControlTags

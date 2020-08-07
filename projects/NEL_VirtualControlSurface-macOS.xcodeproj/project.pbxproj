@@ -25,6 +25,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		3E041BA324DD6A60005730AC /* IconsForkAwesome.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E041BA224DD6A60005730AC /* IconsForkAwesome.h */; };
 		3E42D6D324C881CA0078FDF2 /* OscOutboundPacketStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E42D6C724C881C90078FDF2 /* OscOutboundPacketStream.cpp */; };
 		3E42D6D424C881CA0078FDF2 /* OscOutboundPacketStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E42D6C724C881C90078FDF2 /* OscOutboundPacketStream.cpp */; };
 		3E42D6D524C881CA0078FDF2 /* OscOutboundPacketStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E42D6C724C881C90078FDF2 /* OscOutboundPacketStream.cpp */; };
@@ -603,6 +604,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3E041BA224DD6A60005730AC /* IconsForkAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconsForkAwesome.h; sourceTree = "<group>"; };
 		3E42D6C724C881C90078FDF2 /* OscOutboundPacketStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OscOutboundPacketStream.cpp; sourceTree = "<group>"; };
 		3E42D6C824C881C90078FDF2 /* OscPacketListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OscPacketListener.h; sourceTree = "<group>"; };
 		3E42D6C924C881C90078FDF2 /* OscTypes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OscTypes.cpp; sourceTree = "<group>"; };
@@ -653,7 +655,6 @@
 		3E474FE024B634EA008DA40E /* GlobSeqHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GlobSeqHelpers.h; path = ../GlobSeqHelpers.h; sourceTree = "<group>"; };
 		3E53D2AD24DA0C5300ED03A9 /* NEL_GlyphButton.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = NEL_GlyphButton.cpp; path = ../NEL_GlyphButton.cpp; sourceTree = "<group>"; };
 		3E53D2AE24DA0C5300ED03A9 /* NEL_GlyphButton.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = NEL_GlyphButton.hpp; path = ../NEL_GlyphButton.hpp; sourceTree = "<group>"; };
-		3E53D2B624DA0DA500ED03A9 /* IconsForkAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IconsForkAwesome.h; path = ../IconsForkAwesome.h; sourceTree = "<group>"; };
 		3E5E9D0024DC688300B1FBC3 /* NEL_EditableText.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = NEL_EditableText.cpp; path = ../NEL_EditableText.cpp; sourceTree = "<group>"; };
 		3E5E9D0124DC688300B1FBC3 /* NEL_EditableText.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = NEL_EditableText.hpp; path = ../NEL_EditableText.hpp; sourceTree = "<group>"; };
 		3E61745C24C1E58F00762320 /* mDNS_IPExtract.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = mDNS_IPExtract.cpp; path = ../mDNS_IPExtract.cpp; sourceTree = "<group>"; };
@@ -1121,7 +1122,7 @@
 		089C166AFE841209C02AAC07 /* IPlugExample */ = {
 			isa = PBXGroup;
 			children = (
-				3E53D2B624DA0DA500ED03A9 /* IconsForkAwesome.h */,
+				3E041BA224DD6A60005730AC /* IconsForkAwesome.h */,
 				3E53D2AD24DA0C5300ED03A9 /* NEL_GlyphButton.cpp */,
 				3E53D2AE24DA0C5300ED03A9 /* NEL_GlyphButton.hpp */,
 				3E5E9D0024DC688300B1FBC3 /* NEL_EditableText.cpp */,
@@ -2073,6 +2074,7 @@
 				4FC3F0012086CE5700BD11FA /* uid.h in Headers */,
 				4F03A5B620A4621100EBDFFB /* IGraphics_select.h in Headers */,
 				4F03A5AB20A4621100EBDFFB /* IGraphics_include_in_plug_hdr.h in Headers */,
+				3E041BA324DD6A60005730AC /* IconsForkAwesome.h in Headers */,
 				4FC3EFF22086CE5700BD11FA /* hostclasses.h in Headers */,
 				4FCE29D621D6ED70004BCBA1 /* ITextEntryControl.h in Headers */,
 				4F03A5D420A4621100EBDFFB /* IGraphicsUtilities.h in Headers */,
@@ -2332,7 +2334,7 @@
 						DevelopmentTeam = 686EDA2T8T;
 					};
 					4F9828AA140A9EB700F3FCC1 = {
-						DevelopmentTeam = 686EDA2T8T;
+						DevelopmentTeam = FQY82AZZ9W;
 					};
 					4FB600121567CB0A0020189A = {
 						DevelopmentTeam = 686EDA2T8T;
@@ -3875,7 +3877,9 @@
 		4F9828DD140A9EB700F3FCC1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				DEVELOPMENT_TEAM = FQY82AZZ9W;
 				DSTROOT = "$(VST3_PATH)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(EXTRA_PLUGIN_DEFS)",
@@ -3897,7 +3901,9 @@
 		4F9828DE140A9EB700F3FCC1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				DEVELOPMENT_TEAM = FQY82AZZ9W;
 				DSTROOT = "$(VST3_PATH)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(EXTRA_PLUGIN_DEFS)",
@@ -3919,7 +3925,9 @@
 		4F9828DF140A9EB700F3FCC1 /* Tracer */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				DEVELOPMENT_TEAM = FQY82AZZ9W;
 				DSTROOT = "$(VST3_PATH)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(EXTRA_PLUGIN_DEFS)",

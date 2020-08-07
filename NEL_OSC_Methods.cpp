@@ -48,13 +48,15 @@ void NEL_OSC::runOSCListener ( int port ) {
 
 }
 
+// prob not very good idea to detach another networking thread
+// todo: learn how to break a currently active zeroconf networking thread
 bool NEL_OSC::tryToOpenListener() {
   udpListener.openListenerSocket( udpListener );
-  if (udpListener.m_receiveSocket != nullptr) { launchNetworkingThread(); }
+ // if (udpListener.m_receiveSocket != nullptr) { launchNetworkingThread(); }
   return (udpListener.m_receiveSocket != nullptr);
 }
 
-void NEL_OSC::initOSCSender( const char* IP, int port = 8000 ) {
+void NEL_OSC::initOSCSender( const char* IP, int port = KYMA_RCV_PORT ) {
 
 if (udpSender == nullptr) {
   udpSender = std::make_unique<osc::NEL_PacketSender>(IP, port);
@@ -63,10 +65,12 @@ if (udpSender == nullptr) {
 }
 
 void NEL_OSC::initKyma() {
-  
+  if (udpSender != nullptr ) {
   udpSender->setTargetPortForKyma();
   udpSender->changeTargetHost( getBeSlimeName().c_str() );
+  udpSender->transmitSocket.SetEnableBroadcast(true);
   udpSender->sendOSC("/osc/respond_to", m_listenerPort); //hardware handshake should receive /osc/response_from
+  }
 }
 
  

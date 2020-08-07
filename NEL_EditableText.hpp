@@ -27,6 +27,7 @@ public:
                 const char * entry = "",
                 const IText& text = DEFAULT_CONSOLE_TEXT,
                 const char * toolTip = "",
+                const bool isEditable = true,
                 const IColor& bgColor = COLOR_TRANSPARENT
                 );
 
@@ -36,12 +37,8 @@ public:
   void OnMouseDown(float x, float y, const IMouseMod& mod) override;
   void OnTextEntryCompletion(const char* str, int valIdx) override;
 
-  
 protected:
-  IColor colourStop1;
-  IColor colourStop2;
-  IColor colourStop3;
-
+  bool m_isEditable;
 };
 
 
