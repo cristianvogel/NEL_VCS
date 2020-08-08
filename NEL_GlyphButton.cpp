@@ -47,6 +47,20 @@ void NEL_GlyphButton::OnMouseDown(float x, float y, const IMouseMod& mod)
   SetDirty(true);
 }
 
+void NEL_GlyphButton::simulateOnMouseDown() {
+  if (GetValue() < 0.5) {
+    SetValue(1.);
+    SetBlend(BLEND_25);
+    
+  }
+  else {
+    SetValue(0.);
+    SetBlend(EBlend::Default);
+  }
+  
+  SetDirty(true);
+}
+
 void NEL_GlyphButton::SetDirty(bool push, int valIdx)
 {
   if(GetValue() > 0.5)

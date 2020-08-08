@@ -26,17 +26,23 @@ public:
                 , const IColor& stop1 = getSwatch( Lunada, 0)
                 , const IColor& stop2 = getSwatch( Lunada, 1)
                 , const IColor& stop3 = getSwatch( Lunada, 2)
-                , float flashRate = 0.0f
+                , int flashRate = 0
                 , float a1 = -135.f, float a2 = 135.f, float aAnchor = -135.f
                 );
    
-  float timerMillis;
-  void setFlashRate(float);
+  std::atomic<int> atomicTimerMillis;
+  std::atomic<int> atomicPulseTimerScalar{ 1000 }; // todo: use this for host BPM sync
+  
+  const int scalePulseRate(const float scale, bool set = true );
+  const int& setPulseRate(const int);
+  void setPulseRate(const float);
+  const int& getPulseRate( );
+  
   iplug::Timer* doubleDialPulseTimer;
   std::function<void( iplug::Timer & )> pulseTimerFunc = nullptr;
-  const bool togglePulse( bool );
+  const bool& togglePulse( bool );
   
-  bool pulse [2] = { false, false };
+  bool pulse [2] = { std::atomic<bool>{false}, std::atomic<bool>{false} };
   
   void Draw(IGraphics& p) override;
   void OnMouseDrag(float x, float y, float dX, float dY, const IMouseMod& mod) override;
@@ -51,7 +57,10 @@ public:
   IRECT* getDialBounds();
   
 private:
-  const float rateMillisFactor = 1000.f;
+  
+  const int getTimerMillis();
+  const float getTimerMillisF();
+  
   double mMouseDragValue = 0;
   float mTrackToHandleDistance = 4.f;
   float mInnerPointerFrac = 0.1f;
@@ -64,7 +73,7 @@ private:
   IColor colourStop1;
   IColor colourStop2;
   IColor colourStop3;
-  float innerCircleFlashRate = 0.0f;
+  int m_pulseRate = 0;
   
 };
 

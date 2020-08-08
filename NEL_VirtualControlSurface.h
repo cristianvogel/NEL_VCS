@@ -39,6 +39,8 @@ public:
   typedef std::string DialAddr;
   
   bool hideReadouts { true } ;
+  bool hover {false};
+  
   
   IText numericDisplayTextDef;
   IText ledOn;

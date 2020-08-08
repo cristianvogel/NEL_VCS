@@ -57,15 +57,16 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
       /*
        flip the visibility of the OSC addresses
       */
-      auto showHideControlInfo =
+      auto showHideAddressInfo =
         [this] (IControl * pCaller) {
           hideReadouts = !hideReadouts;
+          
           GetUI()->ForControlInGroup(
                                      "addressStems",
                                       [ ] (IControl& field) { field.Hide(!field.IsHidden()); });
                                     };
       
-      auto showHideNetInfo =
+      auto showHideSocketInfo =
         [this] (IControl * pCaller) {
      
         GetUI()->ForControlInGroup(
@@ -162,14 +163,14 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
         {getSwatch(Memariani, 1).WithOpacity(0.35f), [](double x){ return std::cos(x * 12.5);} },
         {getSwatch(Memariani, 2).WithOpacity(0.25f), [](double x){ return std::sin( x * 12 ) * std::cos( x* 12.5) ;} }
 
-      }, 256, "", DEFAULT_STYLE.WithColor(kBG, COLOR_TRANSPARENT)), kCtrlPlot, "plot")->SetAnimationEndActionFunction(showHideNetInfo);
+      }, 256, "", DEFAULT_STYLE.WithColor(kBG, COLOR_TRANSPARENT)), kCtrlPlot, "plot")->SetAnimationEndActionFunction(showHideSocketInfo);
       
      
 
 #pragma mark preference widgets
          
       IRECT settingWidgetBounds = plotBounds.GetGridCell(1, 11, 3, 12).GetScaledAboutCentre(1.5f).GetHPadded(-15.f);
-      std::vector<IActionFunction> actions { showHideControlInfo, showHideNetInfo, showHideMsgConsole};
+      std::vector<IActionFunction> actions { showHideAddressInfo, showHideSocketInfo, showHideMsgConsole};
       
       for (int i=0; i<NBR_WIDGETS; i++)
       {
@@ -303,65 +304,63 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
 
 }
            
-      #pragma mark network button
-      
-        pGraphics->AttachControl( new IVButtonControl(
-                                      consoleBounds,
-                                      nullptr,
-                                      "",
-                                      rescanButtonStyle().WithEmboss(false).WithDrawShadows(false),
-                                      true,
-                                      true,
-                                      EVShape::Rectangle
-                                  ), kCtrlReScan)
-        -> SetActionFunction(
-        [this] (IControl * pCaller) {
-          
-          // simulate press of the Address reveal widget
-          auto showInfoButton = GetUI()->GetControlWithTag(kAddressWidget)->As<NEL_GlyphButton>();
-              showInfoButton->SetValue( showInfoButton->GetValue() >0.5f ? 0.f : 1.0f  );
-              showInfoButton->SetDirty(true);
-          
-          //try to re-open listener port if it was blocked at initialisation
-          if ( m_noNetwork )
-          {
-            m_noNetwork = nelosc.tryToOpenListener();
-            if (m_noNetwork) { GetUI()->
-                ForControlInGroup("prefs", [pCaller] (IControl& prefButton) {
-                  prefButton.As<NEL_GlyphButton>()->SetOnText(WIDGET_ON_NO_NET)->SetOffText(WIDGET_OFF_NO_NET);
-                  prefButton.SetDirty(true);
-                });
-            }
-          }
-               
-              pCaller->SetAnimation(
-                  [this] (IControl * pCaller)
-              {
-                  auto progress = pCaller->GetAnimationProgress();
-                  if (progress > 1.)
-                  {
-                      pCaller->OnEndAnimation();
-                      return;
-                  }
-                  dynamic_cast<IVectorBase *>(pCaller)->
-                  SetColor(kPR, IColor::LinearInterpolateBetween(NEL_LUNADA_stop2, kPR, static_cast<float>(progress)));
-                  pCaller->SetDirty(false);
+#pragma mark network button
+      auto* networkButton =  new IVButtonControl(
+                                                  consoleBounds,
+                                                  nullptr,
+                                                  "",
+                                                  rescanButtonStyle().WithEmboss(false).WithDrawShadows(false),
+                                                  true,
+                                                  true,
+                                                  EVShape::Rectangle
+                                                );
+      networkButton -> SetActionFunction(
+                                         
+          [this] (IControl * pCaller) {
+          //simulate pressing all the widgets
+          GetUI()->ForControlInGroup("prefs", [ ](IControl& widget ){
+            widget.As<NEL_GlyphButton>()->simulateOnMouseDown();
+        });
+            
+            //try to re-open listener port if it was blocked at initialisation
+            if ( m_noNetwork )
+            {
+              m_noNetwork = nelosc.tryToOpenListener();
+              if (m_noNetwork) { GetUI()->
+                  ForControlInGroup("prefs", [pCaller] (IControl& prefButton) {
+                    prefButton.As<NEL_GlyphButton>()->SetOnText(WIDGET_ON_NO_NET)->SetOffText(WIDGET_OFF_NO_NET);
+                    prefButton.SetDirty(true);
+                  });
               }
-              , 1000  ); //click flash duration
-    
-                //redraw dials and sendOSC from attached action
-                GetUI()->ForControlInGroup("dualDials", [pCaller] (IControl& pDial) {
-                  pDial.SetDirty(true);
-                });
-          
-          if (nelosc.udpListener.hardwareConnected) { try {nelosc.initKyma();} catch (...) { std::cout << " tried to reinitialise Kyma, fail \n"; }; }
-          })
-      -> SetTooltip("Network Refresh");
+            }
+                 
+                pCaller->SetAnimation(
+                    [this] (IControl * pCaller)
+                {
+                    auto progress = pCaller->GetAnimationProgress();
+                    if (progress > 1.)
+                    {
+                        pCaller->OnEndAnimation();
+                        return;
+                    }
+                    dynamic_cast<IVectorBase *>(pCaller)->
+                    SetColor(kPR, IColor::LinearInterpolateBetween(NEL_LUNADA_stop2, kPR, static_cast<float>(progress)));
+                    pCaller->SetDirty(false);
+                }
+                , 1000  ); //click flash duration
       
-      ;
-      };
-  
-  
+                  //redraw dials and sendOSC from attached action
+                  GetUI()->ForControlInGroup("dualDials", [pCaller] (IControl& pDial) {
+                    pDial.SetDirty(true);
+                  });
+            
+            if (nelosc.udpListener.hardwareConnected) { try {nelosc.initKyma();} catch (...) { std::cout << " tried to reinitialise Kyma, fail \n"; }; }
+      });
+      networkButton-> SetTooltip("Network Refresh");
+      networkButton-> SetMouseOverWhenDisabled(true);
+      networkButton-> SetMouseEventsWhenDisabled(true);
+      pGraphics->AttachControl( networkButton , kCtrlReScan);
+    };
 }; //end main layout
 
 //TODO
@@ -374,17 +373,22 @@ void NEL_VirtualControlSurface::updatesFromIncomingOSC() {
 
   
       auto setValueFromIncomingOSC = [ this, &oscMsg, &dualDialIndex ] ( IControl & pCaller ) {
+        
+          auto* dial = pCaller.As<NEL_DualDial>();
           std::string::size_type oscMsgEntry = oscMsg.find("/dualDial/" + std::to_string( dualDialIndex ) );
           if (oscMsgEntry != std::string::npos) { // get a match
             const std::vector<float>& floatArgs = nelosc.getLatestFloatArgs();
             if (!floatArgs.empty()) {
               int paramIndex = 0; float sum = 0;
               for(const auto& value: floatArgs) {
-              pCaller.As<NEL_DualDial>()->SetValue( value, paramIndex );
+              dial->SetValue( value, paramIndex );
               ++paramIndex; sum+=value;
               }
-              pCaller.As<NEL_DualDial>()->setFlashRate( sum / floatArgs.size() ); //average
-              pCaller.SetDirty(false);
+              
+              float avg = dial->scalePulseRate( sum / floatArgs.size() , false );
+              if ( dial->getPulseRate() != avg )
+                   dial->setPulseRate( avg );
+              dial->SetDirty(false);
             }
           }
       dualDialIndex++;
@@ -452,29 +456,27 @@ void NEL_VirtualControlSurface::OnIdle() {
         ITextControl* cnsl = pGraphics->GetControlWithTag(kCtrlNetStatus)->As<ITextControl>();
         IVButtonControl* cnslButton = pGraphics->GetControlWithTag(kCtrlReScan)->As<IVButtonControl>();
         
-        //update console when osc received
-        
-  if ( !cnsl->IsHidden() ){
-        if ( cnslButton->GetMouseIsOver() ) {
-          cnsl->SetAnimation( unGhostText , 500.0f);
-          pGraphics->SetMouseCursor(ECursor::HELP);
-        } else { pGraphics->SetMouseCursor(ECursor::ARROW);}
-          
+        //handle console interaction and data
+  
+  if ( !cnslButton->GetMouseIsOver() && hover  ) { pGraphics->SetMouseCursor(ECursor::ARROW); hover=false; }
+  
+  if ( cnslButton->GetMouseIsOver()  ) { pGraphics->SetMouseCursor(ECursor::HELP); hover = true; }
+  
+  if ( !cnsl->IsHidden() ) {
         auto msg = nelosc.getLatestMessage();
-        if (!msg.empty() && msg != prevMsg) {
-          cnslButton->SetDirty(false);
-          consoleText = msg;
-          cnsl->SetStr(consoleText.c_str());
-          cnsl->SetDirty(false);
-          cnsl->SetAnimation( unGhostText , 500.0f);
-          
-        } else {
-          if (cnsl->GetAnimationProgress() > 0.99f) {
-            cnsl->SetAnimation( ghostText , 500.0f);
-          }
-        }
+        cnsl->SetAnimation( unGhostText , 500.0f);
+        
+          if (!msg.empty() && msg != prevMsg) {
+            cnslButton->SetDirty(false);
+            consoleText = msg;
+            cnsl->SetStr(consoleText.c_str());
+            cnsl->SetDirty(false);
+            cnsl->SetAnimation( unGhostText , 500.0f);
+          } else if (cnsl->GetAnimationProgress() > 0.99f) { cnsl->SetAnimation( ghostText , 500.0f); }
+        
         prevMsg = msg;
   }
+
   
   updatesFromIncomingOSC(); //do something with incoming OSC
   updateNumericDisplays();

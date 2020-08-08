@@ -2334,7 +2334,7 @@
 						DevelopmentTeam = 686EDA2T8T;
 					};
 					4F9828AA140A9EB700F3FCC1 = {
-						DevelopmentTeam = FQY82AZZ9W;
+						ProvisioningStyle = Manual;
 					};
 					4FB600121567CB0A0020189A = {
 						DevelopmentTeam = 686EDA2T8T;
@@ -3878,8 +3878,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				DEVELOPMENT_TEAM = FQY82AZZ9W;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				DSTROOT = "$(VST3_PATH)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(EXTRA_PLUGIN_DEFS)",
@@ -3893,6 +3894,7 @@
 				);
 				INFOPLIST_FILE = "../resources/NEL_VirtualControlSurface-VST3-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = com.NeverEngineLabs.vst3.NELVirtualControlSurface;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = vst3;
 			};
@@ -3902,8 +3904,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				DEVELOPMENT_TEAM = FQY82AZZ9W;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				DSTROOT = "$(VST3_PATH)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(EXTRA_PLUGIN_DEFS)",
@@ -3917,6 +3920,7 @@
 				);
 				INFOPLIST_FILE = "../resources/NEL_VirtualControlSurface-VST3-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = com.NeverEngineLabs.vst3.NELVirtualControlSurface;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = vst3;
 			};
@@ -3926,8 +3930,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				DEVELOPMENT_TEAM = FQY82AZZ9W;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				DSTROOT = "$(VST3_PATH)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(EXTRA_PLUGIN_DEFS)",
@@ -3941,6 +3946,7 @@
 				);
 				INFOPLIST_FILE = "../resources/NEL_VirtualControlSurface-VST3-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = com.NeverEngineLabs.vst3.NELVirtualControlSurface;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = vst3;
 			};
