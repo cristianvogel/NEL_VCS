@@ -52,8 +52,7 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
         pGraphics->LoadFont("Roboto-Regular", ROBOTO_FN);
         pGraphics->LoadFont("Menlo", MENLO_FN);
         pGraphics->LoadFont("ForkAwesome", FORK_AWESOME_FN);
-       // pGraphics->LoadBitmap(DECO_BG);
-     // pGraphics->LoadSVG(DECO_BG);
+        pGraphics->LoadSVG(DECO_BG);
         
 #pragma mark some lambdas used in main layout lambda
       /*
@@ -146,8 +145,8 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
       const IRECT plotBounds = pGraphics->GetBounds().GetFromTop( 24.f );
       
       
-       pGraphics->AttachPanelBackground(NEL_TUNGSTEN);
-      //  pGraphics->AttachSVGBackground (DECO_BG);
+      // pGraphics->AttachPanelBackground(NEL_TUNGSTEN);
+       pGraphics->AttachSVGBackground (DECO_BG);
       
       
 #pragma mark console text

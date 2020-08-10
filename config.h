@@ -54,7 +54,7 @@
 #define APP_SIGNAL_VECTOR_SIZE 64
 
 #define ROBOTO_FN "Roboto-Regular.ttf"
-#define MENLO_FN "Menlo.ttf"
+#define MENLO_FN "Menlo-Regular.ttf"
 #define FORK_AWESOME_FN "forkawesome-webfont.ttf"
 
 #define DECO_BG "deco-bg.svg"

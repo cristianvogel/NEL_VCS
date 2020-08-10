@@ -625,6 +625,7 @@
 		3E041BA224DD6A60005730AC /* IconsForkAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconsForkAwesome.h; sourceTree = "<group>"; };
 		3E3F008824DF4CED008722E5 /* deco-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "deco-bg.png"; sourceTree = "<group>"; };
 		3E3F008924DF4D4D008722E5 /* deco-bg.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "deco-bg.svg"; sourceTree = "<group>"; };
+		3E3F009C24E1AAC0008722E5 /* deco-bg-op.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "deco-bg-op.svg"; sourceTree = "<group>"; };
 		3E42D6C724C881C90078FDF2 /* OscOutboundPacketStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OscOutboundPacketStream.cpp; sourceTree = "<group>"; };
 		3E42D6C824C881C90078FDF2 /* OscPacketListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OscPacketListener.h; sourceTree = "<group>"; };
 		3E42D6C924C881C90078FDF2 /* OscTypes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OscTypes.cpp; sourceTree = "<group>"; };
@@ -1190,6 +1191,7 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3E3F009C24E1AAC0008722E5 /* deco-bg-op.svg */,
 				3E3F008924DF4D4D008722E5 /* deco-bg.svg */,
 				3E3F008824DF4CED008722E5 /* deco-bg.png */,
 				3E7900CD24D6B92D00B85368 /* fad-caret-right.svg */,
