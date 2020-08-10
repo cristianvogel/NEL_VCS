@@ -57,6 +57,8 @@
 #define MENLO_FN "Menlo.ttf"
 #define FORK_AWESOME_FN "forkawesome-webfont.ttf"
 
+#define DECO_BG "deco-bg.svg"
+
 #define NBR_DUALDIALS 8
 #define NBR_WIDGETS 3
 

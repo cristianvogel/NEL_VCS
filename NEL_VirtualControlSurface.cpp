@@ -14,6 +14,7 @@
 #include <sstream>
 #include <mutex>
 
+
 using namespace iplug;
 
 
@@ -48,10 +49,11 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
         pGraphics->EnableMouseOver(true);
         pGraphics->EnableTooltips(true);
         pGraphics->Resize(PLUG_WIDTH, PLUG_HEIGHT, 1.333f);
-        pGraphics->AttachPanelBackground(NEL_TUNGSTEN);
         pGraphics->LoadFont("Roboto-Regular", ROBOTO_FN);
         pGraphics->LoadFont("Menlo", MENLO_FN);
         pGraphics->LoadFont("ForkAwesome", FORK_AWESOME_FN);
+       // pGraphics->LoadBitmap(DECO_BG);
+     // pGraphics->LoadSVG(DECO_BG);
         
 #pragma mark some lambdas used in main layout lambda
       /*
@@ -144,6 +146,10 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
       const IRECT plotBounds = pGraphics->GetBounds().GetFromTop( 24.f );
       
       
+       pGraphics->AttachPanelBackground(NEL_TUNGSTEN);
+      //  pGraphics->AttachSVGBackground (DECO_BG);
+      
+      
 #pragma mark console text
         //▼ network logging console outputs OSC messages and stuff
       
@@ -158,6 +164,7 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
       
       
 #pragma mark decorative plot with reveal
+  
       
       pGraphics->AttachControl(new IVPlotControl(plotBounds, {{getSwatch(Memariani, 0).WithOpacity(0.5f),  [](double x){ return std::sin(x * 12);} },
         {getSwatch(Memariani, 1).WithOpacity(0.35f), [](double x){ return std::cos(x * 12.5);} },

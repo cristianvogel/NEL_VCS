@@ -26,6 +26,24 @@
 
 /* Begin PBXBuildFile section */
 		3E041BA324DD6A60005730AC /* IconsForkAwesome.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E041BA224DD6A60005730AC /* IconsForkAwesome.h */; };
+		3E3F008A24E00E3D008722E5 /* deco-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E3F008824DF4CED008722E5 /* deco-bg.png */; };
+		3E3F008B24E00E3E008722E5 /* deco-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E3F008824DF4CED008722E5 /* deco-bg.png */; };
+		3E3F008C24E00E3F008722E5 /* deco-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E3F008824DF4CED008722E5 /* deco-bg.png */; };
+		3E3F008D24E00E3F008722E5 /* deco-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E3F008824DF4CED008722E5 /* deco-bg.png */; };
+		3E3F008E24E00E40008722E5 /* deco-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E3F008824DF4CED008722E5 /* deco-bg.png */; };
+		3E3F008F24E00E41008722E5 /* deco-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E3F008824DF4CED008722E5 /* deco-bg.png */; };
+		3E3F009024E00E42008722E5 /* deco-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E3F008824DF4CED008722E5 /* deco-bg.png */; };
+		3E3F009124E00E43008722E5 /* deco-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E3F008824DF4CED008722E5 /* deco-bg.png */; };
+		3E3F009224E00E44008722E5 /* deco-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E3F008824DF4CED008722E5 /* deco-bg.png */; };
+		3E3F009324E00E58008722E5 /* deco-bg.svg in Resources */ = {isa = PBXBuildFile; fileRef = 3E3F008924DF4D4D008722E5 /* deco-bg.svg */; };
+		3E3F009424E00E59008722E5 /* deco-bg.svg in Resources */ = {isa = PBXBuildFile; fileRef = 3E3F008924DF4D4D008722E5 /* deco-bg.svg */; };
+		3E3F009524E00E5A008722E5 /* deco-bg.svg in Resources */ = {isa = PBXBuildFile; fileRef = 3E3F008924DF4D4D008722E5 /* deco-bg.svg */; };
+		3E3F009624E00E5B008722E5 /* deco-bg.svg in Resources */ = {isa = PBXBuildFile; fileRef = 3E3F008924DF4D4D008722E5 /* deco-bg.svg */; };
+		3E3F009724E00E5B008722E5 /* deco-bg.svg in Resources */ = {isa = PBXBuildFile; fileRef = 3E3F008924DF4D4D008722E5 /* deco-bg.svg */; };
+		3E3F009824E00E5C008722E5 /* deco-bg.svg in Resources */ = {isa = PBXBuildFile; fileRef = 3E3F008924DF4D4D008722E5 /* deco-bg.svg */; };
+		3E3F009924E00E5D008722E5 /* deco-bg.svg in Resources */ = {isa = PBXBuildFile; fileRef = 3E3F008924DF4D4D008722E5 /* deco-bg.svg */; };
+		3E3F009A24E00E5F008722E5 /* deco-bg.svg in Resources */ = {isa = PBXBuildFile; fileRef = 3E3F008924DF4D4D008722E5 /* deco-bg.svg */; };
+		3E3F009B24E00E5F008722E5 /* deco-bg.svg in Resources */ = {isa = PBXBuildFile; fileRef = 3E3F008924DF4D4D008722E5 /* deco-bg.svg */; };
 		3E42D6D324C881CA0078FDF2 /* OscOutboundPacketStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E42D6C724C881C90078FDF2 /* OscOutboundPacketStream.cpp */; };
 		3E42D6D424C881CA0078FDF2 /* OscOutboundPacketStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E42D6C724C881C90078FDF2 /* OscOutboundPacketStream.cpp */; };
 		3E42D6D524C881CA0078FDF2 /* OscOutboundPacketStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E42D6C724C881C90078FDF2 /* OscOutboundPacketStream.cpp */; };
@@ -605,6 +623,8 @@
 
 /* Begin PBXFileReference section */
 		3E041BA224DD6A60005730AC /* IconsForkAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconsForkAwesome.h; sourceTree = "<group>"; };
+		3E3F008824DF4CED008722E5 /* deco-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "deco-bg.png"; sourceTree = "<group>"; };
+		3E3F008924DF4D4D008722E5 /* deco-bg.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "deco-bg.svg"; sourceTree = "<group>"; };
 		3E42D6C724C881C90078FDF2 /* OscOutboundPacketStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OscOutboundPacketStream.cpp; sourceTree = "<group>"; };
 		3E42D6C824C881C90078FDF2 /* OscPacketListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OscPacketListener.h; sourceTree = "<group>"; };
 		3E42D6C924C881C90078FDF2 /* OscTypes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OscTypes.cpp; sourceTree = "<group>"; };
@@ -1170,6 +1190,8 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3E3F008924DF4D4D008722E5 /* deco-bg.svg */,
+				3E3F008824DF4CED008722E5 /* deco-bg.png */,
 				3E7900CD24D6B92D00B85368 /* fad-caret-right.svg */,
 				3E474FDD24B62C86008DA40E /* buttonPlainBlue_ON.svg */,
 				3E474FDB24B62ACE008DA40E /* buttonPlainBlue.svg */,
@@ -2412,6 +2434,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E7900CF24D6B92D00B85368 /* fad-caret-right.svg in Resources */,
+				3E3F009424E00E59008722E5 /* deco-bg.svg in Resources */,
+				3E3F008B24E00E3E008722E5 /* deco-bg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2420,6 +2444,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E7900D124D6B92D00B85368 /* fad-caret-right.svg in Resources */,
+				3E3F009624E00E5B008722E5 /* deco-bg.svg in Resources */,
+				3E3F008D24E00E3F008722E5 /* deco-bg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2428,6 +2454,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E7900D224D6B92D00B85368 /* fad-caret-right.svg in Resources */,
+				3E3F009924E00E5D008722E5 /* deco-bg.svg in Resources */,
+				3E3F009024E00E42008722E5 /* deco-bg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2435,9 +2463,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E3F009B24E00E5F008722E5 /* deco-bg.svg in Resources */,
 				4F3EE1BF231438D000004786 /* NEL_VirtualControlSurface.icns in Resources */,
 				4F3EE1C0231438D000004786 /* NEL_VirtualControlSurface-macOS-MainMenu.xib in Resources */,
 				3E7900D424D6B92D00B85368 /* fad-caret-right.svg in Resources */,
+				3E3F009224E00E44008722E5 /* deco-bg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2446,6 +2476,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F78BE3C22E74CD000AD537E /* IPlugAUViewController.xib in Resources */,
+				3E3F009124E00E43008722E5 /* deco-bg.png in Resources */,
+				3E3F009A24E00E5F008722E5 /* deco-bg.svg in Resources */,
 				3E7900D324D6B92D00B85368 /* fad-caret-right.svg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2455,6 +2487,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E7900D024D6B92D00B85368 /* fad-caret-right.svg in Resources */,
+				3E3F009524E00E5A008722E5 /* deco-bg.svg in Resources */,
+				3E3F008C24E00E3F008722E5 /* deco-bg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2462,6 +2496,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E3F009724E00E5B008722E5 /* deco-bg.svg in Resources */,
+				3E3F008E24E00E40008722E5 /* deco-bg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2469,9 +2505,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E3F009324E00E58008722E5 /* deco-bg.svg in Resources */,
 				4F78D88613B6382B0032E0F3 /* NEL_VirtualControlSurface.icns in Resources */,
 				4F1B4AE42014D33600BC64D4 /* NEL_VirtualControlSurface-macOS-MainMenu.xib in Resources */,
 				3E7900CE24D6B92D00B85368 /* fad-caret-right.svg in Resources */,
+				3E3F008A24E00E3D008722E5 /* deco-bg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2479,6 +2517,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E3F009824E00E5C008722E5 /* deco-bg.svg in Resources */,
+				3E3F008F24E00E41008722E5 /* deco-bg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3880,6 +3920,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = d1.0.0;
 				DEVELOPMENT_TEAM = "";
 				DSTROOT = "$(VST3_PATH)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -3896,6 +3937,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.NeverEngineLabs.vst3.NELVirtualControlSurface;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = NO;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_EXPORT_DECL = $vers;
+				VERSION_INFO_FILE = v0.x;
+				VERSION_INFO_SUFFIX = $vers;
 				WRAPPER_EXTENSION = vst3;
 			};
 			name = Debug;
@@ -3906,6 +3951,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = a1.0.0;
 				DEVELOPMENT_TEAM = "";
 				DSTROOT = "$(VST3_PATH)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -3922,6 +3968,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.NeverEngineLabs.vst3.NELVirtualControlSurface;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = NO;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_EXPORT_DECL = $vers;
 				WRAPPER_EXTENSION = vst3;
 			};
 			name = Release;
@@ -3948,6 +3996,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.NeverEngineLabs.vst3.NELVirtualControlSurface;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = NO;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_EXPORT_DECL = $vers;
 				WRAPPER_EXTENSION = vst3;
 			};
 			name = Tracer;
