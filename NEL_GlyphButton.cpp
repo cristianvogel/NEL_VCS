@@ -19,6 +19,11 @@ NEL_GlyphButton::NEL_GlyphButton(const IRECT& bounds, IActionFunction aF, const 
   SetTooltip( kToolTip );
 }
 
+void NEL_GlyphButton::OnInit(){
+
+  simulateOnMouseDown();
+}
+
 void NEL_GlyphButton::OnMouseOver(float x, float y, const IMouseMod& mod)
 {
   mText = GLYPH.WithFGColor(COLOR_WHITE);
@@ -51,7 +56,6 @@ void NEL_GlyphButton::simulateOnMouseDown() {
   if (GetValue() < 0.5) {
     SetValue(1.);
     SetBlend(BLEND_25);
-    
   }
   else {
     SetValue(0.);

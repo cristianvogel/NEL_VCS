@@ -162,7 +162,6 @@ void NEL_DualDial::Draw(IGraphics& g) {
              cx, cy, radius,
             angle >= mAnchorAngle ? mAnchorAngle : mAnchorAngle - (mAnchorAngle - angle),
             angle >= mAnchorAngle ? angle : mAnchorAngle, &mBlend, mTrackSize);
-
   
 #pragma mark Inner status LED affirmation segment
   

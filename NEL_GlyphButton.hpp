@@ -29,6 +29,7 @@ public:
   void SetDirty(bool push, int valIdx = 0) override;
   void OnMouseOver(float x, float y, const IMouseMod& mod) override;
   void OnMouseOut() override;
+  void OnInit() override;
 
   NEL_GlyphButton* SetOnText( const char* onText  );
   NEL_GlyphButton* SetOffText( const char* offText );

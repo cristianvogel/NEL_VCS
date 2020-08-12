@@ -61,8 +61,8 @@ static IVStyle rescanButtonStyle() {
     true, // Show label
     false, // Show value
     {
-      DEFAULT_SHCOLOR, // Background
-      COLOR_TRANSLUCENT, // Foreground
+      COLOR_TRANSPARENT, // Background
+      COLOR_TRANSPARENT, // Foreground
       COLOR_LIGHT_GRAY, // Pressed
       COLOR_TRANSPARENT, // Frame
       DEFAULT_HLCOLOR, // Highlight
