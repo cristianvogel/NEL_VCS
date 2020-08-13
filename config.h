@@ -26,7 +26,7 @@
 #define PLUG_DOES_MPE 0
 #define PLUG_DOES_STATE_CHUNKS 0
 #define PLUG_HAS_UI 1
-#define PLUG_WIDTH 647
+#define PLUG_WIDTH 650
 #define PLUG_HEIGHT 400
 #define PLUG_FPS 60
 #define PLUG_SHARED_RESOURCES 0
@@ -54,8 +54,11 @@
 #define APP_SIGNAL_VECTOR_SIZE 64
 
 #define ROBOTO_FN "Roboto-Regular.ttf"
-#define MENLO_FN "Menlo.ttf"
+#define MENLO_FN "Menlo-Regular.ttf"
 #define FORK_AWESOME_FN "forkawesome-webfont.ttf"
+
+#define PLANE_BG "deco_svg/gradient-plane-bg-text.svg"
+#define LOGO_TEXT "deco_svg/logo_text.svg"
 
 #define NBR_DUALDIALS 8
 #define NBR_WIDGETS 3

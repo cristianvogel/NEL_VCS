@@ -14,6 +14,7 @@
 #include <sstream>
 #include <mutex>
 
+
 using namespace iplug;
 
 
@@ -48,7 +49,6 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
         pGraphics->EnableMouseOver(true);
         pGraphics->EnableTooltips(true);
         pGraphics->Resize(PLUG_WIDTH, PLUG_HEIGHT, 1.333f);
-        pGraphics->AttachPanelBackground(NEL_TUNGSTEN);
         pGraphics->LoadFont("Roboto-Regular", ROBOTO_FN);
         pGraphics->LoadFont("Menlo", MENLO_FN);
         pGraphics->LoadFont("ForkAwesome", FORK_AWESOME_FN);
@@ -144,6 +144,10 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
       const IRECT plotBounds = pGraphics->GetBounds().GetFromTop( 24.f );
       
       
+    //pGraphics->AttachPanelBackground(NEL_TUNGSTEN);
+      pGraphics->AttachSVGBackground(PLANE_BG);
+      
+      
 #pragma mark console text
         //▼ network logging console outputs OSC messages and stuff
       
@@ -158,6 +162,7 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
       
       
 #pragma mark decorative plot with reveal
+  
       
       pGraphics->AttachControl(new IVPlotControl(plotBounds, {{getSwatch(Memariani, 0).WithOpacity(0.5f),  [](double x){ return std::sin(x * 12);} },
         {getSwatch(Memariani, 1).WithOpacity(0.35f), [](double x){ return std::cos(x * 12.5);} },
@@ -174,7 +179,7 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
       
       for (int i=0; i<NBR_WIDGETS; i++)
       {
-          pGraphics->AttachControl(
+         pGraphics->AttachControl(
                  new NEL_GlyphButton(
                                      settingWidgetBounds.GetGridCell(0, i, 1, 3),
                                      actions.at(i),
@@ -199,7 +204,7 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
                                                  (std::to_string(nelosc.m_targetPort)).c_str(),
                                                  DEFAULT_CONSOLE_TEXT,
                                                  "Send Port"
-                               ), kTargetPort, "netInfo" )->Hide(true);
+                               ), kTargetPort, "netInfo" )->Hide(false);
       
       widgetCell = plotBounds.GetGridCell(1, 3, 3, 7);
     
@@ -209,7 +214,7 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
                                                  (std::to_string(nelosc.m_listenerPort)).c_str(),
                                                  DEFAULT_CONSOLE_TEXT,
                                                  "Listen Port"
-                               ), kListenPort, "netInfo")->Hide(true);
+                               ), kListenPort, "netInfo")->Hide(false);
     
     widgetCell = plotBounds.GetGridCell(1, 2, 3, 7);
     
@@ -221,7 +226,7 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
                                                "Hostname",
                                                false
                                                );
-      pGraphics->AttachControl(hostnameReadOnly, kTargetHost , "netInfo")->Hide(true);
+      pGraphics->AttachControl(hostnameReadOnly, kTargetHost , "netInfo")->Hide(false);
       
       
          
@@ -274,7 +279,7 @@ NEL_VirtualControlSurface::NEL_VirtualControlSurface(const InstanceInfo &info)
                                        editableTextBounds.SubRectVertical(4, 4).GetMidVPadded(10.f),
                                        nelosc.dialSendAddress.at(d).c_str(),
                                        DEFAULT_CONSOLE_TEXT.WithFGColor(getSwatch( Memariani, 1))),
-             kCtrlTextInput + d, "addressStems")->SetActionFunction( setAddressStem )->Hide(true);
+             kCtrlTextInput + d, "addressStems")->SetActionFunction( setAddressStem )->Hide(false);
                     
 
 #pragma mark numeric displays
